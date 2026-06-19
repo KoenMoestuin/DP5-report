@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Stakeholderbelangen</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    padding: 0;
+  }
+  .page { max-width: 1240px; margin: 0 auto; }
+
+  /* ---------- FIG card (matches report style) ---------- */
+  .figcard {
+    position: relative;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 6px 6px 0 0 var(--ink);
+    padding: 36px 32px 32px;
+  }
+
+  /* ---------- Stakeholder grid ---------- */
+  .stake-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  .stake-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 4px 4px 0 0 var(--ink);
+  }
+  /* faint role-tinted left edge */
+  .stake-card .scene {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-bottom: 1.5px solid var(--ink);
+    overflow: hidden;
+  }
+  .stake-card .scene svg { display: block; width: 100%; height: 100%; }
+
+  .stake-card .body {
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    position: relative;
+  }
+  /* small colored accent bar on left of body to echo scene color */
+  .stake-card .body::before {
+    content: "";
+    position: absolute;
+    left: 22px; top: 22px;
+    width: 32px; height: 4px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .card-innovator .body::before    { background: #e8c66a; }
+  .card-opdrachtgever .body::before { background: #6f9ec4; }
+  .card-publiek .body::before      { background: #6b8f5e; }
+  .card-context .body::before      { background: #d96b3f; }
+
+  .stake-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin: 14px 0 0;
+    color: var(--ink);
+    /* allow space for up to 2 lines so the dashed line below sits at a consistent y */
+    min-height: 48px;
+  }
+
+  .stake-sub {
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.4;
+    margin: 0;
+    /* fixed min-height so the dashed line below sits at the same y across all cards */
+    min-height: 44px;
+  }
+
+  .stake-goal {
+    margin: 4px 0 0;
+    padding-top: 14px;
+    border-top: 1px dashed var(--ink-4);
+    font-size: 14.5px;
+    line-height: 1.45;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  /* per-role accents */
+  .card-innovator .scene    { background: #f3e2ad; }
+  .card-opdrachtgever .scene { background: #cdddea; }
+  .card-publiek .scene      { background: #c9d8c0; }
+  .card-context .scene      { background: #f3c9b4; }
+
+  /* responsive: stack on narrow screens */
+  @media (max-width: 980px) {
+    .stake-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .stake-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="figcard">
+      <div class="stake-grid">
+
+        <!-- ========================================================
+             1 — SOCIALE INNOVATOR
+             ======================================================== -->
+        <article class="stake-card card-innovator">
+          <div class="scene" data-screen-label="Sociale innovator">
+            <svg viewBox="0 0 280 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- back wall hint -->
+              <line x1="0" y1="158" x2="280" y2="158" stroke="#9c7a14" stroke-width="1.4" opacity="0.55"/>
+
+              <!-- whiteboard with sticky notes -->
+              <g>
+                <rect x="22" y="36" width="120" height="78" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.8"/>
+                <!-- stickies -->
+                <rect x="34" y="48" width="22" height="22" rx="2" fill="#f3c9b4" stroke="#111" stroke-width="1.4" transform="rotate(-6 45 59)"/>
+                <rect x="62" y="50" width="22" height="22" rx="2" fill="#cdddea" stroke="#111" stroke-width="1.4" transform="rotate(4 73 61)"/>
+                <rect x="92" y="46" width="22" height="22" rx="2" fill="#c9d8c0" stroke="#111" stroke-width="1.4" transform="rotate(-3 103 57)"/>
+                <!-- arrows/notes -->
+                <line x1="46" y1="84" x2="106" y2="84" stroke="#9c7a14" stroke-width="1.4"/>
+                <line x1="46" y1="92" x2="92" y2="92" stroke="#9c7a14" stroke-width="1.4"/>
+                <line x1="46" y1="100" x2="100" y2="100" stroke="#9c7a14" stroke-width="1.4"/>
+              </g>
+
+              <!-- desk surface -->
+              <line x1="32" y1="172" x2="248" y2="172" stroke="#111" stroke-width="1.8"/>
+
+              <!-- laptop on desk -->
+              <g transform="translate(60 132)">
+                <path d="M 0 36 L 80 36 L 76 6 L 4 6 Z" fill="#faf7f2" stroke="#111" stroke-width="1.6"/>
+                <rect x="8" y="10" width="64" height="22" fill="#cdddea" stroke="#111" stroke-width="1.2"/>
+                <line x1="14" y1="18" x2="50" y2="18" stroke="#111" stroke-width="1"/>
+                <line x1="14" y1="24" x2="40" y2="24" stroke="#111" stroke-width="1"/>
+                <ellipse cx="40" cy="36" rx="6" ry="2" fill="#111"/>
+              </g>
+
+              <!-- student bust at the right side -->
+              <g fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <g transform="translate(190 60)">
+                  <!-- head -->
+                  <ellipse cx="22" cy="22" rx="20" ry="22" fill="#faf7f2"/>
+                  <!-- short cap of hair -->
+                  <path d="M 4 16 Q 10 4 22 3 Q 34 4 40 16"/>
+                  <path d="M 8 12 L 10 8"/>
+                  <!-- engaged brows -->
+                  <path d="M 12 20 Q 16 17 20 20"/>
+                  <path d="M 24 20 Q 28 17 32 20"/>
+                  <!-- eyes -->
+                  <circle cx="16" cy="26" r="1.6" fill="#111" stroke="none"/>
+                  <circle cx="28" cy="26" r="1.6" fill="#111" stroke="none"/>
+                  <!-- smile -->
+                  <path d="M 18 34 Q 22 37 26 34"/>
+                  <!-- shoulders (casual: t-shirt) -->
+                  <path d="M -8 64 Q 4 50 22 48 Q 40 50 52 64"/>
+                  <!-- t-shirt body indication -->
+                  <path d="M -8 64 L -10 90"/>
+                  <path d="M 52 64 L 54 90"/>
+                  <!-- collar -->
+                  <path d="M 16 50 Q 22 56 28 50"/>
+                </g>
+
+                <!-- notebook in front of figure (on desk) -->
+                <g transform="translate(170 156)">
+                  <rect x="0" y="0" width="60" height="14" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.4"/>
+                  <line x1="6" y1="5" x2="50" y2="5" stroke="#9c7a14" stroke-width="1"/>
+                  <line x1="6" y1="9" x2="40" y2="9" stroke="#9c7a14" stroke-width="1"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="body">
+            <h3 class="stake-title">Sociale innovator</h3>
+            <p class="stake-sub">Medestudenten / Wijkuniversiteit-professionals</p>
+            <p class="stake-goal">Snel grip krijgen op complexiteit, zonder het leerproces over te slaan</p>
+          </div>
+        </article>
+
+        <!-- ========================================================
+             2 — OPDRACHTGEVER (figuur in pak)
+             ======================================================== -->
+        <article class="stake-card card-opdrachtgever">
+          <div class="scene" data-screen-label="Opdrachtgever">
+            <svg viewBox="0 0 280 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- raised stage / ovaal -->
+              <ellipse cx="140" cy="188" rx="100" ry="11" fill="#f3ede2" stroke="#111" stroke-width="1.6"/>
+
+              <!-- presentation board behind -->
+              <g>
+                <rect x="48" y="24" width="86" height="62" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.6"/>
+                <!-- chart bars -->
+                <line x1="60" y1="74" x2="120" y2="74" stroke="#111" stroke-width="1.2"/>
+                <rect x="62"  y="58" width="10" height="16" fill="#6f9ec4" stroke="#111" stroke-width="1.2"/>
+                <rect x="78"  y="48" width="10" height="26" fill="#6f9ec4" stroke="#111" stroke-width="1.2"/>
+                <rect x="94"  y="38" width="10" height="36" fill="#6f9ec4" stroke="#111" stroke-width="1.2"/>
+                <rect x="110" y="52" width="10" height="22" fill="#6f9ec4" stroke="#111" stroke-width="1.2"/>
+              </g>
+
+              <!-- man in a suit -->
+              <g fill="none" stroke="#111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <g transform="translate(150 56)">
+                  <!-- head -->
+                  <ellipse cx="22" cy="22" rx="19" ry="22" fill="#faf7f2"/>
+                  <!-- short combed hair -->
+                  <path d="M 4 18 Q 10 5 22 4 Q 34 5 40 18"/>
+                  <path d="M 14 12 L 16 8"/>
+                  <path d="M 30 12 L 32 8"/>
+                  <!-- brows -->
+                  <line x1="13" y1="20" x2="19" y2="20"/>
+                  <line x1="25" y1="20" x2="31" y2="20"/>
+                  <!-- eyes -->
+                  <circle cx="16" cy="25" r="1.5" fill="#111" stroke="none"/>
+                  <circle cx="28" cy="25" r="1.5" fill="#111" stroke="none"/>
+                  <!-- composed mouth -->
+                  <line x1="19" y1="34" x2="25" y2="34"/>
+
+                  <!-- suit jacket: closed filled body from shoulders down to the table -->
+                  <path d="M -10 72 Q 2 56 22 54 Q 42 56 54 72 L 54 122 L -10 122 Z" fill="#2a3a4a" stroke="#111" stroke-width="1.6"/>
+                  <!-- jacket lapels (V) revealing shirt -->
+                  <path d="M 12 56 L 22 78 L 32 56" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+                  <!-- shirt collar -->
+                  <path d="M 16 56 L 22 62 L 28 56" stroke="#111" stroke-width="1.4" fill="none"/>
+                  <!-- tie -->
+                  <path d="M 22 62 L 18 70 L 22 92 L 26 70 Z" fill="#436b8c" stroke="#111" stroke-width="1.3"/>
+                  <!-- jacket button -->
+                  <circle cx="22" cy="100" r="1.6" fill="#faf7f2" stroke="#111" stroke-width="0.8"/>
+                </g>
+              </g>
+
+              <!-- briefcase next to him -->
+              <g transform="translate(208 144)">
+                <rect x="0" y="6" width="34" height="24" rx="2" fill="#9c7a14" stroke="#111" stroke-width="1.6"/>
+                <path d="M 10 6 L 10 2 Q 10 0 12 0 L 22 0 Q 24 0 24 2 L 24 6" fill="none" stroke="#111" stroke-width="1.6"/>
+                <line x1="0" y1="16" x2="34" y2="16" stroke="#111" stroke-width="1"/>
+                <rect x="14" y="13" width="6" height="6" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+              </g>
+            </svg>
+          </div>
+          <div class="body">
+            <h3 class="stake-title">Opdrachtgever</h3>
+            <p class="stake-sub">Wijkuniversiteit-consortium</p>
+            <p class="stake-goal">Een eigen definitie van leren, participatie en impact realiseren</p>
+          </div>
+        </article>
+
+        <!-- ========================================================
+             3 — PUBLIEK / DOELGROEP (jongeren op straat)
+             ======================================================== -->
+        <article class="stake-card card-publiek">
+          <div class="scene" data-screen-label="Publiek / doelgroep">
+            <svg viewBox="0 0 280 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- pavement -->
+              <rect x="0" y="172" width="280" height="38" fill="#dfe6d8"/>
+              <line x1="0" y1="172" x2="280" y2="172" stroke="#4a6b3f" stroke-width="1.4"/>
+              <!-- pavement tile lines -->
+              <line x1="46"  y1="172" x2="46"  y2="210" stroke="#4a6b3f" stroke-width="1" stroke-dasharray="3 4" opacity="0.7"/>
+              <line x1="116" y1="172" x2="116" y2="210" stroke="#4a6b3f" stroke-width="1" stroke-dasharray="3 4" opacity="0.7"/>
+              <line x1="186" y1="172" x2="186" y2="210" stroke="#4a6b3f" stroke-width="1" stroke-dasharray="3 4" opacity="0.7"/>
+              <line x1="240" y1="172" x2="240" y2="210" stroke="#4a6b3f" stroke-width="1" stroke-dasharray="3 4" opacity="0.7"/>
+
+              <!-- building silhouette behind -->
+              <g opacity="0.85">
+                <rect x="6" y="58" width="62" height="114" fill="#b9c8af" stroke="#4a6b3f" stroke-width="1.4"/>
+                <rect x="14" y="74" width="14" height="14" fill="#faf7f2" stroke="#4a6b3f" stroke-width="1"/>
+                <rect x="34" y="74" width="14" height="14" fill="#faf7f2" stroke="#4a6b3f" stroke-width="1"/>
+                <rect x="14" y="98" width="14" height="14" fill="#faf7f2" stroke="#4a6b3f" stroke-width="1"/>
+                <rect x="34" y="98" width="14" height="14" fill="#faf7f2" stroke="#4a6b3f" stroke-width="1"/>
+              </g>
+              <g opacity="0.85">
+                <rect x="216" y="40" width="58" height="132" fill="#b9c8af" stroke="#4a6b3f" stroke-width="1.4"/>
+                <rect x="226" y="56" width="14" height="14" fill="#faf7f2" stroke="#4a6b3f" stroke-width="1"/>
+                <rect x="246" y="56" width="14" height="14" fill="#faf7f2" stroke="#4a6b3f" stroke-width="1"/>
+                <rect x="226" y="80" width="14" height="14" fill="#faf7f2" stroke="#4a6b3f" stroke-width="1"/>
+                <rect x="246" y="80" width="14" height="14" fill="#faf7f2" stroke="#4a6b3f" stroke-width="1"/>
+              </g>
+
+              <!-- three youths on the street -->
+              <g fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+
+                <!-- youth A: hoodie, hands in pockets -->
+                <g transform="translate(98 88)">
+                  <!-- head -->
+                  <ellipse cx="16" cy="14" rx="13" ry="15" fill="#faf7f2"/>
+                  <!-- hoodie hood around head -->
+                  <path d="M 2 14 Q 4 -2 16 -2 Q 28 -2 30 14" fill="#d96b3f" stroke="#111" stroke-width="1.6"/>
+                  <!-- face -->
+                  <circle cx="11" cy="16" r="1.3" fill="#111"/>
+                  <circle cx="21" cy="16" r="1.3" fill="#111"/>
+                  <path d="M 12 22 Q 16 24 20 22"/>
+                  <!-- hoodie body -->
+                  <path d="M -2 50 Q 4 32 16 30 Q 28 32 34 50 L 30 82 L 2 82 Z" fill="#d96b3f" stroke="#111" stroke-width="1.6"/>
+                  <!-- hood strings -->
+                  <line x1="12" y1="32" x2="12" y2="44" stroke="#faf7f2" stroke-width="1.4"/>
+                  <line x1="20" y1="32" x2="20" y2="44" stroke="#faf7f2" stroke-width="1.4"/>
+                  <!-- pocket pouch -->
+                  <path d="M 4 56 L 28 56" stroke="#7c3a1f" stroke-width="1.2"/>
+                </g>
+
+                <!-- youth B: cap, jacket, holding phone -->
+                <g transform="translate(132 80)">
+                  <!-- head -->
+                  <ellipse cx="16" cy="18" rx="13" ry="15" fill="#faf7f2"/>
+                  <!-- cap -->
+                  <path d="M 3 14 Q 6 4 16 4 Q 26 4 29 14 Z" fill="#2a3a4a" stroke="#111" stroke-width="1.5"/>
+                  <!-- cap visor -->
+                  <path d="M 3 14 L 32 14 L 30 17 L 5 17 Z" fill="#2a3a4a" stroke="#111" stroke-width="1.5"/>
+                  <!-- face -->
+                  <circle cx="11" cy="22" r="1.3" fill="#111"/>
+                  <circle cx="21" cy="22" r="1.3" fill="#111"/>
+                  <path d="M 12 28 Q 16 30 20 28"/>
+                  <!-- jacket -->
+                  <path d="M 0 56 Q 6 38 16 36 Q 26 38 32 56 L 30 90 L 2 90 Z" fill="#cdddea" stroke="#111" stroke-width="1.6"/>
+                  <!-- zip -->
+                  <line x1="16" y1="38" x2="16" y2="90" stroke="#111" stroke-width="1.2"/>
+                  <!-- arm + phone -->
+                  <path d="M 6 60 Q 0 70 6 80" stroke="#111" stroke-width="1.6"/>
+                  <rect x="0" y="72" width="10" height="14" rx="1.5" fill="#111" stroke="#111" stroke-width="1.2"/>
+                  <rect x="2" y="74" width="6" height="9" fill="#cdddea"/>
+                </g>
+
+                <!-- youth C: long hair, hoodie, bag -->
+                <g transform="translate(168 86)">
+                  <!-- head -->
+                  <ellipse cx="16" cy="16" rx="13" ry="15" fill="#faf7f2"/>
+                  <!-- hair: top cap + two side strands (no fringe over the eyes) -->
+                  <path d="M 0 14 Q 2 -2 16 -2 Q 30 -2 32 14 Z M 0 14 L -2 38 L 6 30 L 4 14 Z M 32 14 L 34 38 L 26 30 L 28 14 Z" fill="#3b2a1f" stroke="#111" stroke-width="1.5"/>
+                  <!-- face -->
+                  <circle cx="11" cy="18" r="1.3" fill="#111"/>
+                  <circle cx="21" cy="18" r="1.3" fill="#111"/>
+                  <path d="M 12 24 Q 16 26 20 24"/>
+                  <!-- top -->
+                  <path d="M 0 52 Q 6 34 16 32 Q 26 34 32 52 L 30 84 L 2 84 Z" fill="#e8c66a" stroke="#111" stroke-width="1.6"/>
+                  <!-- shoulder bag strap -->
+                  <line x1="6" y1="36" x2="34" y2="76" stroke="#111" stroke-width="1.4"/>
+                  <rect x="30" y="70" width="14" height="14" rx="1.5" fill="#9c7a14" stroke="#111" stroke-width="1.4"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="body">
+            <h3 class="stake-title">Publiek / doelgroep</h3>
+            <p class="stake-sub">Jongeren in Delft West</p>
+            <p class="stake-goal">Niet alleen object van framing worden, maar invloed houden op hoe hun leefwereld wordt vormgegeven</p>
+          </div>
+        </article>
+
+        <!-- ========================================================
+             4 — CONTEXTPARTNERS (organisaties met uithangbord)
+             ======================================================== -->
+        <article class="stake-card card-context">
+          <div class="scene" data-screen-label="Contextpartners">
+            <svg viewBox="0 0 280 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- ground -->
+              <line x1="0" y1="184" x2="280" y2="184" stroke="#9c4f2c" stroke-width="1.6"/>
+
+              <!-- BUILDING 1 — Buurthuis (left) -->
+              <g>
+                <!-- body -->
+                <rect x="12" y="86" width="78" height="98" fill="#faf7f2" stroke="#111" stroke-width="1.8"/>
+                <!-- roof (gabled) -->
+                <path d="M 8 86 L 51 50 L 94 86 Z" fill="#d96b3f" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/>
+                <!-- awning / sign band -->
+                <rect x="20" y="104" width="62" height="14" fill="#d96b3f" stroke="#111" stroke-width="1.4"/>
+                <!-- sign text marks -->
+                <line x1="26" y1="111" x2="50" y2="111" stroke="#faf7f2" stroke-width="1.6"/>
+                <line x1="54" y1="111" x2="76" y2="111" stroke="#faf7f2" stroke-width="1.6"/>
+                <!-- door -->
+                <rect x="42" y="148" width="18" height="36" fill="#9c7a14" stroke="#111" stroke-width="1.4"/>
+                <circle cx="56" cy="166" r="1.2" fill="#111"/>
+                <!-- windows -->
+                <rect x="20" y="128" width="16" height="14" fill="#cdddea" stroke="#111" stroke-width="1.3"/>
+                <line x1="28" y1="128" x2="28" y2="142" stroke="#111" stroke-width="1"/>
+                <rect x="66" y="128" width="16" height="14" fill="#cdddea" stroke="#111" stroke-width="1.3"/>
+                <line x1="74" y1="128" x2="74" y2="142" stroke="#111" stroke-width="1"/>
+                <!-- hanging sign (uithangbord) -->
+                <g>
+                  <line x1="6" y1="100" x2="6" y2="124" stroke="#111" stroke-width="1.4"/>
+                  <rect x="-12" y="124" width="36" height="20" rx="2" fill="#e8c66a" stroke="#111" stroke-width="1.5"/>
+                  <line x1="-4" y1="132" x2="16" y2="132" stroke="#111" stroke-width="1.4"/>
+                  <line x1="-4" y1="138" x2="12" y2="138" stroke="#111" stroke-width="1.4"/>
+                </g>
+              </g>
+
+              <!-- BUILDING 2 — Gemeente (center, taller) -->
+              <g>
+                <rect x="102" y="64" width="76" height="120" fill="#faf7f2" stroke="#111" stroke-width="1.8"/>
+                <!-- flat roof with parapet -->
+                <rect x="98" y="58" width="84" height="10" fill="#6f9ec4" stroke="#111" stroke-width="1.6"/>
+                <!-- flagpole -->
+                <line x1="140" y1="58" x2="140" y2="32" stroke="#111" stroke-width="1.4"/>
+                <path d="M 140 32 L 156 36 L 140 42 Z" fill="#d96b3f" stroke="#111" stroke-width="1.3"/>
+                <!-- official sign band (uithangbord) -->
+                <rect x="110" y="82" width="60" height="16" fill="#6f9ec4" stroke="#111" stroke-width="1.4"/>
+                <line x1="116" y1="90" x2="164" y2="90" stroke="#faf7f2" stroke-width="1.8"/>
+                <!-- big door -->
+                <rect x="128" y="138" width="24" height="46" fill="#2a3a4a" stroke="#111" stroke-width="1.6"/>
+                <line x1="140" y1="138" x2="140" y2="184" stroke="#faf7f2" stroke-width="1"/>
+                <!-- upper windows -->
+                <rect x="110" y="110" width="14" height="18" fill="#cdddea" stroke="#111" stroke-width="1.3"/>
+                <line x1="117" y1="110" x2="117" y2="128" stroke="#111" stroke-width="1"/>
+                <line x1="110" y1="119" x2="124" y2="119" stroke="#111" stroke-width="1"/>
+                <rect x="156" y="110" width="14" height="18" fill="#cdddea" stroke="#111" stroke-width="1.3"/>
+                <line x1="163" y1="110" x2="163" y2="128" stroke="#111" stroke-width="1"/>
+                <line x1="156" y1="119" x2="170" y2="119" stroke="#111" stroke-width="1"/>
+              </g>
+
+              <!-- BUILDING 3 — Stichting (right) -->
+              <g>
+                <rect x="188" y="98" width="78" height="86" fill="#faf7f2" stroke="#111" stroke-width="1.8"/>
+                <!-- slanted roof -->
+                <path d="M 184 98 L 232 70 L 270 98 Z" fill="#6b8f5e" stroke="#111" stroke-width="1.8" stroke-linejoin="round"/>
+                <!-- awning -->
+                <path d="M 196 116 L 258 116 L 252 128 L 202 128 Z" fill="#6b8f5e" stroke="#111" stroke-width="1.4"/>
+                <line x1="208" y1="116" x2="208" y2="128" stroke="#4a6b3f" stroke-width="1"/>
+                <line x1="220" y1="116" x2="220" y2="128" stroke="#4a6b3f" stroke-width="1"/>
+                <line x1="232" y1="116" x2="232" y2="128" stroke="#4a6b3f" stroke-width="1"/>
+                <line x1="244" y1="116" x2="244" y2="128" stroke="#4a6b3f" stroke-width="1"/>
+                <!-- big display window -->
+                <rect x="200" y="140" width="32" height="32" fill="#cdddea" stroke="#111" stroke-width="1.4"/>
+                <line x1="216" y1="140" x2="216" y2="172" stroke="#111" stroke-width="1"/>
+                <line x1="200" y1="156" x2="232" y2="156" stroke="#111" stroke-width="1"/>
+                <!-- door -->
+                <rect x="240" y="146" width="18" height="38" fill="#4a6b3f" stroke="#111" stroke-width="1.4"/>
+                <circle cx="244" cy="166" r="1.2" fill="#faf7f2"/>
+                <!-- circular hanging sign -->
+                <g>
+                  <line x1="272" y1="110" x2="272" y2="130" stroke="#111" stroke-width="1.4"/>
+                  <circle cx="272" cy="142" r="12" fill="#e8c66a" stroke="#111" stroke-width="1.5"/>
+                  <line x1="266" y1="142" x2="278" y2="142" stroke="#111" stroke-width="1.3"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="body">
+            <h3 class="stake-title">Contextpartners</h3>
+            <p class="stake-sub">Buurtinitiatieven, gemeente, maatschappelijke organisaties</p>
+            <p class="stake-goal">Erkenning krijgen voor bestaande kennis, relaties en machtsposities</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

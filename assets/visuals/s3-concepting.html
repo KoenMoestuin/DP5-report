@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Visualisaties · Sprint 3 · Concepting</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body { font-family: var(--font-body); color: var(--ink); padding: 64px clamp(24px, 6vw, 96px) 96px; }
+  .page { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 80px; }
+
+  .figcard { position: relative; background: var(--paper); border: 1.5px solid var(--ink); box-shadow: 6px 6px 0 0 var(--ink); padding: 40px 40px 44px; }
+  .figcard-edge { padding: 0; overflow: hidden; }
+
+  /* dims (fig 2) */
+  .dims { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+  .dim { padding: 28px 24px 32px; border-right: 1px dashed rgba(17,17,17,0.18); display: flex; flex-direction: column; gap: 16px; min-height: 430px; }
+  .dim:last-child { border-right: none; }
+  .dim-num { font-family: var(--font-mono); font-size: 11px; color: var(--clay); font-weight: 700; letter-spacing: 0.08em; }
+  .dim-title { font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: -0.02em; line-height: 1.15; margin: 0; }
+  .dim-q { font-style: italic; font-size: 13px; color: var(--ink-3); line-height: 1.5; margin: 0; }
+  .dim-vis { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .dim-vis svg { width: 100%; height: auto; max-height: 265px; }
+
+  /* richtingen (fig 3) */
+  .richt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .richt-card { border: 1.5px solid var(--ink); background: var(--paper); display: flex; flex-direction: column; overflow: hidden; }
+  .richt-card.chosen { border: 2px solid var(--moss); box-shadow: 4px 4px 0 0 var(--moss); }
+  .rc-vis { background: var(--paper-2); padding: 22px 16px 14px; display: flex; align-items: center; justify-content: center; min-height: 192px; }
+  .rc-vis svg { width: 100%; height: auto; max-height: 168px; }
+  .rc-body { padding: 14px 16px 18px; border-top: 1.5px solid var(--ink); display: flex; flex-direction: column; gap: 7px; }
+  .richt-card.chosen .rc-body { border-top-color: var(--moss); }
+  .rc-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .rc-title { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; line-height: 1.3; margin: 0; flex: 1; }
+  .rc-badge { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; }
+  .rc-badge.x { background: var(--paper-3); color: var(--ink-3); border: 1.5px solid var(--ink-4); }
+  .rc-badge.v { background: var(--moss); color: var(--paper); }
+  .rc-reason { font-size: 12px; color: var(--clay); line-height: 1.5; font-style: italic; margin: 0; }
+  .rc-desc { font-size: 11.5px; color: var(--ink-2); line-height: 1.55; margin: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ================================================================
+     FIG 1 — Morfologische kaart op de probleemruimte
+     ================================================================ -->
+<section>
+<div class="figcard">
+<svg viewBox="0 -28 770 620" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:auto;display:block">
+
+  <!-- connecting paths (behind cards) -->
+  <polyline points="368,-10 368,20 368,92 368,117 228,117 228,142 228,214 228,264 228,336 228,361 368,361 368,386 368,458 368,508 368,580" stroke="#111" stroke-width="2.5" opacity="0.85" stroke-linejoin="round"/>
+  <polyline points="508,-10 508,20 508,92 508,117 648,117 648,142 648,214 648,264 648,336 648,361 508,361 508,386 508,458 508,508 508,580" stroke="#111" stroke-width="2.5" stroke-dasharray="9 5" opacity="0.78" stroke-linejoin="round"/>
+
+
+
+  <!-- dividers removed -->
+
+  <!-- ── ROW 1 (y=20, clay) ── -->
+  <circle cx="12" cy="56" r="4" fill="#d96b3f"/>
+  <text x="24" y="60" font-family="Nunito,sans-serif" font-size="10.5" font-style="italic" fill="#5b5b5b">Probleem</text>
+  <!-- r1c1 -->
+  <rect x="162" y="20" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M166,20 L290,20 Q294,20 294,24 L294,38 L162,38 L162,24 Q162,20 166,20 Z" fill="#d96b3f"/>
+  <text x="228" y="33" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Veiligheid</text>
+  <path d="M228,46 L244,52 L244,67 Q242,79 228,83 Q214,79 212,67 L212,52 Z" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+  <line x1="228" y1="57" x2="228" y2="70" stroke="#d96b3f" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="228" cy="75" r="1.5" fill="#d96b3f" stroke="none"/>
+  <rect x="162" y="20" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r1c2 PATH B -->
+  <rect x="302" y="20" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M306,20 L430,20 Q434,20 434,24 L434,38 L302,38 L302,24 Q302,20 306,20 Z" fill="#d96b3f"/>
+  <text x="368" y="33" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Gebrek groen</text>
+  <line x1="368" y1="83" x2="368" y2="56" stroke="#6b8f5e" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="368" y1="70" x2="354" y2="61" stroke="#6b8f5e" stroke-width="1.3"/>
+  <line x1="368" y1="64" x2="382" y2="57" stroke="#6b8f5e" stroke-width="1.3"/>
+  <line x1="368" y1="58" x2="358" y2="51" stroke="#6b8f5e" stroke-width="1.2"/>
+  <line x1="356" y1="83" x2="380" y2="83" stroke="#111" stroke-width="1.2"/>
+  <rect x="302" y="20" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r1c3 PATH A -->
+  <rect x="442" y="20" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M446,20 L570,20 Q574,20 574,24 L574,38 L442,38 L442,24 Q442,20 446,20 Z" fill="#d96b3f"/>
+  <text x="508" y="33" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Sociale isolatie</text>
+  <circle cx="508" cy="55" r="7" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <line x1="508" y1="62" x2="508" y2="76" stroke="#111" stroke-width="1.2"/>
+  <line x1="508" y1="68" x2="500" y2="75" stroke="#111" stroke-width="1.2"/>
+  <line x1="508" y1="68" x2="516" y2="75" stroke="#111" stroke-width="1.2"/>
+  <line x1="508" y1="76" x2="503" y2="84" stroke="#111" stroke-width="1.2"/>
+  <line x1="508" y1="76" x2="513" y2="84" stroke="#111" stroke-width="1.2"/>
+  <ellipse cx="508" cy="66" rx="23" ry="21" fill="none" stroke="#bdb6a8" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="442" y="20" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r1c4 -->
+  <rect x="582" y="20" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M586,20 L710,20 Q714,20 714,24 L714,38 L582,38 L582,24 Q582,20 586,20 Z" fill="#d96b3f"/>
+  <text x="648" y="33" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Woningnood</text>
+  <path d="M623,87 L623,73 L631,63 L639,73 L639,87 Z" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <rect x="626" y="78" width="5" height="9" fill="#bdb6a8" stroke="none"/>
+  <path d="M637,87 L637,68 L648,56 L659,68 L659,87 Z" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+  <rect x="641" y="74" width="6" height="13" fill="#bdb6a8" stroke="none"/>
+  <path d="M657,87 L657,73 L665,63 L673,73 L673,87 Z" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <rect x="660" y="78" width="5" height="9" fill="#bdb6a8" stroke="none"/>
+  <line x1="619" y1="87" x2="677" y2="87" stroke="#111" stroke-width="1.2"/>
+  <rect x="582" y="20" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+
+<g transform="translate(0, 34)">
+  <!-- ── ROW 2 (y=108, clay) ── -->
+  <circle cx="12" cy="144" r="4" fill="#e8c66a"/>
+  <text x="24" y="148" font-family="Nunito,sans-serif" font-size="10.5" font-style="italic" fill="#5b5b5b">Oorzaak</text>
+  <!-- r2c1 PATH A -->
+  <rect x="162" y="108" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M166,108 L290,108 Q294,108 294,112 L294,126 L162,126 L162,112 Q162,108 166,108 Z" fill="#e8c66a"/>
+  <text x="228" y="121" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Beleidsverzuim</text>
+  <rect x="211" y="133" width="34" height="44" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <path d="M237,133 L245,133 L245,141 Z" fill="#f0ebde" stroke="#111" stroke-width="1"/>
+  <line x1="215" y1="148" x2="241" y2="148" stroke="#bdb6a8" stroke-width="0.8"/>
+  <line x1="215" y1="156" x2="241" y2="156" stroke="#bdb6a8" stroke-width="0.8"/>
+  <line x1="215" y1="164" x2="241" y2="164" stroke="#bdb6a8" stroke-width="0.8"/>
+  <line x1="211" y1="133" x2="245" y2="177" stroke="#d96b3f" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
+  <line x1="245" y1="133" x2="211" y2="177" stroke="#d96b3f" stroke-width="2" opacity="0.7" stroke-linecap="round"/>
+  <rect x="162" y="108" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r2c2 -->
+  <rect x="302" y="108" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M306,108 L430,108 Q434,108 434,112 L434,126 L302,126 L302,112 Q302,108 306,108 Z" fill="#e8c66a"/>
+  <text x="368" y="121" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Gebrek middelen</text>
+  <circle cx="368" cy="153" r="18" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+  <circle cx="368" cy="153" r="11" fill="#f0ebde" stroke="#bdb6a8" stroke-width="0.9"/>
+  <text x="368" y="158" text-anchor="middle" font-family="Sora,sans-serif" font-size="13" font-weight="700" fill="#bdb6a8" stroke="none">€</text>
+  <line x1="352" y1="137" x2="384" y2="169" stroke="#d96b3f" stroke-width="2" stroke-linecap="round"/>
+  <rect x="302" y="108" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r2c3 -->
+  <rect x="442" y="108" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M446,108 L570,108 Q574,108 574,112 L574,126 L442,126 L442,112 Q442,108 446,108 Z" fill="#e8c66a"/>
+  <text x="508" y="121" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Historisch kader</text>
+  <line x1="490" y1="136" x2="526" y2="136" stroke="#111" stroke-width="1.8"/>
+  <line x1="490" y1="170" x2="526" y2="170" stroke="#111" stroke-width="1.8"/>
+  <path d="M492,136 L524,136 L508,153 L524,170 L492,170 L508,153 Z" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+  <path d="M492,136 L524,136 L508,153 Z" fill="#efd06a" opacity="0.4" stroke="none"/>
+  <path d="M508,153 L515,170 L501,170 Z" fill="#efd06a" opacity="0.4" stroke="none"/>
+  <rect x="442" y="108" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r2c4 PATH B -->
+  <rect x="582" y="108" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M586,108 L710,108 Q714,108 714,112 L714,126 L582,126 L582,112 Q582,108 586,108 Z" fill="#e8c66a"/>
+  <text x="648" y="121" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Onbekendheid</text>
+  <circle cx="648" cy="153" r="18" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+  <path d="M640,149 Q640,139 648,139 Q656,139 656,147 Q656,154 648,157" stroke="#111" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="648" cy="165" r="2" fill="#111" stroke="none"/>
+  <rect x="582" y="108" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+</g>
+<g transform="translate(0, 68)">
+  <!-- ── ROW 3 (y=196, clay) ── -->
+  <circle cx="12" cy="232" r="4" fill="#6f9ec4"/>
+  <text x="24" y="236" font-family="Nunito,sans-serif" font-size="10.5" font-style="italic" fill="#5b5b5b">Aanname</text>
+  <!-- r3c1 PATH B -->
+  <rect x="162" y="196" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M166,196 L290,196 Q294,196 294,200 L294,214 L162,214 L162,200 Q162,196 166,196 Z" fill="#6f9ec4"/>
+  <text x="228" y="209" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Bewoners passief</text>
+  <circle cx="222" cy="228" r="7" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <line x1="222" y1="235" x2="222" y2="250" stroke="#111" stroke-width="1.2"/>
+  <line x1="213" y1="241" x2="231" y2="241" stroke="#111" stroke-width="1.6"/>
+  <line x1="222" y1="250" x2="215" y2="260" stroke="#111" stroke-width="1.2"/>
+  <line x1="222" y1="250" x2="229" y2="260" stroke="#111" stroke-width="1.2"/>
+  <text x="237" y="231" font-family="Nunito,sans-serif" font-size="9" font-weight="700" fill="#6f9ec4" stroke="none">z</text>
+  <text x="243" y="223" font-family="Nunito,sans-serif" font-size="12" font-weight="700" fill="#6f9ec4" stroke="none">Z</text>
+  <rect x="162" y="196" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r3c2 -->
+  <rect x="302" y="196" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M306,196 L430,196 Q434,196 434,200 L434,214 L302,214 L302,200 Q302,196 306,196 Z" fill="#6f9ec4"/>
+  <text x="368" y="209" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Markt bepaalt</text>
+  <circle cx="365" cy="242" r="16" fill="#fff6dc" stroke="#111" stroke-width="1.3"/>
+  <circle cx="365" cy="242" r="10" fill="#efd06a" stroke="#111" stroke-width="0.8"/>
+  <text x="365" y="247" text-anchor="middle" font-family="Sora,sans-serif" font-size="12" font-weight="800" fill="#111" stroke="none">€</text>
+  <line x1="365" y1="222" x2="365" y2="218" stroke="#efd06a" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="378" y1="226" x2="381" y2="222" stroke="#efd06a" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="384" y1="240" x2="388" y2="240" stroke="#efd06a" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="351" y1="226" x2="348" y2="222" stroke="#efd06a" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="347" y1="240" x2="343" y2="240" stroke="#efd06a" stroke-width="1.8" stroke-linecap="round"/>
+  <rect x="302" y="196" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r3c3 -->
+  <rect x="442" y="196" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M446,196 L570,196 Q574,196 574,200 L574,214 L442,214 L442,200 Q442,196 446,196 Z" fill="#6f9ec4"/>
+  <text x="508" y="209" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Gemeente weet</text>
+  <rect x="496" y="242" width="24" height="20" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <path d="M494,242 L508,226 L522,242 Z" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <ellipse cx="508" cy="248" rx="5" ry="3.5" fill="#cdddea" stroke="#111" stroke-width="0.9"/>
+  <circle cx="508" cy="248" r="1.5" fill="#111" stroke="none"/>
+  <line x1="503" y1="242" x2="500" y2="238" stroke="#6f9ec4" stroke-width="0.9"/>
+  <line x1="508" y1="241" x2="508" y2="237" stroke="#6f9ec4" stroke-width="0.9"/>
+  <line x1="513" y1="242" x2="516" y2="238" stroke="#6f9ec4" stroke-width="0.9"/>
+  <line x1="492" y1="262" x2="524" y2="262" stroke="#111" stroke-width="1.3"/>
+  <rect x="442" y="196" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r3c4 PATH A -->
+  <rect x="582" y="196" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M586,196 L710,196 Q714,196 714,200 L714,214 L582,214 L582,200 Q582,196 586,196 Z" fill="#6f9ec4"/>
+  <text x="648" y="209" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Groei is goed</text>
+  <line x1="632" y1="262" x2="632" y2="226" stroke="#111" stroke-width="1.2"/>
+  <line x1="632" y1="262" x2="668" y2="262" stroke="#111" stroke-width="1.2"/>
+  <polyline points="634,258 640,250 646,252 652,242 658,236 664,228" stroke="#6f9ec4" stroke-width="2" fill="none" stroke-linejoin="round"/>
+
+  <rect x="582" y="196" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+</g>
+<g transform="translate(0, 102)">
+  <!-- ── ROW 4 (y=284, moss) ── -->
+  <circle cx="12" cy="320" r="4" fill="#6b8f5e"/>
+  <text x="24" y="324" font-family="Nunito,sans-serif" font-size="10.5" font-style="italic" fill="#5b5b5b">Waarde</text>
+  <!-- r4c1 -->
+  <rect x="162" y="284" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M166,284 L290,284 Q294,284 294,288 L294,302 L162,302 L162,288 Q162,284 166,284 Z" fill="#6b8f5e"/>
+  <text x="228" y="297" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Leefbaarheid</text>
+  <path d="M216,350 L216,334 L228,322 L240,334 L240,350 Z" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+  <rect x="221" y="340" width="8" height="10" rx="1" fill="#bdb6a8" stroke="none"/>
+  <path d="M228,329 Q224,323 220,326 Q217,330 228,337 Q239,330 236,326 Q232,323 228,329 Z" fill="#d96b3f" stroke="none"/>
+  <line x1="212" y1="350" x2="244" y2="350" stroke="#111" stroke-width="1.3"/>
+  <rect x="162" y="284" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r4c2 PATH A -->
+  <rect x="302" y="284" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M306,284 L430,284 Q434,284 434,288 L434,302 L302,302 L302,288 Q302,284 306,284 Z" fill="#6b8f5e"/>
+  <text x="368" y="297" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Rechtvaardigheid</text>
+  <line x1="368" y1="346" x2="368" y2="312" stroke="#111" stroke-width="1.8"/>
+  <line x1="360" y1="346" x2="376" y2="346" stroke="#111" stroke-width="1.5"/>
+  <line x1="348" y1="312" x2="388" y2="312" stroke="#111" stroke-width="1.5"/>
+  <circle cx="368" cy="312" r="3" fill="#6b8f5e" stroke="#111" stroke-width="1"/>
+  <line x1="350" y1="312" x2="350" y2="330" stroke="#111" stroke-width="1"/>
+  <line x1="386" y1="312" x2="386" y2="330" stroke="#111" stroke-width="1"/>
+  <rect x="332" y="330" width="36" height="8" rx="2" fill="#f0ebde" stroke="#111" stroke-width="1.2"/>
+  <rect x="368" y="330" width="36" height="8" rx="2" fill="#f0ebde" stroke="#111" stroke-width="1.2"/>
+  <rect x="302" y="284" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r4c3 PATH B -->
+  <rect x="442" y="284" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M446,284 L570,284 Q574,284 574,288 L574,302 L442,302 L442,288 Q442,284 446,284 Z" fill="#6b8f5e"/>
+  <text x="508" y="297" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Participatie</text>
+  <circle cx="508" cy="312" r="4" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+  <circle cx="523" cy="323" r="4" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+  <circle cx="517" cy="341" r="4" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+  <circle cx="499" cy="341" r="4" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+  <circle cx="493" cy="323" r="4" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+  <circle cx="508" cy="328" r="16" fill="none" stroke="#6b8f5e" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="442" y="284" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r4c4 -->
+  <rect x="582" y="284" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M586,284 L710,284 Q714,284 714,288 L714,302 L582,302 L582,288 Q582,284 586,284 Z" fill="#6b8f5e"/>
+  <text x="648" y="297" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Duurzaamheid</text>
+  <path d="M648,310 Q672,316 668,336 Q664,350 648,352 Q632,350 628,336 Q624,316 648,310 Z" fill="#dde6d4" stroke="#6b8f5e" stroke-width="1.4"/>
+  <line x1="648" y1="316" x2="648" y2="348" stroke="#6b8f5e" stroke-width="0.9"/>
+  <line x1="648" y1="326" x2="641" y2="331" stroke="#6b8f5e" stroke-width="0.7"/>
+  <line x1="648" y1="334" x2="656" y2="338" stroke="#6b8f5e" stroke-width="0.7"/>
+  <line x1="648" y1="342" x2="641" y2="346" stroke="#6b8f5e" stroke-width="0.7"/>
+  <rect x="582" y="284" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+</g>
+<g transform="translate(0, 136)">
+  <!-- ── ROW 5 (y=372, macht/ink) ── -->
+  <circle cx="12" cy="408" r="4" fill="#9b7cb0"/>
+  <text x="24" y="412" font-family="Nunito,sans-serif" font-size="10.5" font-style="italic" fill="#5b5b5b">Oplossing</text>
+  <!-- r5c1 -->
+  <rect x="162" y="372" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M166,372 L290,372 Q294,372 294,376 L294,390 L162,390 L162,376 Q162,372 166,372 Z" fill="#9b7cb0"/>
+  <text x="228" y="385" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Regelgeving</text>
+  <rect x="211" y="396" width="32" height="42" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <path d="M235,396 L243,396 L243,404 Z" fill="#f0ebde" stroke="#111" stroke-width="1"/>
+  <line x1="215" y1="412" x2="238" y2="412" stroke="#bdb6a8" stroke-width="0.8"/>
+  <line x1="215" y1="420" x2="238" y2="420" stroke="#bdb6a8" stroke-width="0.8"/>
+  <line x1="215" y1="428" x2="238" y2="428" stroke="#bdb6a8" stroke-width="0.8"/>
+  <circle cx="232" cy="432" r="6" fill="#9b7cb0" stroke="none" opacity="0.85"/>
+  <circle cx="232" cy="432" r="3" fill="none" stroke="#faf7f2" stroke-width="1"/>
+  <rect x="162" y="372" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r5c2 -->
+  <rect x="302" y="372" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M306,372 L430,372 Q434,372 434,376 L434,390 L302,390 L302,376 Q302,372 306,372 Z" fill="#9b7cb0"/>
+  <text x="368" y="385" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Bewonersregie</text>
+  <circle cx="356" cy="402" r="8" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <line x1="356" y1="410" x2="356" y2="426" stroke="#111" stroke-width="1.2"/>
+  <line x1="356" y1="416" x2="348" y2="424" stroke="#111" stroke-width="1.2"/>
+  <line x1="356" y1="416" x2="364" y2="424" stroke="#111" stroke-width="1.2"/>
+  <line x1="356" y1="426" x2="350" y2="434" stroke="#111" stroke-width="1.2"/>
+  <line x1="356" y1="426" x2="362" y2="434" stroke="#111" stroke-width="1.2"/>
+  <circle cx="380" cy="408" r="6" fill="none" stroke="#9b7cb0" stroke-width="1.5"/>
+  <line x1="386" y1="412" x2="394" y2="420" stroke="#9b7cb0" stroke-width="1.5"/>
+  <line x1="391" y1="417" x2="394" y2="414" stroke="#9b7cb0" stroke-width="1.3"/>
+  <line x1="394" y1="420" x2="396" y2="416" stroke="#9b7cb0" stroke-width="1.3"/>
+  <rect x="302" y="372" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r5c3 PATH A -->
+  <rect x="442" y="372" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M446,372 L570,372 Q574,372 574,376 L574,390 L442,390 L442,376 Q442,372 446,372 Z" fill="#9b7cb0"/>
+  <text x="508" y="385" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Herstructurering</text>
+  <rect x="494" y="408" width="28" height="26" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+  <rect x="499" y="413" width="5" height="5" fill="#cdddea" stroke="#111" stroke-width="0.7"/>
+  <rect x="506" y="413" width="5" height="5" fill="#cdddea" stroke="#111" stroke-width="0.7"/>
+  <rect x="513" y="413" width="5" height="5" fill="#cdddea" stroke="#111" stroke-width="0.7"/>
+  <rect x="499" y="421" width="5" height="5" fill="#cdddea" stroke="#111" stroke-width="0.7"/>
+  <rect x="506" y="421" width="5" height="5" fill="#cdddea" stroke="#111" stroke-width="0.7"/>
+  <rect x="513" y="421" width="5" height="5" fill="#cdddea" stroke="#111" stroke-width="0.7"/>
+  <line x1="492" y1="434" x2="524" y2="434" stroke="#111" stroke-width="1.2"/>
+  <rect x="442" y="372" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+  <!-- r5c4 PATH B -->
+  <rect x="582" y="372" width="132" height="72" rx="4" fill="#faf7f2"/>
+  <path d="M586,372 L710,372 Q714,372 714,376 L714,390 L582,390 L582,376 Q582,372 586,372 Z" fill="#9b7cb0"/>
+  <text x="648" y="385" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2">Dialoog</text>
+  <path d="M624,400 Q624,394 630,394 L652,394 Q658,394 658,400 L658,408 Q658,414 652,414 L640,414 L638,418 L638,414 L630,414 Q624,414 624,408 Z" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+  <line x1="628" y1="401" x2="654" y2="401" stroke="#bdb6a8" stroke-width="0.8"/>
+  <line x1="628" y1="408" x2="652" y2="408" stroke="#bdb6a8" stroke-width="0.8"/>
+  <path d="M642,410 Q642,404 648,404 L668,404 Q674,404 674,410 L674,418 Q674,424 668,424 L660,424 L662,428 L662,424 L648,424 Q642,424 642,418 Z" fill="#f0ebde" stroke="#111" stroke-width="1.1"/>
+  <line x1="646" y1="411" x2="670" y2="411" stroke="#bdb6a8" stroke-width="0.7"/>
+  <line x1="646" y1="418" x2="668" y2="418" stroke="#bdb6a8" stroke-width="0.7"/>
+  <rect x="582" y="372" width="132" height="72" rx="4" fill="none" stroke="#111" stroke-width="1.3"/>
+</g>
+  <!-- Representatie labels boven Probleem-rij -->
+  <rect x="314" y="-26" width="108" height="16" rx="3" fill="#111" stroke="none"/>
+  <text x="368" y="-18" dominant-baseline="middle" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2" stroke="none">Representatie A</text>
+  <rect x="454" y="-26" width="108" height="16" rx="3" fill="#111" stroke="none"/>
+  <text x="508" y="-18" dominant-baseline="middle" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="700" fill="#faf7f2" stroke="none">Representatie B</text>
+
+  <!-- legend removed -->
+
+</svg>
+</div>
+</section>
+
+<!-- ================================================================
+     FIG 2 — Ontwerpruimte: drie dimensies (HKJ)
+     ================================================================ -->
+<section>
+<div class="figcard figcard-edge">
+<div class="dims">
+
+  <div class="dim">
+    <span class="dim-num">01 / DIMENSIE</span>
+    <h3 class="dim-title">Representeren</h3>
+    <p class="dim-q">Hoe representeer je problemen in het spel?</p>
+    <div class="dim-vis">
+      <svg viewBox="0 0 220 240" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- CFA-kaartjes waaier -->
+
+  <g transform="rotate(-20, 110, 240)">
+    <rect x="78" y="46" width="64" height="88" rx="4" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+    <path d="M82,46 L138,46 Q142,46 142,50 L142,64 L78,64 L78,50 Q78,46 82,46 Z" fill="#d96b3f" stroke="none"/>
+    <text x="110" y="59" text-anchor="middle" font-family="Sora,sans-serif" font-size="9" font-weight="700" fill="#faf7f2" stroke="none">Probleem</text>
+    <line x1="83" y1="74" x2="137" y2="74" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="84" x2="137" y2="84" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="94" x2="135" y2="94" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="104" x2="137" y2="104" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="114" x2="133" y2="114" stroke="#bdb6a8" stroke-width="0.9"/>
+  </g>
+
+  <g transform="rotate(-10, 110, 240)">
+    <rect x="78" y="46" width="64" height="88" rx="4" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+    <path d="M82,46 L138,46 Q142,46 142,50 L142,64 L78,64 L78,50 Q78,46 82,46 Z" fill="#e8c66a" stroke="none"/>
+    <text x="110" y="59" text-anchor="middle" font-family="Sora,sans-serif" font-size="9" font-weight="700" fill="#111" stroke="none">Oorzaak</text>
+    <line x1="83" y1="74" x2="137" y2="74" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="84" x2="137" y2="84" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="94" x2="135" y2="94" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="104" x2="137" y2="104" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="114" x2="133" y2="114" stroke="#bdb6a8" stroke-width="0.9"/>
+  </g>
+
+  <g transform="rotate(0, 110, 240)">
+    <rect x="78" y="46" width="64" height="88" rx="4" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+    <path d="M82,46 L138,46 Q142,46 142,50 L142,64 L78,64 L78,50 Q78,46 82,46 Z" fill="#6f9ec4" stroke="none"/>
+    <text x="110" y="59" text-anchor="middle" font-family="Sora,sans-serif" font-size="9" font-weight="700" fill="#faf7f2" stroke="none">Aanname</text>
+    <line x1="83" y1="74" x2="137" y2="74" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="84" x2="137" y2="84" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="94" x2="135" y2="94" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="104" x2="137" y2="104" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="114" x2="133" y2="114" stroke="#bdb6a8" stroke-width="0.9"/>
+  </g>
+
+  <g transform="rotate(10, 110, 240)">
+    <rect x="78" y="46" width="64" height="88" rx="4" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+    <path d="M82,46 L138,46 Q142,46 142,50 L142,64 L78,64 L78,50 Q78,46 82,46 Z" fill="#6b8f5e" stroke="none"/>
+    <text x="110" y="59" text-anchor="middle" font-family="Sora,sans-serif" font-size="9" font-weight="700" fill="#faf7f2" stroke="none">Waarde</text>
+    <line x1="83" y1="74" x2="137" y2="74" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="84" x2="137" y2="84" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="94" x2="135" y2="94" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="104" x2="137" y2="104" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="114" x2="133" y2="114" stroke="#bdb6a8" stroke-width="0.9"/>
+  </g>
+
+  <g transform="rotate(20, 110, 240)">
+    <rect x="78" y="46" width="64" height="88" rx="4" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+    <path d="M82,46 L138,46 Q142,46 142,50 L142,64 L78,64 L78,50 Q78,46 82,46 Z" fill="#9b7cb0" stroke="none"/>
+    <text x="110" y="59" text-anchor="middle" font-family="Sora,sans-serif" font-size="9" font-weight="700" fill="#faf7f2" stroke="none">Oplossing</text>
+    <line x1="83" y1="74" x2="137" y2="74" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="84" x2="137" y2="84" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="94" x2="135" y2="94" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="104" x2="137" y2="104" stroke="#bdb6a8" stroke-width="0.9"/>
+    <line x1="83" y1="114" x2="133" y2="114" stroke="#bdb6a8" stroke-width="0.9"/>
+  </g>
+</svg>
+    </div>
+  </div>
+
+  <div class="dim">
+    <span class="dim-num">02 / DIMENSIE</span>
+    <h3 class="dim-title">Onderhandelen</h3>
+    <p class="dim-q">Hoe onderhandelen spelers over wat de probleemrepresentatie wordt?</p>
+    <div class="dim-vis">
+      <svg viewBox="0 0 220 240" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Central pole -->
+  <line x1="110" y1="30" x2="110" y2="200" stroke="#111" stroke-width="2.5"/>
+  <!-- Base -->
+  <path d="M84,200 L136,200 L142,212 L78,212 Z" fill="#f0ebde" stroke="#111" stroke-width="1.5"/>
+  <line x1="72" y1="212" x2="148" y2="212" stroke="#111" stroke-width="2"/>
+  <!-- Pivot -->
+  <circle cx="110" cy="63" r="5" fill="#faf7f2" stroke="#111" stroke-width="2"/>
+
+  <!-- Beam (left end centered above left pan, right end above right pan) -->
+  <line x1="47" y1="68" x2="173" y2="58" stroke="#111" stroke-width="2.8"/>
+  <!-- Beam end knobs -->
+  <circle cx="47" cy="68" r="3.5" fill="#faf7f2" stroke="#111" stroke-width="1.8"/>
+  <circle cx="173" cy="58" r="3.5" fill="#faf7f2" stroke="#111" stroke-width="1.8"/>
+
+  <!-- LEFT strings: apex at (47,68), symmetric to pan corners (14,148) and (80,148) -->
+  <line x1="47" y1="68" x2="14" y2="148" stroke="#111" stroke-width="1.2"/>
+  <line x1="47" y1="68" x2="80" y2="148" stroke="#111" stroke-width="1.2"/>
+
+  <!-- LEFT pan rim + sides + curved bottom -->
+  <line x1="14" y1="148" x2="80" y2="148" stroke="#111" stroke-width="1.8"/>
+  <line x1="14" y1="148" x2="14" y2="162" stroke="#111" stroke-width="1.5"/>
+  <line x1="80" y1="148" x2="80" y2="162" stroke="#111" stroke-width="1.5"/>
+  <path d="M14,162 Q47,174 80,162" fill="#f0ebde" stroke="#111" stroke-width="1.5"/>
+
+  <!-- LEFT cards in pan -->
+  <g transform="translate(18, 104) rotate(-5, 14, 44)">
+    <rect x="0" y="0" width="28" height="44" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+    <path d="M2,0 L26,0 Q28,0 28,2 L28,9 L0,9 L0,2 Q0,0 2,0 Z" fill="#d96b3f" stroke="none"/>
+    <text x="14" y="7.5" text-anchor="middle" font-family="Sora,sans-serif" font-size="5" font-weight="700" fill="#faf7f2" stroke="none">Probleem</text>
+    <line x1="3" y1="16" x2="25" y2="16" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="23" x2="25" y2="23" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="30" x2="23" y2="30" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="37" x2="25" y2="37" stroke="#bdb6a8" stroke-width="0.7"/>
+  </g>
+  <g transform="translate(40, 101) rotate(4, 14, 47)">
+    <rect x="0" y="0" width="28" height="44" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+    <path d="M2,0 L26,0 Q28,0 28,2 L28,9 L0,9 L0,2 Q0,0 2,0 Z" fill="#e8c66a" stroke="none"/>
+    <text x="14" y="7.5" text-anchor="middle" font-family="Sora,sans-serif" font-size="5" font-weight="700" fill="#111" stroke="none">Oorzaak</text>
+    <line x1="3" y1="16" x2="25" y2="16" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="23" x2="25" y2="23" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="30" x2="23" y2="30" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="37" x2="25" y2="37" stroke="#bdb6a8" stroke-width="0.7"/>
+  </g>
+
+  <!-- RIGHT strings: apex at (173,58), symmetric to pan corners (140,136) and (206,136) -->
+  <line x1="173" y1="58" x2="140" y2="136" stroke="#111" stroke-width="1.2"/>
+  <line x1="173" y1="58" x2="206" y2="136" stroke="#111" stroke-width="1.2"/>
+
+  <!-- RIGHT pan rim + sides + curved bottom -->
+  <line x1="140" y1="136" x2="206" y2="136" stroke="#111" stroke-width="1.8"/>
+  <line x1="140" y1="136" x2="140" y2="150" stroke="#111" stroke-width="1.5"/>
+  <line x1="206" y1="136" x2="206" y2="150" stroke="#111" stroke-width="1.5"/>
+  <path d="M140,150 Q173,162 206,150" fill="#f0ebde" stroke="#111" stroke-width="1.5"/>
+
+  <!-- RIGHT cards in pan -->
+  <g transform="translate(144, 92) rotate(-4, 14, 44)">
+    <rect x="0" y="0" width="28" height="44" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+    <path d="M2,0 L26,0 Q28,0 28,2 L28,9 L0,9 L0,2 Q0,0 2,0 Z" fill="#6b8f5e" stroke="none"/>
+    <text x="14" y="7.5" text-anchor="middle" font-family="Sora,sans-serif" font-size="5" font-weight="700" fill="#faf7f2" stroke="none">Waarde</text>
+    <line x1="3" y1="16" x2="25" y2="16" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="23" x2="25" y2="23" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="30" x2="23" y2="30" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="37" x2="25" y2="37" stroke="#bdb6a8" stroke-width="0.7"/>
+  </g>
+  <g transform="translate(166, 89) rotate(3, 14, 47)">
+    <rect x="0" y="0" width="28" height="44" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+    <path d="M2,0 L26,0 Q28,0 28,2 L28,9 L0,9 L0,2 Q0,0 2,0 Z" fill="#9b7cb0" stroke="none"/>
+    <text x="14" y="7.5" text-anchor="middle" font-family="Sora,sans-serif" font-size="5" font-weight="700" fill="#faf7f2" stroke="none">Oplossing</text>
+    <line x1="3" y1="16" x2="25" y2="16" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="23" x2="25" y2="23" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="30" x2="23" y2="30" stroke="#bdb6a8" stroke-width="0.7"/>
+    <line x1="3" y1="37" x2="25" y2="37" stroke="#bdb6a8" stroke-width="0.7"/>
+  </g>
+</svg>
+    </div>
+  </div>
+
+  <div class="dim">
+    <span class="dim-num">03 / DIMENSIE</span>
+    <h3 class="dim-title">Gamificeren</h3>
+    <p class="dim-q">Hoe wordt het gegamificeerd?</p>
+    <div class="dim-vis">
+      <svg viewBox="0 0 220 240" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Game board (hexagon) -->
+  <polygon points="110,18 170,53 170,123 110,158 50,123 50,53" fill="#f5f0e8" stroke="#111" stroke-width="2"/>
+  <!-- Inner board detail -->
+  <polygon points="110,38 152,61 152,107 110,130 68,107 68,61" fill="#faf7f2" stroke="#bdb6a8" stroke-width="1"/>
+  <!-- Center: one CFA card face up -->
+  <rect x="91" y="70" width="38" height="54" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+  <path d="M93,70 L127,70 Q129,70 129,72 L129,81 L91,81 L91,72 Q91,70 93,70 Z" fill="#6f9ec4" stroke="none"/>
+  <text x="110" y="79" text-anchor="middle" font-family="Sora,sans-serif" font-size="6.5" font-weight="700" fill="#faf7f2" stroke="none">Aanname</text>
+  <line x1="95" y1="89" x2="125" y2="89" stroke="#bdb6a8" stroke-width="0.8"/>
+  <line x1="95" y1="97" x2="125" y2="97" stroke="#bdb6a8" stroke-width="0.8"/>
+  <line x1="95" y1="105" x2="121" y2="105" stroke="#bdb6a8" stroke-width="0.8"/>
+  <line x1="95" y1="113" x2="125" y2="113" stroke="#bdb6a8" stroke-width="0.8"/>
+  <!-- Player tokens at board corners -->
+  <circle cx="110" cy="30" r="8" fill="#d96b3f" stroke="#111" stroke-width="1.3"/>
+  <circle cx="160" cy="60" r="8" fill="#e8c66a" stroke="#111" stroke-width="1.3"/>
+  <circle cx="160" cy="116" r="8" fill="#6b8f5e" stroke="#111" stroke-width="1.3"/>
+  <circle cx="110" cy="146" r="8" fill="#9b7cb0" stroke="#111" stroke-width="1.3"/>
+  <circle cx="60" cy="116" r="8" fill="#6f9ec4" stroke="#111" stroke-width="1.3"/>
+  <text x="110" y="30" text-anchor="middle" dominant-baseline="central" font-family="Sora,sans-serif" font-size="7" font-weight="700" fill="#faf7f2" stroke="none">1</text>
+  <text x="160" y="60" text-anchor="middle" dominant-baseline="central" font-family="Sora,sans-serif" font-size="7" font-weight="700" fill="#111" stroke="none">2</text>
+  <text x="160" y="116" text-anchor="middle" dominant-baseline="central" font-family="Sora,sans-serif" font-size="7" font-weight="700" fill="#faf7f2" stroke="none">3</text>
+  <text x="110" y="146" text-anchor="middle" dominant-baseline="central" font-family="Sora,sans-serif" font-size="7" font-weight="700" fill="#faf7f2" stroke="none">4</text>
+  <text x="60" y="116" text-anchor="middle" dominant-baseline="central" font-family="Sora,sans-serif" font-size="7" font-weight="700" fill="#faf7f2" stroke="none">5</text>
+
+  <!-- Trophy cup (bottom right) -->
+  <path d="M154,168 L192,168 L188,196 Q186,208 173,212 Q160,208 158,196 Z" fill="#f5e97a" stroke="#111" stroke-width="1.8"/>
+  <!-- Trophy shine -->
+  <path d="M161,174 Q166,170 169,180" stroke="#fff" stroke-width="1.4" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <!-- Trophy handles -->
+  <path d="M154,176 Q144,176 145,188 Q146,198 158,198" stroke="#111" stroke-width="1.6" fill="none"/>
+  <path d="M192,176 Q202,176 201,188 Q200,198 188,198" stroke="#111" stroke-width="1.6" fill="none"/>
+  <!-- Trophy stem -->
+  <rect x="169" y="212" width="8" height="12" rx="1.5" fill="#f5e97a" stroke="#111" stroke-width="1.5"/>
+  <!-- Trophy base -->
+  <rect x="160" y="224" width="26" height="7" rx="2" fill="#f5e97a" stroke="#111" stroke-width="1.5"/>
+</svg>
+    </div>
+  </div>
+
+</div>
+</div>
+</section>
+
+<!-- ================================================================
+     FIG 3 — Verkende & afgevallen richtingen
+     ================================================================ -->
+<section>
+<div class="figcard">
+<div class="richt-grid">
+
+  <!-- Card 1: Brillenmaker-objecten ✗ -->
+  <div class="richt-card">
+    <div class="rc-vis">
+      <svg viewBox="0 0 220 156" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- glasses, slightly tilted -->
+        <g transform="rotate(-4 110 86)">
+          <!-- left lens -->
+          <circle cx="66" cy="86" r="34" fill="#deeef5" stroke="#111" stroke-width="3.5"/>
+          <circle cx="66" cy="86" r="27" fill="#edf5f9" stroke="none"/>
+          <!-- right lens -->
+          <circle cx="148" cy="86" r="34" fill="#deeef5" stroke="#111" stroke-width="3.5"/>
+          <circle cx="148" cy="86" r="27" fill="#edf5f9" stroke="none"/>
+          <!-- bridge -->
+          <path d="M93 84 Q107 78 121 84" stroke="#111" stroke-width="2.5" fill="none"/>
+          <!-- nose pads -->
+          <circle cx="95" cy="88" r="2.5" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+          <circle cx="119" cy="88" r="2.5" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+          <!-- temple arms -->
+          <line x1="32" y1="82" x2="8" y2="88" stroke-width="2.5"/>
+          <line x1="182" y1="82" x2="208" y2="88" stroke-width="2.5"/>
+          <!-- scribbled text left lens -->
+          <line x1="48" y1="78" x2="82" y2="78" stroke="#6f9ec4" stroke-width="1.2"/>
+          <line x1="46" y1="86" x2="84" y2="86" stroke="#6f9ec4" stroke-width="1.2"/>
+          <line x1="50" y1="94" x2="80" y2="94" stroke="#6f9ec4" stroke-width="1.2"/>
+          <!-- scribbled text right lens -->
+          <line x1="130" y1="78" x2="166" y2="78" stroke="#d96b3f" stroke-width="1.2"/>
+          <line x1="128" y1="86" x2="168" y2="86" stroke="#d96b3f" stroke-width="1.2"/>
+          <line x1="132" y1="94" x2="164" y2="94" stroke="#d96b3f" stroke-width="1.2"/>
+        </g>
+      </svg>
+    </div>
+    <div class="rc-body">
+      <div class="rc-head">
+        <p class="rc-title">Brillenmaker&#x2011;objecten</p>
+        <div class="rc-badge x">✗</div>
+      </div>
+      <p class="rc-desc">Spelobjecten rond de bril-metafoor uit sprint 2 — glazen platen en beschrijfbare brillen waarop spelers hun perspectief vastleggen.</p>
+      <p class="rc-reason">✗ Te geforceerd — voegde niets toe aan de spelervaring.</p>
+    </div>
+  </div>
+
+  <!-- Card 2: Eigen frames → gezamenlijk frame ✗ -->
+  <div class="richt-card">
+    <div class="rc-vis">
+      <svg viewBox="0 0 220 156" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Frame A (left, sky border) -->
+        <rect x="6" y="10" width="82" height="132" rx="4" stroke="#6f9ec4" stroke-width="3" fill="#e6f0f7"/>
+        <!-- cards inside A — 3 verschillende kleuren -->
+        <rect x="14" y="20" width="66" height="22" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <path d="M16,20 L78,20 Q80,20 80,22 L80,29 L14,29 L14,22 Q14,20 16,20 Z" fill="#d96b3f"/>
+        <line x1="18" y1="37" x2="76" y2="37" stroke="#bdb6a8" stroke-width="0.9"/>
+        <rect x="14" y="48" width="66" height="22" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <path d="M16,48 L78,48 Q80,48 80,50 L80,57 L14,57 L14,50 Q14,48 16,48 Z" fill="#6f9ec4"/>
+        <line x1="18" y1="65" x2="76" y2="65" stroke="#bdb6a8" stroke-width="0.9"/>
+        <rect x="14" y="76" width="66" height="22" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <path d="M16,76 L78,76 Q80,76 80,78 L80,85 L14,85 L14,78 Q14,76 16,76 Z" fill="#e8c66a"/>
+        <line x1="18" y1="93" x2="76" y2="93" stroke="#bdb6a8" stroke-width="0.9"/>
+        <text x="47" y="116" text-anchor="middle" font-family="Sora,sans-serif" font-size="9" font-weight="700" fill="#6f9ec4" stroke="none">Frame A</text>
+        <text x="47" y="128" text-anchor="middle" font-family="Nunito,sans-serif" font-size="8" fill="#8a8a8a" font-style="italic" stroke="none">eigen framing</text>
+
+        <!-- Frame B (right, moss border) -->
+        <rect x="132" y="10" width="82" height="132" rx="4" stroke="#6b8f5e" stroke-width="3" fill="#e7f0e4"/>
+        <!-- cards inside B — 3 andere kleuren -->
+        <rect x="140" y="20" width="66" height="22" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <path d="M142,20 L204,20 Q206,20 206,22 L206,29 L140,29 L140,22 Q140,20 142,20 Z" fill="#6b8f5e"/>
+        <line x1="144" y1="37" x2="202" y2="37" stroke="#bdb6a8" stroke-width="0.9"/>
+        <rect x="140" y="48" width="66" height="22" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <path d="M142,48 L204,48 Q206,48 206,50 L206,57 L140,57 L140,50 Q140,48 142,48 Z" fill="#9b7cb0"/>
+        <line x1="144" y1="65" x2="202" y2="65" stroke="#bdb6a8" stroke-width="0.9"/>
+        <rect x="140" y="76" width="66" height="22" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <path d="M142,76 L204,76 Q206,76 206,78 L206,85 L140,85 L140,78 Q140,76 142,76 Z" fill="#d96b3f"/>
+        <line x1="144" y1="93" x2="202" y2="93" stroke="#bdb6a8" stroke-width="0.9"/>
+        <text x="173" y="116" text-anchor="middle" font-family="Sora,sans-serif" font-size="9" font-weight="700" fill="#6b8f5e" stroke="none">Frame B</text>
+        <text x="173" y="128" text-anchor="middle" font-family="Nunito,sans-serif" font-size="8" fill="#8a8a8a" font-style="italic" stroke="none">eigen framing</text>
+
+        <!-- blocked arrows -->
+        <line x1="90" y1="74" x2="104" y2="74" stroke="#bdb6a8" stroke-width="1.3"/>
+        <line x1="130" y1="74" x2="116" y2="74" stroke="#bdb6a8" stroke-width="1.3"/>
+        <!-- lightning bolt (confrontatie) -->
+        <path d="M114 22 L108 60 L116 60 L106 110 L122 60 L113 60 L119 22 Z" fill="rgba(232,198,106,0.25)" stroke="#e8c66a" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+      </svg>
+    </div>
+    <div class="rc-body">
+      <div class="rc-head">
+        <p class="rc-title">Eigen frames → gezamenlijk frame</p>
+        <div class="rc-badge x">✗</div>
+      </div>
+      <p class="rc-desc">Spelers ontwerpen vooraf elk een eigen probleemrepresentatie en onderhandelen tijdens de sessie naar één gedeeld frame.</p>
+      <p class="rc-reason">✗ Zette frames tegenover elkaar — spelers groeven zich in in plaats van open te staan.</p>
+    </div>
+  </div>
+
+  <!-- Card 3: Generatief spel met CFA-kaarten ✓ -->
+  <div class="richt-card chosen">
+    <div class="rc-vis">
+      <svg viewBox="0 0 220 156" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Ontwerper (links) -->
+        <circle cx="26" cy="12" r="7" fill="#f3c9b4" stroke="#111" stroke-width="1.3"/>
+        <line x1="26" y1="19" x2="26" y2="32" stroke="#111" stroke-width="1.3"/>
+        <line x1="19" y1="25" x2="33" y2="25" stroke="#111" stroke-width="1.3"/>
+        <line x1="26" y1="32" x2="20" y2="42" stroke="#111" stroke-width="1.2"/>
+        <line x1="26" y1="32" x2="32" y2="42" stroke="#111" stroke-width="1.2"/>
+
+        <!-- Stakeholders (midden, 3 poppetjes) -->
+        <circle cx="96" cy="10" r="5.5" fill="#cdddea" stroke="#111" stroke-width="1.1"/>
+        <line x1="96" y1="15" x2="96" y2="25" stroke="#111" stroke-width="1.1"/>
+        <line x1="91" y1="19" x2="101" y2="19" stroke="#111" stroke-width="1.1"/>
+        <line x1="96" y1="25" x2="92" y2="33" stroke="#111" stroke-width="1.1"/>
+        <line x1="96" y1="25" x2="100" y2="33" stroke="#111" stroke-width="1.1"/>
+        <circle cx="110" cy="8" r="5.5" fill="#f3c9b4" stroke="#111" stroke-width="1.1"/>
+        <line x1="110" y1="13" x2="110" y2="23" stroke="#111" stroke-width="1.1"/>
+        <line x1="105" y1="17" x2="115" y2="17" stroke="#111" stroke-width="1.1"/>
+        <line x1="110" y1="23" x2="106" y2="31" stroke="#111" stroke-width="1.1"/>
+        <line x1="110" y1="23" x2="114" y2="31" stroke="#111" stroke-width="1.1"/>
+        <circle cx="124" cy="10" r="5.5" fill="#dde6d4" stroke="#111" stroke-width="1.1"/>
+        <line x1="124" y1="15" x2="124" y2="25" stroke="#111" stroke-width="1.1"/>
+        <line x1="119" y1="19" x2="129" y2="19" stroke="#111" stroke-width="1.1"/>
+        <line x1="124" y1="25" x2="120" y2="33" stroke="#111" stroke-width="1.1"/>
+        <line x1="124" y1="25" x2="128" y2="33" stroke="#111" stroke-width="1.1"/>
+
+        <!-- AI (rechts, computer icoon) -->
+        <rect x="181" y="6" width="22" height="16" rx="1.5" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+        <rect x="184" y="9" width="16" height="10" rx="0.5" fill="#111"/>
+        <line x1="187" y1="22" x2="200" y2="22" stroke="#111" stroke-width="1"/>
+        <rect x="189" y="22" width="6" height="3" rx="0.5" fill="#bdb6a8" stroke="none"/>
+
+        <!-- Gestippelde pijlen: van onderkant figuur naar bovenkant kaartjes (y=64) -->
+        <path d="M26 42 Q34 54 36 64" stroke="#bdb6a8" stroke-width="1" fill="none" stroke-dasharray="3 2"/>
+        <path d="M110 33 Q110 50 98 64" stroke="#bdb6a8" stroke-width="1" fill="none" stroke-dasharray="3 2"/>
+        <path d="M192 25 Q192 50 160 64" stroke="#bdb6a8" stroke-width="1" fill="none" stroke-dasharray="3 2"/>
+
+        <!-- CFA-kaartjes grid (2 rijen × 3 kolommen) -->
+        <!-- Rij 1: Probleem / Oorzaak / Aanname -->
+        <rect x="8" y="64" width="56" height="38" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+        <path d="M11,64 L61,64 Q64,64 64,67 L64,75 L8,75 L8,67 Q8,64 11,64 Z" fill="#d96b3f" stroke="none"/>
+        <text x="36" y="73" text-anchor="middle" font-family="Sora,sans-serif" font-size="6" font-weight="700" fill="#faf7f2" stroke="none">Probleem</text>
+        <line x1="12" y1="82" x2="60" y2="82" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="12" y1="89" x2="58" y2="89" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="12" y1="96" x2="60" y2="96" stroke="#bdb6a8" stroke-width="0.8"/>
+
+        <rect x="70" y="64" width="56" height="38" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.2" transform="rotate(1 98 83)"/>
+        <path d="M73,64 L123,64 Q126,64 126,67 L126,75 L70,75 L70,67 Q70,64 73,64 Z" fill="#e8c66a" stroke="none" transform="rotate(1 98 69)"/>
+        <text x="98" y="73" text-anchor="middle" font-family="Sora,sans-serif" font-size="6" font-weight="700" fill="#111" stroke="none" transform="rotate(1 98 73)">Oorzaak</text>
+        <line x1="74" y1="82" x2="122" y2="82" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="74" y1="89" x2="120" y2="89" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="74" y1="96" x2="122" y2="96" stroke="#bdb6a8" stroke-width="0.8"/>
+
+        <rect x="132" y="64" width="56" height="38" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.2" transform="rotate(-1.5 160 83)"/>
+        <path d="M135,64 L185,64 Q188,64 188,67 L188,75 L132,75 L132,67 Q132,64 135,64 Z" fill="#6f9ec4" stroke="none" transform="rotate(-1.5 160 69)"/>
+        <text x="160" y="73" text-anchor="middle" font-family="Sora,sans-serif" font-size="6" font-weight="700" fill="#faf7f2" stroke="none" transform="rotate(-1.5 160 73)">Aanname</text>
+        <line x1="136" y1="82" x2="184" y2="82" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="136" y1="89" x2="182" y2="89" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="136" y1="96" x2="184" y2="96" stroke="#bdb6a8" stroke-width="0.8"/>
+
+        <!-- Rij 2: Waarde / Oplossing -->
+        <rect x="8" y="110" width="80" height="38" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.2" transform="rotate(-1 48 129)"/>
+        <path d="M11,110 L85,110 Q88,110 88,113 L88,121 L8,121 L8,113 Q8,110 11,110 Z" fill="#6b8f5e" stroke="none" transform="rotate(-1 48 115)"/>
+        <text x="48" y="119" text-anchor="middle" font-family="Sora,sans-serif" font-size="6" font-weight="700" fill="#faf7f2" stroke="none" transform="rotate(-1 48 119)">Waarde</text>
+        <line x1="12" y1="128" x2="84" y2="128" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="12" y1="136" x2="80" y2="136" stroke="#bdb6a8" stroke-width="0.8"/>
+
+        <rect x="122" y="110" width="80" height="38" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.2" transform="rotate(1.5 162 129)"/>
+        <path d="M125,110 L199,110 Q202,110 202,113 L202,121 L122,121 L122,113 Q122,110 125,110 Z" fill="#9b7cb0" stroke="none" transform="rotate(1.5 162 115)"/>
+        <text x="162" y="119" text-anchor="middle" font-family="Sora,sans-serif" font-size="6" font-weight="700" fill="#faf7f2" stroke="none" transform="rotate(1.5 162 119)">Oplossing</text>
+        <line x1="126" y1="128" x2="198" y2="128" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="126" y1="136" x2="194" y2="136" stroke="#bdb6a8" stroke-width="0.8"/>
+      </svg>
+    </div>
+    <div class="rc-body">
+      <div class="rc-head">
+        <p class="rc-title">Generatief spel met CFA&#x2011;kaarten</p>
+        <div class="rc-badge v">✓</div>
+      </div>
+      <p class="rc-desc">Een fysiek kaartspel waarin ontwerper, stakeholders én AI CFA-kaarten genereren als vertrekpunt om probleemrepresentaties te bouwen.</p>
+      <p class="rc-reason" style="color: var(--moss); font-style: normal; font-weight: 700;">✓ Gekozen richting</p>
+    </div>
+  </div>
+
+</div>
+</div>
+</section>
+
+<!-- ================================================================
+     VISUAL — De wijk als kaart (afgevallen concept)
+     ================================================================ -->
+<section>
+<div class="figcard">
+<svg viewBox="0 0 880 384" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:auto;display:block">
+
+  <clipPath id="tableClip">
+    <rect x="60" y="22" width="760" height="340" rx="20"/>
+  </clipPath>
+  <!-- Table surface = de kaart -->
+  <rect x="60" y="22" width="760" height="340" rx="20" fill="#f2ede2" stroke="#111" stroke-width="2.5"/>
+
+  <!-- Subtle graph-paper grid -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0 L0 0 0 20" fill="none" stroke="rgba(17,17,17,0.05)" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect x="60" y="22" width="760" height="340" rx="20" fill="url(#grid)" stroke="none" clip-path="url(#tableClip)"/>
+
+<g clip-path="url(#tableClip)">
+  <!-- ══ KANAAL (bovenrand kaart) ══ -->
+  <rect x="60" y="22" width="760" height="58" rx="0" fill="#c8dce8" stroke="none"/>
+  <path d="M60 80 L820 80" stroke="#9bbccc" stroke-width="1.5"/>
+  <!-- Kanaal water rimpels -->
+  <path d="M100,52 Q130,46 160,52 Q190,58 220,52" stroke="#9bbccc" stroke-width="1" fill="none" opacity="0.7"/>
+  <path d="M300,48 Q340,42 380,48 Q420,54 460,48" stroke="#9bbccc" stroke-width="1" fill="none" opacity="0.7"/>
+  <path d="M580,50 Q620,44 660,50 Q700,56 730,50" stroke="#9bbccc" stroke-width="1" fill="none" opacity="0.7"/>
+  <text x="440" y="62" text-anchor="middle" font-family="Nunito,sans-serif" font-size="9" font-style="italic" fill="#6a9ab0" stroke="none">Schipluiden kanaal</text>
+
+  <!-- ══ HOOFDSTRATEN (volledig getekend) ══ -->
+  <!-- Troelstralaan — horizontaal, midden -->
+  <rect x="60" y="196" width="760" height="22" fill="#ddd7c8" stroke="none"/>
+  <line x1="60" y1="196" x2="820" y2="196" stroke="#9e9485" stroke-width="1.3"/>
+  <line x1="60" y1="218" x2="820" y2="218" stroke="#9e9485" stroke-width="1.3"/>
+  <text x="200" y="211" text-anchor="middle" font-family="Nunito,sans-serif" font-size="8" font-style="italic" fill="#7a7060" stroke="none">Troelstralaan</text>
+  <!-- Middenstip -->
+  <line x1="60" y1="207" x2="820" y2="207" stroke="#b5ae9f" stroke-width="0.5" stroke-dasharray="8 6"/>
+
+  <!-- M.L. Kinglaan — verticaal -->
+  <rect x="330" y="22" width="18" height="340" fill="#ddd7c8" stroke="none"/>
+  <line x1="330" y1="22" x2="330" y2="362" stroke="#9e9485" stroke-width="1.1"/>
+  <line x1="348" y1="22" x2="348" y2="362" stroke="#9e9485" stroke-width="1.1"/>
+  <text x="339" y="165" text-anchor="middle" font-family="Nunito,sans-serif" font-size="7.5" font-style="italic" fill="#7a7060" stroke="none" transform="rotate(-90,339,165)">M.L. Kinglaan</text>
+
+  <!-- Brasserskade — verticaal rechts, deels getekend -->
+  <rect x="590" y="80" width="14" height="116" fill="#ddd7c8" stroke="none"/>
+  <line x1="590" y1="80" x2="590" y2="196" stroke="#9e9485" stroke-width="1.1"/>
+  <line x1="604" y1="80" x2="604" y2="196" stroke="#9e9485" stroke-width="1.1"/>
+  <!-- onderste deel gestippeld -->
+  <line x1="590" y1="218" x2="590" y2="362" stroke="#bdb6a8" stroke-width="1" stroke-dasharray="6 4"/>
+  <line x1="604" y1="218" x2="604" y2="362" stroke="#bdb6a8" stroke-width="1" stroke-dasharray="6 4"/>
+  <text x="597" y="340" text-anchor="middle" font-family="Nunito,sans-serif" font-size="7" font-style="italic" fill="#a09890" stroke="none" transform="rotate(-90,597,300)">Brasserskade</text>
+
+  <!-- Dwarsstraat links -->
+  <line x1="60" y1="300" x2="330" y2="300" stroke="#9e9485" stroke-width="0.9"/>
+  <line x1="60" y1="310" x2="330" y2="310" stroke="#9e9485" stroke-width="0.9"/>
+
+  <!-- ══ BLOK A: Beatrixpark — nette bird's eye layout ══ -->
+  <rect x="68" y="88" width="254" height="100" rx="4" fill="#dde6d4" stroke="#6b8f5e" stroke-width="1.6"/>
+  <!-- Hoofdpad (diagonaal door park) -->
+  <path d="M78,182 Q140,155 200,120 Q228,106 314,96" stroke="#c8bd9a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- Zijpad -->
+  <path d="M140,182 Q160,165 168,148" stroke="#c8bd9a" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Bomen in regelmatige rij langs pad -->
+  <circle cx="96" cy="170" r="11" fill="#b8cfa0" stroke="#6b8f5e" stroke-width="1.2"/>
+  <circle cx="122" cy="158" r="10" fill="#c4d4b0" stroke="#6b8f5e" stroke-width="1.1"/>
+  <circle cx="150" cy="143" r="11" fill="#b8cfa0" stroke="#6b8f5e" stroke-width="1.2"/>
+  <circle cx="178" cy="130" r="10" fill="#c4d4b0" stroke="#6b8f5e" stroke-width="1.1"/>
+  <circle cx="206" cy="113" r="11" fill="#b8cfa0" stroke="#6b8f5e" stroke-width="1.2"/>
+  <!-- Boom rechts naast vijver -->
+  <circle cx="280" cy="136" r="9" fill="#c4d4b0" stroke="#6b8f5e" stroke-width="1"/>
+  <circle cx="298" cy="116" r="10" fill="#b8cfa0" stroke="#6b8f5e" stroke-width="1.1"/>
+  <!-- Struikje bij ingang -->
+  <circle cx="86" cy="100" r="7" fill="#a8c090" stroke="#6b8f5e" stroke-width="1"/>
+  <circle cx="100" cy="96" r="6" fill="#b8cfa0" stroke="#6b8f5e" stroke-width="0.9"/>
+  <!-- Bank met ouderen -->
+  <rect x="136" y="162" width="20" height="7" rx="1" fill="#e8dfc8" stroke="#6b8f5e" stroke-width="1.1"/>
+  <line x1="136" y1="161" x2="156" y2="161" stroke="#6b8f5e" stroke-width="1.4"/>
+  <!-- Ouderen op bank -->
+  <circle cx="141" cy="172" r="3.5" fill="#c8b89a" stroke="#111" stroke-width="0.8"/>
+  <circle cx="150" cy="173" r="3.5" fill="#c8b89a" stroke="#111" stroke-width="0.8"/>
+  <!-- Speeltuin (kleine zandbak) -->
+  <rect x="88" y="108" width="22" height="18" rx="3" fill="#e4d8b0" stroke="#a89a6a" stroke-width="1"/>
+  <circle cx="99" cy="117" r="4" fill="none" stroke="#a89a6a" stroke-width="0.9"/>
+  <!-- Kindjes -->
+  <circle cx="96" cy="130" r="3" fill="#c8b89a" stroke="#111" stroke-width="0.7"/>
+  <circle cx="104" cy="128" r="2.5" fill="#e8c66a" stroke="#111" stroke-width="0.7" opacity="0.9"/>
+  <text x="195" y="183" text-anchor="middle" font-family="Nunito,sans-serif" font-size="7.5" font-style="italic" fill="#5a7a4a" stroke="none">Beatrixpark</text>
+
+  <!-- ══ BLOK B: Supermarkt — vogelperspectief ══ -->
+  <rect x="356" y="88" width="226" height="100" rx="3" fill="#ede8d8" stroke="#111" stroke-width="1.4"/>
+  <!-- Supermarkt gebouw -->
+  <rect x="375" y="96" width="110" height="72" rx="2" fill="#f5f0e6" stroke="#111" stroke-width="1.4"/>
+  <!-- Winkelwagens gebied -->
+  <rect x="392" y="100" width="76" height="10" rx="1" fill="#ddd7c8" stroke="#bdb6a8" stroke-width="0.8"/>
+  <!-- Schappen (lijnen van boven) -->
+  <line x1="376" y1="116" x2="484" y2="116" stroke="#bdb6a8" stroke-width="0.9"/>
+  <line x1="376" y1="126" x2="484" y2="126" stroke="#bdb6a8" stroke-width="0.9"/>
+  <line x1="376" y1="136" x2="484" y2="136" stroke="#bdb6a8" stroke-width="0.9"/>
+  <line x1="376" y1="146" x2="484" y2="146" stroke="#bdb6a8" stroke-width="0.9"/>
+  <line x1="376" y1="156" x2="484" y2="156" stroke="#bdb6a8" stroke-width="0.9"/>
+  <!-- Kassa rij -->
+  <rect x="376" y="158" width="108" height="8" rx="1" fill="#e4dccf" stroke="#bdb6a8" stroke-width="0.8"/>
+  <!-- Parkeerplaats -->
+  <rect x="494" y="96" width="80" height="72" rx="1" fill="#e0dbd0" stroke="#bdb6a8" stroke-width="1"/>
+  <!-- Auto's (kleine rechthoekjes) -->
+  <rect x="500" y="102" width="18" height="11" rx="1.5" fill="#c8c0b4" stroke="#9e9485" stroke-width="0.9"/>
+  <rect x="522" y="102" width="18" height="11" rx="1.5" fill="#c8c0b4" stroke="#9e9485" stroke-width="0.9"/>
+  <rect x="544" y="102" width="18" height="11" rx="1.5" fill="#d96b3f" stroke="#9e9485" stroke-width="0.9" opacity="0.7"/>
+  <rect x="500" y="118" width="18" height="11" rx="1.5" fill="#c8c0b4" stroke="#9e9485" stroke-width="0.9"/>
+  <rect x="522" y="118" width="18" height="11" rx="1.5" fill="#6f9ec4" stroke="#9e9485" stroke-width="0.9" opacity="0.6"/>
+  <text x="469" y="182" text-anchor="middle" font-family="Nunito,sans-serif" font-size="8" fill="#8a8070" stroke="none">Supermarkt</text>
+
+  <!-- ══ BLOK C: Gemeentehuis — deels getekend ══ -->
+  <path d="M612 88 L812 88 L812 188" stroke="#111" stroke-width="1.5" fill="none"/>
+  <path d="M812 188 L612 188 L612 88" stroke="#bdb6a8" stroke-width="1.1" stroke-dasharray="6 4" fill="none"/>
+  <!-- Formeel plein voor het gebouw -->
+  <rect x="658" y="158" width="118" height="22" rx="1" fill="#e0dbd0" stroke="#bdb6a8" stroke-width="0.9"/>
+  <!-- Symmetrisch trappen/stoep -->
+  <rect x="700" y="154" width="34" height="6" rx="0.5" fill="#d8d2c4" stroke="#bdb6a8" stroke-width="0.8"/>
+  <rect x="704" y="150" width="26" height="5" rx="0.5" fill="#d0cab8" stroke="#bdb6a8" stroke-width="0.7"/>
+  <!-- Gemeentehuis gebouw (symmetrisch, imposant) -->
+  <rect x="650" y="96" width="134" height="56" rx="1" fill="#f5f0e6" stroke="#111" stroke-width="1.6"/>
+  <!-- Middenrisaliet (vooruitstekend centraal deel) -->
+  <rect x="692" y="92" width="50" height="60" rx="1" fill="#f8f4ec" stroke="#111" stroke-width="1.5"/>
+  <!-- Kolommen (symmetrisch, 6 stuks) -->
+  <line x1="664" y1="96" x2="664" y2="152" stroke="#d4cfc6" stroke-width="2.5"/>
+  <line x1="677" y1="96" x2="677" y2="152" stroke="#d4cfc6" stroke-width="2.5"/>
+  <line x1="696" y1="92" x2="696" y2="152" stroke="#bdb6a8" stroke-width="2"/>
+  <line x1="709" y1="92" x2="709" y2="152" stroke="#bdb6a8" stroke-width="2"/>
+  <line x1="726" y1="92" x2="726" y2="152" stroke="#bdb6a8" stroke-width="2"/>
+  <line x1="739" y1="92" x2="739" y2="152" stroke="#bdb6a8" stroke-width="2"/>
+  <line x1="757" y1="96" x2="757" y2="152" stroke="#d4cfc6" stroke-width="2.5"/>
+  <line x1="770" y1="96" x2="770" y2="152" stroke="#d4cfc6" stroke-width="2.5"/>
+  <!-- Ingang (dubbele deur) -->
+  <rect x="706" y="132" width="22" height="20" rx="1" fill="#ddd7c8" stroke="#111" stroke-width="1.2"/>
+  <line x1="717" y1="132" x2="717" y2="152" stroke="#111" stroke-width="0.9"/>
+  <!-- Vlaggemast + vlag -->
+  <line x1="717" y1="80" x2="717" y2="94" stroke="#111" stroke-width="1.5"/>
+  <path d="M717,80 L733,85 L717,90 Z" fill="#d96b3f" stroke="none"/>
+  <!-- Kleine figuurtjes op plein -->
+  <circle cx="690" cy="168" r="2.5" fill="#c8b89a" stroke="#111" stroke-width="0.7"/>
+  <circle cx="717" cy="166" r="2.5" fill="#c8b89a" stroke="#111" stroke-width="0.7"/>
+  <circle cx="740" cy="169" r="2" fill="#c8b89a" stroke="#111" stroke-width="0.7"/>
+  <circle cx="727" cy="174" r="2" fill="#c8b89a" stroke="#111" stroke-width="0.7"/>
+  <text x="718" y="192" text-anchor="middle" font-family="Nunito,sans-serif" font-size="7.5" font-style="italic" fill="#bdb6a8" stroke="none">in progress…</text>
+
+  <!-- ══ BLOK D: Hangjongeren met graffiti ══ -->
+  <rect x="68" y="226" width="254" height="126" rx="3" fill="#ede8d8" stroke="#111" stroke-width="1.4"/>
+  <!-- Muur met graffiti -->
+  <rect x="78" y="236" width="234" height="18" rx="1" fill="#d8d2c4" stroke="#111" stroke-width="1.3"/>
+  <!-- Graffiti tags op de muur (kleurrijke letters/vormen) -->
+  <text x="96" y="249" font-family="Sora,sans-serif" font-size="9" font-weight="800" fill="#d96b3f" stroke="none" transform="rotate(-3,96,249)">WEST</text>
+  <text x="148" y="250" font-family="Sora,sans-serif" font-size="8" font-weight="800" fill="#6f9ec4" stroke="none" transform="rotate(2,148,250)">★</text>
+  <text x="162" y="249" font-family="Sora,sans-serif" font-size="9" font-weight="800" fill="#6b8f5e" stroke="none" transform="rotate(-2,162,249)">THX</text>
+  <text x="210" y="250" font-family="Sora,sans-serif" font-size="8" font-weight="800" fill="#9b7cb0" stroke="none" transform="rotate(3,210,250)">BNHF</text>
+  <text x="258" y="249" font-family="Sora,sans-serif" font-size="7" font-weight="800" fill="#e8c66a" stroke="none">∞</text>
+  <!-- Kleine graffiti op de vloer eronder -->
+  <path d="M88,268 Q100,264 112,268" stroke="#d96b3f" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <path d="M230,272 Q244,268 258,272" stroke="#6f9ec4" stroke-width="1.5" fill="none" opacity="0.5" style="stroke: rgba(111, 158, 196, 0)"/>
+  <!-- Stoeprand -->
+  <line x1="78" y1="260" x2="312" y2="260" stroke="#bdb6a8" stroke-width="1"/>
+  <!-- Groepje jongeren (van boven, als gekleurde poppetjes) -->
+  <!-- Jongere 1 -->
+  <circle cx="108" cy="278" r="6" fill="#c8b89a" stroke="#111" stroke-width="1"/>
+  <line x1="108" y1="284" x2="108" y2="296" stroke="#111" stroke-width="1.2"/>
+  <line x1="102" y1="289" x2="114" y2="289" stroke="#111" stroke-width="1.2"/>
+  <line x1="108" y1="296" x2="103" y2="304" stroke="#111" stroke-width="1.1"/>
+  <line x1="108" y1="296" x2="113" y2="304" stroke="#111" stroke-width="1.1"/>
+  <!-- Jongere 2 -->
+  <circle cx="128" cy="276" r="6" fill="#e8c66a" stroke="#111" stroke-width="1" opacity="0.9"/>
+  <line x1="128" y1="282" x2="128" y2="294" stroke="#111" stroke-width="1.2"/>
+  <line x1="122" y1="287" x2="134" y2="287" stroke="#111" stroke-width="1.2"/>
+  <line x1="128" y1="294" x2="123" y2="302" stroke="#111" stroke-width="1.1"/>
+  <line x1="128" y1="294" x2="133" y2="302" stroke="#111" stroke-width="1.1"/>
+  <!-- Jongere 3 (zittend op muur) -->
+  <circle cx="152" cy="265" r="5.5" fill="#c8b89a" stroke="#111" stroke-width="1"/>
+  <line x1="152" y1="270" x2="152" y2="280" stroke="#111" stroke-width="1.2"/>
+  <line x1="147" y1="274" x2="157" y2="274" stroke="#111" stroke-width="1.2"/>
+  <line x1="152" y1="280" x2="146" y2="286" stroke="#111" stroke-width="1.1"/>
+  <line x1="152" y1="280" x2="158" y2="286" stroke="#111" stroke-width="1.1"/>
+  <!-- Jongere 4 -->
+  <circle cx="172" cy="279" r="6" fill="#6f9ec4" stroke="#111" stroke-width="1" opacity="0.85"/>
+  <line x1="172" y1="285" x2="172" y2="297" stroke="#111" stroke-width="1.2"/>
+  <line x1="166" y1="290" x2="178" y2="290" stroke="#111" stroke-width="1.2"/>
+  <line x1="172" y1="297" x2="167" y2="305" stroke="#111" stroke-width="1.1"/>
+  <line x1="172" y1="297" x2="177" y2="305" stroke="#111" stroke-width="1.1"/>
+  <!-- Skateboard op de grond -->
+  <rect x="194" y="290" width="24" height="10" rx="3" fill="#c8c0b4" stroke="#111" stroke-width="1"/>
+  <circle cx="198" cy="300" r="2" fill="#111" stroke="none"/>
+  <circle cx="214" cy="300" r="2" fill="#111" stroke="none"/>
+  <!-- Fietsen gestald -->
+  <ellipse cx="236" cy="278" rx="3" ry="9" fill="none" stroke="#9e9485" stroke-width="1.3" style="opacity: 0"/>
+  <ellipse cx="246" cy="278" rx="3" ry="9" fill="none" stroke="#9e9485" stroke-width="1.3" style="stroke: rgba(158, 148, 133, 0)"/>
+  <line x1="236" y1="270" x2="246" y2="270" stroke="#9e9485" stroke-width="1" style="opacity: 0"/>
+  <ellipse cx="260" cy="280" rx="3" ry="9" fill="none" stroke="#9e9485" stroke-width="1.3" style="stroke: rgba(158, 148, 133, 0)"/>
+
+  <!-- ══ BLOK E: Midden-onder — leeg, nog in te tekenen ══ -->
+  <rect x="356" y="226" width="226" height="126" rx="3" fill="#f5f2ea" stroke="#bdb6a8" stroke-width="1.4" stroke-dasharray="8 5"/>
+  <line x1="356" y1="268" x2="582" y2="268" stroke="#d4cfc6" stroke-width="0.6" stroke-dasharray="4 4"/>
+  <line x1="356" y1="310" x2="582" y2="310" stroke="#d4cfc6" stroke-width="0.6" stroke-dasharray="4 4"/>
+  <line x1="446" y1="226" x2="446" y2="352" stroke="#d4cfc6" stroke-width="0.6" stroke-dasharray="4 4"/>
+  <line x1="514" y1="226" x2="514" y2="352" stroke="#d4cfc6" stroke-width="0.6" stroke-dasharray="4 4"/>
+  <g transform="translate(469, 276) rotate(-22)">
+    <rect x="-3.5" y="-16" width="7" height="12" rx="1" fill="#e8dfc8" stroke="#bdb6a8" stroke-width="0.9"/>
+    <path d="M-3.5 -4 L3.5 -4 L0 3 Z" fill="#faf7f2" stroke="#bdb6a8" stroke-width="0.8"/>
+  </g>
+  <text x="469" y="305" text-anchor="middle" font-family="Nunito,sans-serif" font-size="8" font-style="italic" fill="#c0b9ae" stroke="none">nog in te tekenen</text>
+
+  <!-- ══ BLOK F: Rechts-onder — leeg, nog in te tekenen ══ -->
+  <rect x="612" y="226" width="200" height="126" rx="3" fill="#f5f2ea" stroke="#bdb6a8" stroke-width="1.4" stroke-dasharray="8 5"/>
+  <line x1="612" y1="268" x2="812" y2="268" stroke="#d4cfc6" stroke-width="0.6" stroke-dasharray="4 4" style="opacity: 1"/>
+  <line x1="612" y1="310" x2="812" y2="310" stroke="#d4cfc6" stroke-width="0.6" stroke-dasharray="4 4"/>
+  <line x1="678" y1="226" x2="678" y2="352" stroke="#d4cfc6" stroke-width="0.6" stroke-dasharray="4 4"/>
+  <line x1="746" y1="226" x2="746" y2="352" stroke="#d4cfc6" stroke-width="0.6" stroke-dasharray="4 4"/>
+  <g transform="translate(712, 282) rotate(-22)">
+    <rect x="-3.5" y="-16" width="7" height="12" rx="1" fill="#e8dfc8" stroke="#bdb6a8" stroke-width="0.9"/>
+    <path d="M-3.5 -4 L3.5 -4 L0 3 Z" fill="#faf7f2" stroke="#bdb6a8" stroke-width="0.8"/>
+  </g>
+  <text x="712" y="310" text-anchor="middle" font-family="Nunito,sans-serif" font-size="8" font-style="italic" fill="#c0b9ae" stroke="none">nog in te tekenen</text>
+  </g>
+
+  <!-- ══ PENNEN van de spelers ══ -->
+  <!-- Pen van speler A (boven, tekent NM blok) -->
+  <g transform="translate(470 80) rotate(15)">
+    <rect x="-4" y="-28" width="8" height="22" rx="1.5" fill="#efd06a" stroke="#111" stroke-width="1.1"/>
+    <rect x="-4" y="-32" width="8" height="6" rx="1" fill="#d4c45a" stroke="#111" stroke-width="1"/>
+    <path d="M-4 -6 L4 -6 L0 3 Z" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+    <line x1="0" y1="3" x2="0.5" y2="7" stroke="#111" stroke-width="1.4"/>
+  </g>
+
+  <!-- Pen van speler C (links, tekent ZW blok) -->
+  <g transform="translate(68 285) rotate(-70)">
+    <rect x="-4" y="-28" width="8" height="22" rx="1.5" fill="#9b7cb0" stroke="#111" stroke-width="1.1"/>
+    <rect x="-4" y="-32" width="8" height="6" rx="1" fill="#7a5a90" stroke="#111" stroke-width="1"/>
+    <path d="M-4 -6 L4 -6 L0 3 Z" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+    <line x1="0" y1="3" x2="0.5" y2="7" stroke="#111" stroke-width="1.4"/>
+  </g>
+
+  <!-- Pen van speler D (rechts, tekent ZE) -->
+  <g transform="translate(812 265) rotate(100)">
+    <rect x="-4" y="-28" width="8" height="22" rx="1.5" fill="#6f9ec4" stroke="#111" stroke-width="1.1"/>
+    <rect x="-4" y="-32" width="8" height="6" rx="1" fill="#4a7ea4" stroke="#111" stroke-width="1"/>
+    <path d="M-4 -6 L4 -6 L0 3 Z" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+    <line x1="0" y1="3" x2="0.5" y2="7" stroke="#111" stroke-width="1.4"/>
+  </g>
+
+  <!-- Verse lijntjes van pen D -->
+  <path d="M612 260 L655 260" stroke="#111" stroke-width="1.1" stroke-linecap="round" opacity="0.6" style="opacity: 0"/>
+  <path d="M612 270 L648 270" stroke="#111" stroke-width="1.1" stroke-linecap="round" opacity="0.4" style="opacity: 0"/>
+
+  <!-- ══ AI-SCENARIO kaartje (op de kaart gelegd, licht gekanteld) ══ -->
+  <g transform="translate(378 148) rotate(-5)">
+    <rect x="4" y="4" width="124" height="94" rx="5" fill="rgba(17,17,17,0.1)" stroke="none"/>
+    <rect x="0" y="0" width="124" height="94" rx="5" fill="#faf7f2" stroke="#111" stroke-width="2"/>
+    <path d="M5,0 L119,0 Q124,0 124,5 L124,26 L0,26 L0,5 Q0,0 5,0 Z" fill="#111"/>
+    <text x="62" y="18" text-anchor="middle" font-family="Sora,sans-serif" font-size="8.5" font-weight="800" fill="#faf7f2" stroke="none" letter-spacing="1.5">AI-SCENARIO</text>
+    <line x1="12" y1="38" x2="112" y2="38" stroke="#111" stroke-width="1.4"/>
+    <line x1="12" y1="50" x2="106" y2="50" stroke="#bdb6a8" stroke-width="1.2"/>
+    <line x1="12" y1="62" x2="112" y2="62" stroke="#bdb6a8" stroke-width="1.2"/>
+    <line x1="12" y1="74" x2="100" y2="74" stroke="#bdb6a8" stroke-width="1.2"/>
+    <line x1="12" y1="84" x2="108" y2="84" stroke="#bdb6a8" stroke-width="1"/>
+    <circle cx="110" cy="14" r="7" fill="#d96b3f" stroke="none"/>
+    <text x="110" y="19" text-anchor="middle" font-family="Sora,sans-serif" font-size="9" font-weight="800" fill="#faf7f2" stroke="none">!</text>
+  </g>
+  <path d="M382 158 Q416 136 440 148" stroke="#d96b3f" stroke-width="1.4" fill="none" stroke-dasharray="3 3" opacity="0.55"/>
+  <path d="M434 143 L440 150 L446 144" stroke="#d96b3f" stroke-width="1.3" fill="none" opacity="0.55"/>
+
+  <!-- ══ SPELERS rondom tafel ══ -->
+
+
+</svg>
+</div>
+</section>
+
+</div>
+</body>
+</html>

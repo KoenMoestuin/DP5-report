@@ -1,0 +1,242 @@
+/* ============================================================
+   Frictiewereld Design System — colors & type
+   Loaded as: <link rel="stylesheet" href="colors_and_type.css">
+   ============================================================ */
+
+/* ---------- Web fonts (Google Fonts) ---------- */
+/* Display: Sora — rounded geometric sans, heavy weights echo the
+   Frictiewereld wordmark (curved F, friendly terminals, weight 800).
+   Body: Nunito — humanist rounded sans matching the warm, social
+   tone of the screens. Mono: JetBrains Mono for any code/labels.
+   NOTE: substitute candidates only — flag to user. */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ---------- Brand palette ---------------------------------
+     Frictiewereld is high-contrast monochrome at its core
+     (black ink, off-white paper, hand-drawn lines), softened
+     with three "warmth" accents pulled from the social/people
+     side of the brand: clay, moss, sky.
+     ---------------------------------------------------------- */
+
+  /* Ink & paper — the structural backbone */
+  --ink:        #111111;   /* primary text, strokes, fills */
+  --ink-2:      #2a2a2a;   /* secondary ink */
+  --ink-3:      #5b5b5b;   /* tertiary, muted */
+  --ink-4:      #8a8a8a;   /* placeholders */
+  --paper:      #faf7f2;   /* main warm off-white background */
+  --paper-2:    #f3ede2;   /* warmer surface, cards on paper */
+  --paper-3:    #e8e1d3;   /* dividers, subtle bands */
+  --line:       #1a1a1a;   /* hand-drawn stroke color */
+  --line-soft:  rgba(17,17,17,0.18);
+
+  /* Warm accents — social, human, NOT high-tech */
+  --clay:       #d96b3f;   /* friction, action, alerts */
+  --clay-soft:  #f3c9b4;
+  --moss:       #6b8f5e;   /* growth, journey progress */
+  --moss-soft:  #c9d8c0;
+  --sky:        #6f9ec4;   /* perspective, calm, info */
+  --sky-soft:   #cdddea;
+  --sun:        #e8c66a;   /* highlight / "aha" moments */
+  --sun-soft:   #f3e2ad;
+
+  /* Semantic */
+  --fg-1:       var(--ink);
+  --fg-2:       var(--ink-2);
+  --fg-3:       var(--ink-3);
+  --fg-4:       var(--ink-4);
+  --fg-on-dark: var(--paper);
+
+  --bg-1:       var(--paper);
+  --bg-2:       var(--paper-2);
+  --bg-3:       var(--paper-3);
+  --bg-inverse: var(--ink);
+
+  --border:        var(--ink);
+  --border-soft:   var(--line-soft);
+  --border-strong: var(--ink);
+
+  --accent:        var(--clay);
+  --accent-soft:   var(--clay-soft);
+  --success:       var(--moss);
+  --info:          var(--sky);
+  --warn:          var(--sun);
+  --danger:        var(--clay);
+
+  /* ---------- Typography ----------------------------------- */
+  --font-display: 'Sora', 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Nunito', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* Base scale — generous, readable, warm. Body is 17px to
+     give body copy room to breathe. */
+  --fs-xs:   12px;
+  --fs-sm:   14px;
+  --fs-base: 17px;
+  --fs-md:   19px;
+  --fs-lg:   22px;
+  --fs-xl:   28px;
+  --fs-2xl:  36px;
+  --fs-3xl:  48px;
+  --fs-4xl:  64px;
+  --fs-5xl:  88px;
+
+  --lh-tight:  1.08;
+  --lh-snug:   1.22;
+  --lh-normal: 1.45;
+  --lh-loose:  1.65;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-caps:   0.12em;
+
+  /* ---------- Spacing (4-pt base, slightly airy) ----------- */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  /* ---------- Radii — Frictiewereld is mostly capsules
+     (pill labels) and circles (orb nodes). Cards are softly
+     rounded. No sharp corners. ----------------------------- */
+  --r-xs:    6px;
+  --r-sm:   10px;
+  --r-md:   14px;
+  --r-lg:   20px;
+  --r-pill: 999px;
+  --r-circle: 50%;
+
+  /* ---------- Borders -------------------------------------- */
+  --bw-hair:   1px;
+  --bw:        1.5px;   /* default hand-drawn weight */
+  --bw-bold:   2.25px;
+  --bw-heavy:  3px;
+
+  /* ---------- Shadows — minimal, used sparingly. The brand
+     is flat-line first; elevation is communicated through
+     stroke weight, not blur. ------------------------------- */
+  --shadow-1: 0 1px 0 rgba(17,17,17,0.06);
+  --shadow-2: 0 6px 20px -10px rgba(17,17,17,0.18);
+  --shadow-3: 0 14px 36px -16px rgba(17,17,17,0.22);
+  /* Inked shadow — for the rare "lifted card" moment */
+  --shadow-ink: 4px 4px 0 0 var(--ink);
+
+  /* ---------- Motion --------------------------------------- */
+  --ease-out:  cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-in:   cubic-bezier(0.7, 0.0, 0.8, 0.2);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 380ms;
+  --dur-4: 640ms;
+}
+
+/* ============================================================
+   Semantic type styles
+   ============================================================ */
+
+html, body {
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.fw-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--lh-tight);
+}
+
+.fw-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-4xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+.fw-h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+.fw-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-snug);
+}
+.fw-h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+}
+
+/* "Verhaal." style — short label + period, used to tag nodes */
+.fw-tag {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  letter-spacing: 0;
+}
+
+.fw-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+  text-wrap: pretty;
+}
+.fw-body-sm {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--fg-2);
+}
+
+.fw-quote {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+  color: var(--fg-2);
+}
+
+.fw-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.fw-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: 0;
+}
+
+.fw-orb-letter {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+}

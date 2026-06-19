@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Visualisaties · Sprint 3 · Framing</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    padding: 64px clamp(24px, 6vw, 96px) 96px;
+  }
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  /* ——— Figcard ——— */
+  .figcard {
+    position: relative;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 6px 6px 0 0 var(--ink);
+    padding: 40px 40px 44px;
+  }
+
+  /* ============================================================
+     FIG 1 — Vertrekpunten + Implicaties
+     ============================================================ */
+  .vp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    position: relative;
+  }
+
+
+
+  .vp-col {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    z-index: 1;
+  }
+
+  .vp-obs {
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    padding: 18px 14px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-height: 190px;
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  .obs-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--ink);
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .vp-down {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+  }
+
+  .vp-impl {
+    border: 2px solid var(--clay);
+    background: var(--clay-soft);
+    padding: 14px 12px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-height: 150px;
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  .impl-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--ink);
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  /* ============================================================
+     FIG 2 — Zoeken vs Construeren
+     ============================================================ */
+  .contrast-panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .c-panel {
+    padding: 28px 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .c-panel:first-child { border-right: 1.5px solid var(--ink); }
+
+  .c-head {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .c-verb {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--ink-3);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .c-noun {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .c-panel:first-child .c-noun { color: var(--ink-3); }
+  .c-panel:last-child .c-noun { color: var(--clay); }
+
+  .c-vis svg { width: 100%; height: auto; display: block; }
+
+
+
+  /* ============================================================
+     FIG 3 — WPR & CFA
+     ============================================================ */
+  .methods-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .method-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .method-col:first-child { border-right: 1.5px solid var(--ink); }
+
+  .m-head {
+    background: var(--paper-2);
+    border-bottom: 1.5px solid var(--ink);
+    padding: 22px 28px 18px;
+  }
+
+  .m-head-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .m-acronym {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 40px;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+
+  .m-fullname {
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--ink-3);
+    margin: 0 0 8px;
+  }
+
+  .m-origin {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    font-weight: 700;
+  }
+
+  .m-body {
+    padding: 22px 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .m-core {
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    border-left: 2px solid var(--clay);
+    padding: 2px 0 2px 10px;
+    margin: 0;
+  }
+
+  .m-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .m-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .m-num {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 10px;
+    color: var(--clay);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    min-width: 18px;
+    padding-top: 2px;
+  }
+
+  .m-txt {
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  .m-sep {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    font-weight: 700;
+    padding-top: 8px;
+    border-top: 1px dashed var(--ink-4);
+    margin: 0;
+  }
+
+  .m-bullet {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+  }
+
+  .m-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--clay);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  /* ============================================================
+     FIG 3 — CFA Visual Diagram
+     ============================================================ */
+  .cfa-diagram { display: flex; flex-direction: column; gap: 24px; }
+  .cfa-hd { display: flex; align-items: baseline; gap: 14px; }
+  .cfa-acronym { font-family: var(--font-display); font-weight: 800; font-size: 40px; letter-spacing: -0.04em; line-height: 1; color: var(--ink); }
+  .cfa-subtitle { font-size: 12.5px; font-style: italic; color: var(--ink-3); }
+
+  .cfa-flow { display: grid; grid-template-columns: 80px 1fr 80px; align-items: center; gap: 24px; }
+  .cfa-side { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .cfa-side-label { font-family: var(--font-mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-4); text-align: center; line-height: 1.4; margin: 0; }
+  .cfa-arrow-wrap { display: flex; justify-content: center; }
+  .cfa-dir-row { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
+  .cfa-dir-lbl { font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-2); white-space: nowrap; flex-shrink: 0; }
+  .cfa-dir-line-r, .cfa-dir-line-l { flex: 1; height: 2px; background: #555; position: relative; align-self: center; }
+  .cfa-dir-line-r::after { content: ''; position: absolute; right: -6px; top: -3px; border-left: 7px solid #555; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+  .cfa-dir-line-l::before { content: ''; position: absolute; left: -6px; top: -3px; border-right: 7px solid #555; border-top: 4px solid transparent; border-bottom: 4px solid transparent; }
+
+  .cfa-frame { border: 2px solid var(--ink); overflow: hidden; }
+  .cfa-panels { display: grid; grid-template-columns: 1fr 44px 1fr; }
+  .cfa-diag { background: #faf0eb; padding: 22px 24px 24px; }
+  .cfa-prog { background: #eef4eb; padding: 22px 24px 24px; }
+  .cfa-panel-title { font-family: var(--font-display); font-weight: 800; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 16px; }
+  .cfa-diag .cfa-panel-title { color: var(--clay); }
+  .cfa-prog .cfa-panel-title { color: #4a7040; }
+  .cfa-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .cfa-item:last-child { margin-bottom: 0; }
+  .cfa-item-icon { flex-shrink: 0; }
+  .cfa-item-text { font-size: 12.5px; color: var(--ink-2); line-height: 1.3; margin: 0; }
+
+  .cfa-tension-col { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border-left: 1.5px solid var(--ink-4); border-right: 1.5px solid var(--ink-4); background: var(--paper); padding: 16px 0; }
+  .cfa-tension-label { font-family: var(--font-mono); font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-4); writing-mode: vertical-rl; }
+
+  .cfa-macht { background: var(--ink); padding: 14px 24px; display: flex; align-items: center; gap: 14px; }
+  .cfa-macht-label { font-family: var(--font-display); font-weight: 800; font-size: 13px; color: var(--clay); letter-spacing: 0.06em; white-space: nowrap; flex-shrink: 0; }
+  .cfa-macht-text { font-size: 12px; color: #c8c0b4; line-height: 1.4; margin: 0; }
+  .cfa-macht-sep { color: #555; margin: 0 4px; }
+
+  /* ============================================================
+     FIG 4 — De Brug
+     ============================================================ */
+  .figcard-bridge {
+    padding: 32px 32px 28px;
+  }
+
+  .bridge-fig svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- =========================================================
+       FIG 1 — Vertrekpunten sprint 3 → implicaties
+       ========================================================= -->
+  <section>
+    <div class="figcard">
+      <div class="vp-grid">
+
+        <!-- 1: Tool ≠ menselijk contact -->
+        <div class="vp-col">
+          <div class="vp-obs">
+            <svg viewBox="0 0 100 88" width="100" height="88" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Person left -->
+              <circle cx="16" cy="14" r="8" fill="#faf7f2"/>
+              <line x1="16" y1="22" x2="16" y2="46"/>
+              <line x1="16" y1="31" x2="5"  y2="42"/>
+              <line x1="16" y1="31" x2="27" y2="42"/>
+              <line x1="16" y1="46" x2="9"  y2="62"/>
+              <line x1="16" y1="46" x2="23" y2="62"/>
+              <!-- Person right -->
+              <circle cx="84" cy="14" r="8" fill="#faf7f2"/>
+              <line x1="84" y1="22" x2="84" y2="46"/>
+              <line x1="84" y1="31" x2="73" y2="42"/>
+              <line x1="84" y1="31" x2="95" y2="42"/>
+              <line x1="84" y1="46" x2="77" y2="62"/>
+              <line x1="84" y1="46" x2="91" y2="62"/>
+              <!-- Laptop screen crossed out -->
+              <rect x="31" y="26" width="38" height="26" rx="2" stroke="#bdb6a8" stroke-width="1.2" fill="#f0ebde"/>
+              <rect x="27" y="52" width="46" height="5" rx="1" stroke="#bdb6a8" stroke-width="1" fill="#f0ebde"/>
+              <line x1="34" y1="29" x2="65" y2="48" stroke="#d96b3f" stroke-width="2"/>
+              <line x1="65" y1="29" x2="34" y2="48" stroke="#d96b3f" stroke-width="2"/>
+              <!-- Direct connection arc over the screen -->
+              <path d="M 25 8 Q 50 -4 75 8" stroke="#111" stroke-width="1.8"/>
+            </svg>
+            <p class="obs-text">De tool mag menselijk contact niet vervangen, maar moet mensen juist samenbrengen.</p>
+          </div>
+          <div class="vp-down">
+            <svg width="14" height="32" viewBox="0 0 14 32" fill="none">
+              <line x1="7" y1="0" x2="7" y2="23" stroke="#d96b3f" stroke-width="2"/>
+              <path d="M 1 17 L 7 27 L 13 17" stroke="#d96b3f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="vp-impl">
+            <svg viewBox="-4 -10 84 64" width="100" height="88" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Playing cards fanned out (spelvorm) -->
+              <g transform="rotate(-14 22 38)">
+                <rect x="2" y="10" width="26" height="38" rx="2" fill="#faf7f2" stroke="#111"/>
+                <circle cx="15" cy="24" r="3" fill="#6b8f5e" stroke="none"/>
+                <circle cx="15" cy="38" r="3" fill="#6b8f5e" stroke="none"/>
+              </g>
+              <g transform="rotate(-3 36 38)">
+                <rect x="20" y="6" width="26" height="38" rx="2" fill="#fff6dc" stroke="#111"/>
+                <circle cx="33" cy="17" r="2.5" fill="#d96b3f" stroke="none"/>
+                <circle cx="33" cy="33" r="2.5" fill="#d96b3f" stroke="none"/>
+              </g>
+              <g transform="rotate(10 52 38)">
+                <rect x="38" y="10" width="26" height="38" rx="2" fill="#faf7f2" stroke="#111"/>
+                <circle cx="51" cy="22" r="3" fill="#6f9ec4" stroke="none"/>
+              </g>
+              <!-- small people heads above cards -->
+              <circle cx="8" cy="7" r="4" fill="#f3c9b4" stroke="#111" stroke-width="1"/>
+              <circle cx="31" cy="0" r="4" fill="#dde6d4" stroke="#111" stroke-width="1"/>
+              <circle cx="56" cy="5" r="4" fill="#cdddea" stroke="#111" stroke-width="1"/>
+            </svg>
+            <p class="impl-text">Een spelvorm die je sámen met stakeholders speelt.</p>
+          </div>
+        </div>
+
+        <!-- 2: Probleemrepresentatie wordt geconstrueerd -->
+        <div class="vp-col">
+          <div class="vp-obs">
+            <svg viewBox="0 0 100 88" width="100" height="88" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Thought bubble -->
+              <path d="M 12 72 Q 8 58 10 46 Q 14 28 28 20 Q 42 12 56 14 Q 72 16 80 30 Q 88 44 84 58 Q 78 70 64 74 Q 50 78 36 74 Q 20 70 12 72 Z" fill="#faf7f2" stroke="#111"/>
+              <circle cx="9" cy="78" r="3" fill="#faf7f2" stroke="#111"/>
+              <circle cx="5" cy="84" r="2" fill="#faf7f2" stroke="#111"/>
+              <!-- Inside: overlapping problem shapes → multiple representations -->
+              <polygon points="48,24 36,46 60,46" fill="#cdddea" stroke="#111" stroke-width="1.2" opacity="0.9"/>
+              <circle cx="62" cy="46" r="13" fill="#dde6d4" stroke="#111" stroke-width="1.2" opacity="0.85"/>
+              <rect x="24" y="38" width="22" height="18" fill="#f3c9b4" stroke="#111" stroke-width="1.2" opacity="0.8"/>
+              <!-- ? showing uncertainty / openness -->
+              <!-- ? removed -->
+            </svg>
+            <p class="obs-text">Het mentale model draait om hoe iemand het probleem representeert — een representatie die je construeert, niet vindt.</p>
+          </div>
+          <div class="vp-down">
+            <svg width="14" height="32" viewBox="0 0 14 32" fill="none">
+              <line x1="7" y1="0" x2="7" y2="23" stroke="#d96b3f" stroke-width="2"/>
+              <path d="M 1 17 L 7 27 L 13 17" stroke="#d96b3f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="vp-impl">
+            <svg viewBox="0 0 76 46" width="100" height="88" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Stacked building blocks: multiple layers -->
+              <rect x="2"  y="32" width="20" height="12" fill="#cdddea" stroke="#111"/>
+              <rect x="22" y="32" width="16" height="12" fill="#dde6d4" stroke="#111"/>
+              <rect x="38" y="32" width="18" height="12" fill="#f3c9b4" stroke="#111"/>
+              <rect x="56" y="32" width="18" height="12" fill="#efd06a" stroke="#111"/>
+              <rect x="8"  y="20" width="20" height="12" fill="#dde6d4" stroke="#111"/>
+              <rect x="28" y="20" width="20" height="12" fill="#cdddea" stroke="#111"/>
+              <rect x="48" y="20" width="18" height="12" fill="#f3c9b4" stroke="#111"/>
+              <rect x="14" y="8"  width="22" height="12" fill="#f3c9b4" stroke="#111"/>
+              <rect x="36" y="8"  width="18" height="12" fill="#dde6d4" stroke="#111"/>
+            </svg>
+            <p class="impl-text">Een spelvorm waarin het construeren van probleemrepresentaties centraal staat.</p>
+          </div>
+        </div>
+
+        <!-- 3: AI-moe → fysiek -->
+        <div class="vp-col">
+          <div class="vp-obs">
+            <svg viewBox="0 0 100 88" width="100" height="88" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Desk -->
+              <line x1="6"  y1="62" x2="94" y2="62" stroke-width="2"/>
+              <line x1="18" y1="62" x2="18" y2="80"/>
+              <line x1="82" y1="62" x2="82" y2="80"/>
+              <!-- Laptop -->
+              <rect x="22" y="34" width="56" height="30" rx="2" fill="#faf7f2" stroke="#111"/>
+              <rect x="16" y="64" width="68" height="5"  rx="1" fill="#f0ebde" stroke="#111"/>
+              <!-- Overwhelming AI text on screen -->
+              <text x="50" y="47" text-anchor="middle" font-family="Nunito" font-size="6" font-weight="800" fill="#bdb6a8" letter-spacing="2">AI   AI   AI</text>
+              <text x="50" y="56" text-anchor="middle" font-family="Nunito" font-size="6" font-weight="800" fill="#bdb6a8" letter-spacing="2">AI   AI   AI</text>
+              <!-- Tired figure, head resting on arms on desk -->
+              <circle cx="50" cy="24" r="9" fill="#faf7f2" stroke="#111"/>
+              <!-- Tired eyes (closed) -->
+              <path d="M 45 25 Q 47 27 49 25" stroke="#111" stroke-width="1.1" fill="none"/>
+              <path d="M 51 25 Q 53 27 55 25" stroke="#111" stroke-width="1.1" fill="none"/>
+              <!-- Arms folded on desk -->
+              <path d="M 43 32 Q 34 34 30 36"/>
+              <path d="M 57 32 Q 66 34 70 36"/>
+              <!-- Z's floating up -->
+              <text x="64" y="24" font-family="Sora" font-weight="800" font-size="9"  fill="#bdb6a8">z</text>
+              <text x="72" y="16" font-family="Sora" font-weight="800" font-size="11" fill="#bdb6a8">z</text>
+              <text x="82" y="7"  font-family="Sora" font-weight="800" font-size="13" fill="#bdb6a8">Z</text>
+            </svg>
+            <p class="obs-text">Sommige gebruikers zijn AI-moe en willen niet de hele dag achter een scherm zitten.</p>
+          </div>
+          <div class="vp-down">
+            <svg width="14" height="32" viewBox="0 0 14 32" fill="none">
+              <line x1="7" y1="0" x2="7" y2="23" stroke="#d96b3f" stroke-width="2"/>
+              <path d="M 1 17 L 7 27 L 13 17" stroke="#d96b3f" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="vp-impl">
+            <svg viewBox="0 0 88 74" width="100" height="88" fill="none" stroke="#111" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Game card in background -->
+              <rect x="20" y="4" width="48" height="58" rx="3" fill="#fff6dc" stroke="#111" stroke-width="1.2" transform="rotate(-4 44 33)"/>
+              <line x1="27" y1="16" x2="59" y2="14" stroke="#efd06a" stroke-width="2.5"/>
+              <line x1="27" y1="23" x2="57" y2="21" stroke="#efd06a" stroke-width="1.5"/>
+              <!-- Pawn LEFT – clay -->
+              <path d="M 10 45 L 4 64 Q 4 70 14 70 Q 24 70 22 64 L 18 45 Z" fill="#d96b3f" stroke="#111" stroke-width="1.3"/>
+              <circle cx="14" cy="36" r="9" fill="#d96b3f" stroke="#111" stroke-width="1.3"/>
+              <!-- Pawn CENTER – sage, taller -->
+              <path d="M 36 44 L 30 64 Q 30 70 44 70 Q 58 70 56 64 L 52 44 Z" fill="#6b8f5e" stroke="#111" stroke-width="1.3"/>
+              <circle cx="44" cy="33" r="10" fill="#6b8f5e" stroke="#111" stroke-width="1.3"/>
+              <!-- Pawn RIGHT – sky -->
+              <path d="M 66 45 L 62 64 Q 62 70 74 70 Q 84 70 84 64 L 78 45 Z" fill="#6f9ec4" stroke="#111" stroke-width="1.3"/>
+              <circle cx="74" cy="36" r="9" fill="#6f9ec4" stroke="#111" stroke-width="1.3"/>
+            </svg>
+            <p class="impl-text">Een spelvorm die fysiek wordt gespeeld, niet achter het scherm.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FIG 2 — Probleem ZOEKEN vs Probleem CONSTRUEREN
+       ========================================================= -->
+  <section>
+    <div class="figcard">
+      <div class="contrast-panels">
+
+        <!-- LEFT: ZOEKEN -->
+        <div class="c-panel">
+          <div class="c-head">
+            <span class="c-verb">Probleem</span>
+            <span class="c-noun">ZOEKEN</span>
+          </div>
+          <div class="c-vis">
+            <svg viewBox="0 0 440 300" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <defs>
+                <clipPath id="lens-clip">
+                  <circle cx="268" cy="158" r="98"/>
+                </clipPath>
+              </defs>
+
+              <!-- Scattered messy world (all greyed out) -->
+              <g opacity="0.18" stroke="#111" stroke-width="1.3">
+                <polygon points="22,44 10,68 34,68"   fill="#8a8a8a"/>
+                <circle  cx="60" cy="50"  r="11"       fill="#8a8a8a"/>
+                <rect    x="80"  y="28"  width="22" height="16" fill="#8a8a8a"/>
+                <polygon points="128,58 114,84 142,84" fill="#8a8a8a"/>
+                <line    x1="16" y1="100" x2="38" y2="100" stroke-width="2.2"/>
+                <line    x1="27" y1="89"  x2="27" y2="111" stroke-width="2.2"/>
+                <circle  cx="70" cy="112" r="9"          fill="#8a8a8a"/>
+                <rect    x="92"  y="104" width="20" height="16" fill="#8a8a8a"/>
+                <polygon points="130,96 114,124 146,124" fill="#8a8a8a"/>
+                <circle  cx="22" cy="178" r="14"         fill="#8a8a8a"/>
+                <rect    x="44"  y="162" width="26" height="20" fill="#8a8a8a"/>
+                <polygon points="92,174 76,206 108,206"  fill="#8a8a8a"/>
+                <line    x1="120" y1="166" x2="144" y2="166" stroke-width="2.2"/>
+                <line    x1="132" y1="154" x2="132" y2="178" stroke-width="2.2"/>
+                <circle  cx="40" cy="248" r="8"          fill="#8a8a8a"/>
+                <rect    x="64"  y="234" width="20" height="18" fill="#8a8a8a"/>
+                <polygon points="104,244 90,268 118,268" fill="#8a8a8a"/>
+                <!-- right of lens -->
+                <circle  cx="392" cy="68"  r="10"        fill="#8a8a8a"/>
+                <rect    x="376" y="104"  width="22" height="16" fill="#8a8a8a"/>
+                <polygon points="412,128 398,152 426,152" fill="#8a8a8a"/>
+                <circle  cx="400" cy="212" r="12"        fill="#8a8a8a"/>
+                <line    x1="372" y1="244" x2="398" y2="244" stroke-width="2.2"/>
+              </g>
+
+              <!-- Lens white fill -->
+              <circle cx="268" cy="158" r="98" fill="#faf7f2"/>
+
+              <!-- Inside lens: scattered (muted) + ONE highlighted problem -->
+              <g clip-path="url(#lens-clip)">
+                <g opacity="0.15" stroke="#111" stroke-width="1.2">
+                  <polygon points="218,108 204,132 232,132" fill="#8a8a8a"/>
+                  <circle  cx="248" cy="120" r="8"           fill="#8a8a8a"/>
+                  <rect    x="304" y="110" width="20" height="14" fill="#8a8a8a"/>
+                  <circle  cx="320" cy="156" r="10"          fill="#8a8a8a"/>
+                  <polygon points="220,192 204,220 236,220"  fill="#8a8a8a"/>
+                  <rect    x="306" y="188" width="18" height="14" fill="#8a8a8a"/>
+                </g>
+                <!-- THE highlighted problem — one clear focal point -->
+                <circle cx="268" cy="158" r="26" fill="#f3c9b4" stroke="#d96b3f" stroke-width="2.5"/>
+                <!-- exclamation / target -->
+                <circle cx="268" cy="158" r="12" fill="none" stroke="#d96b3f" stroke-width="1.5"/>
+                <line x1="268" y1="142" x2="268" y2="152" stroke="#d96b3f" stroke-width="3"/>
+                <circle cx="268" cy="161" r="2.5" fill="#d96b3f" stroke="none"/>
+              </g>
+
+              <!-- Lens ring -->
+              <circle cx="268" cy="158" r="98" fill="none" stroke="#111" stroke-width="3"/>
+              <!-- Handle -->
+              <path d="M 344 234 L 414 294" stroke="#111" stroke-width="16" stroke-linecap="round"/>
+              <path d="M 344 234 L 414 294" stroke="#2a2a2a" stroke-width="9" stroke-linecap="round"/>
+
+              <!-- "één probleem" label inside lens -->
+              <text x="268" y="198" text-anchor="middle" font-family="Nunito" font-size="9" font-weight="700" fill="#d96b3f" letter-spacing="0.5">het 'ware' probleem</text>
+            </svg>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: CONSTRUEREN -->
+        <div class="c-panel">
+          <div class="c-head">
+            <span class="c-verb">Probleem</span>
+            <span class="c-noun">CONSTRUEREN</span>
+          </div>
+          <div class="c-vis">
+            <svg viewBox="-15 0 440 300" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+
+              <!-- Source material (loose elements, left side) -->
+              <g opacity="0.6">
+                <polygon points="26,52 12,76 40,76"    fill="#cdddea" stroke="#111" stroke-width="1.2"/>
+                <circle  cx="58" cy="56"  r="11"       fill="#dde6d4" stroke="#111" stroke-width="1.2"/>
+                <rect    x="16" y="88"   width="20" height="14" fill="#f3c9b4" stroke="#111" stroke-width="1.2"/>
+                <line    x1="22" y1="113" x2="44" y2="113" stroke-width="2.2"/>
+                <line    x1="33" y1="102" x2="33" y2="124" stroke-width="2.2"/>
+                <circle  cx="56" cy="130" r="9"        fill="#efd06a" stroke="#111" stroke-width="1.2"/>
+                <rect    x="18" y="148" width="24" height="16" fill="#cdddea" stroke="#111" stroke-width="1.2"/>
+                <polygon points="56,158 42,182 70,182"  fill="#dde6d4" stroke="#111" stroke-width="1.2"/>
+                <circle  cx="26" cy="210" r="8"        fill="#f3c9b4" stroke="#111" stroke-width="1.2"/>
+                <rect    x="42" y="208" width="20" height="14" fill="#efd06a" stroke="#111" stroke-width="1.2"/>
+                <line    x1="18" y1="238" x2="42" y2="238" stroke-width="2.2"/>
+                <line    x1="30" y1="226" x2="30" y2="250" stroke-width="2.2"/>
+              </g>
+
+              <!-- Arrow from source to constructions -->
+              <path d="M 84 150 Q 110 150 128 150" stroke="#d96b3f" stroke-width="1.8" fill="none"/>
+              <path d="M 121 144 L 130 150 L 121 156" stroke="#d96b3f" stroke-width="1.8" fill="none"/>
+
+              <!-- CONSTRUCTION A -->
+              <g>
+                <rect x="136" y="222" width="52" height="16" fill="#cdddea" stroke="#111" stroke-width="1.3"/>
+                <rect x="142" y="206" width="40" height="16" fill="#dde6d4" stroke="#111" stroke-width="1.3"/>
+                <rect x="148" y="190" width="30" height="16" fill="#f3c9b4" stroke="#111" stroke-width="1.3"/>
+                <rect x="154" y="174" width="22" height="16" fill="#efd06a" stroke="#111" stroke-width="1.3"/>
+                <text x="162" y="252" text-anchor="middle" font-family="Nunito" font-size="9.5" font-weight="700" fill="#5b5b5b">A</text>
+              </g>
+
+              <!-- CONSTRUCTION B -->
+              <g>
+                <rect x="204" y="222" width="58" height="16" fill="#dde6d4" stroke="#111" stroke-width="1.3"/>
+                <rect x="210" y="206" width="44" height="16" fill="#f3c9b4" stroke="#111" stroke-width="1.3"/>
+                <rect x="216" y="190" width="32" height="16" fill="#cdddea" stroke="#111" stroke-width="1.3"/>
+                <rect x="220" y="174" width="22" height="16" fill="#efd06a" stroke="#111" stroke-width="1.3"/>
+                <rect x="224" y="158" width="14" height="16" fill="#dde6d4" stroke="#111" stroke-width="1.3"/>
+                <text x="233" y="252" text-anchor="middle" font-family="Nunito" font-size="9.5" font-weight="700" fill="#5b5b5b">B</text>
+              </g>
+
+              <!-- CONSTRUCTION C -->
+              <g>
+                <rect x="278" y="222" width="50" height="16" fill="#f3c9b4" stroke="#111" stroke-width="1.3"/>
+                <rect x="286" y="206" width="34" height="16" fill="#efd06a" stroke="#111" stroke-width="1.3"/>
+                <rect x="280" y="190" width="44" height="16" fill="#cdddea" stroke="#111" stroke-width="1.3"/>
+                <rect x="290" y="174" width="24" height="16" fill="#dde6d4" stroke="#111" stroke-width="1.3"/>
+                <text x="303" y="252" text-anchor="middle" font-family="Nunito" font-size="9.5" font-weight="700" fill="#5b5b5b">C</text>
+              </g>
+
+              <!-- CONSTRUCTION D -->
+              <g>
+                <rect x="350" y="222" width="48" height="16" fill="#efd06a" stroke="#111" stroke-width="1.3"/>
+                <rect x="356" y="206" width="36" height="16" fill="#cdddea" stroke="#111" stroke-width="1.3"/>
+                <rect x="360" y="190" width="28" height="16" fill="#f3c9b4" stroke="#111" stroke-width="1.3"/>
+                <rect x="364" y="174" width="20" height="16" fill="#dde6d4" stroke="#111" stroke-width="1.3"/>
+                <rect x="368" y="158" width="12" height="16" fill="#efd06a" stroke="#111" stroke-width="1.3"/>
+                <text x="374" y="252" text-anchor="middle" font-family="Nunito" font-size="9.5" font-weight="700" fill="#5b5b5b">D</text>
+              </g>
+
+            </svg>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FIG 3 — CFA Visualisatie
+       ========================================================= -->
+  <section>
+    <div class="figcard">
+      <div class="cfa-diagram">
+
+        <!-- Header -->
+        <div class="cfa-hd">
+          <span class="cfa-acronym">CFA</span>
+          <span class="cfa-subtitle">Critical Frame Analysis &middot; Mieke Verloo e.a.</span>
+        </div>
+
+        <!-- Direction: constructie -->
+        <div class="cfa-dir-row">
+          <span class="cfa-dir-lbl">constructie</span>
+          <div class="cfa-dir-line-r"></div>
+        </div>
+
+        <!-- Flow: input → frame → output -->
+        <div class="cfa-flow">
+
+          <!-- Input: losse informatie -->
+          <div class="cfa-side">
+            <svg viewBox="0 0 72 88" width="72" height="88" fill="none" stroke="#111" stroke-width="1.3" stroke-linecap="round">
+              <polygon points="8,10 0,26 16,26" fill="#cdddea" stroke="#111" opacity="0.75"/>
+              <circle cx="52" cy="10" r="8" fill="#dde6d4" stroke="#111" opacity="0.75"/>
+              <rect x="26" y="4" width="16" height="12" fill="#f3c9b4" stroke="#111" opacity="0.75"/>
+              <line x1="4" y1="46" x2="20" y2="46" stroke-width="2.2" opacity="0.6"/>
+              <line x1="12" y1="38" x2="12" y2="54" stroke-width="2.2" opacity="0.6"/>
+              <circle cx="50" cy="48" r="8" fill="#efd06a" stroke="#111" opacity="0.7"/>
+              <rect x="30" y="42" width="14" height="12" fill="#cdddea" stroke="#111" opacity="0.7"/>
+              <polygon points="14,72 4,88 24,88" fill="#dde6d4" stroke="#111" opacity="0.6"/>
+              <circle cx="48" cy="78" r="7" fill="#f3c9b4" stroke="#111" opacity="0.6"/>
+              <rect x="58" y="68" width="12" height="16" fill="#efd06a" stroke="#111" opacity="0.6"/>
+            </svg>
+            <p class="cfa-side-label">losse<br>informatie</p>
+          </div>
+          <div class="cfa-frame">
+            <div class="cfa-panels">
+
+              <!-- DIAGNOSE -->
+              <div class="cfa-diag">
+                <p class="cfa-panel-title">Diagnose</p>
+                <div class="cfa-item">
+                  <svg class="cfa-item-icon" viewBox="0 0 28 28" width="28" height="28" fill="none">
+                    <circle cx="14" cy="14" r="13" fill="#f3c9b4" stroke="#d96b3f" stroke-width="1.5"/>
+                    <text x="14" y="20" text-anchor="middle" font-family="Sora" font-weight="800" font-size="15" fill="#d96b3f">?</text>
+                  </svg>
+                  <p class="cfa-item-text">Wat is het probleem?</p>
+                </div>
+                <div class="cfa-item">
+                  <svg class="cfa-item-icon" viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="#d96b3f" stroke-width="1.5" stroke-linecap="round">
+                    <circle cx="5" cy="14" r="4" fill="#f3c9b4"/>
+                    <line x1="9" y1="14" x2="17" y2="14"/>
+                    <path d="M 15 11 L 19 14 L 15 17" fill="none"/>
+                    <circle cx="23" cy="14" r="4" fill="#f3c9b4"/>
+                  </svg>
+                  <p class="cfa-item-text">Wat is de oorzaak?</p>
+                </div>
+                <div class="cfa-item">
+                  <svg class="cfa-item-icon" viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="#d96b3f" stroke-width="1.5" stroke-linecap="round">
+                    <circle cx="14" cy="9" r="5" fill="#f3c9b4"/>
+                    <path d="M 4 26 Q 4 18 14 18 Q 24 18 24 26" fill="#f3c9b4"/>
+                  </svg>
+                  <p class="cfa-item-text">Wie is verantwoordelijk?</p>
+                </div>
+              </div>
+
+              <!-- TENSION DIVIDER -->
+              <div class="cfa-tension-col">
+                <svg viewBox="0 0 20 70" width="20" height="70" fill="none" stroke="#bdb6a8" stroke-width="1.5" stroke-linecap="round">
+                  <line x1="10" y1="6" x2="10" y2="64"/>
+                  <path d="M 5 12 L 10 5 L 15 12"/>
+                  <path d="M 5 58 L 10 65 L 15 58"/>
+                </svg>
+                <p class="cfa-tension-label">spanning</p>
+              </div>
+
+              <!-- PROGNOSE -->
+              <div class="cfa-prog">
+                <p class="cfa-panel-title">Prognose</p>
+                <div class="cfa-item">
+                  <svg class="cfa-item-icon" viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="#4a7040" stroke-width="1.5" stroke-linecap="round">
+                    <circle cx="14" cy="14" r="13" fill="#dde6d4"/>
+                    <path d="M 9 14 L 14 9 L 19 14" fill="none"/>
+                    <line x1="14" y1="9" x2="14" y2="20"/>
+                  </svg>
+                  <p class="cfa-item-text">Wat moet er gebeuren?</p>
+                </div>
+                <div class="cfa-item">
+                  <svg class="cfa-item-icon" viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="#4a7040" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Lightbulb: oplossing/idee -->
+                    <path d="M 8 15 Q 8 5 14 5 Q 20 5 20 15 Q 20 19 17 20 L 11 20 Q 8 19 8 15 Z" fill="#dde6d4"/>
+                    <line x1="11" y1="21" x2="17" y2="21"/>
+                    <line x1="12" y1="23" x2="16" y2="23"/>
+                  </svg>
+                  <p class="cfa-item-text">Welke oplossing?</p>
+                </div>
+                <div class="cfa-item">
+                  <svg class="cfa-item-icon" viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="#4a7040" stroke-width="1.5" stroke-linecap="round">
+                    <circle cx="9"  cy="9" r="4" fill="#dde6d4"/>
+                    <path d="M 1 26 Q 1 19 9 19 Q 17 19 17 26" fill="#dde6d4"/>
+                    <circle cx="19" cy="9" r="4" fill="#dde6d4"/>
+                    <path d="M 11 26 Q 11 19 19 19 Q 27 19 27 26" fill="#dde6d4"/>
+                  </svg>
+                  <p class="cfa-item-text">Wie moet handelen?</p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- MACHT strip -->
+            <div class="cfa-macht">
+              <svg viewBox="0 0 24 20" width="24" height="20" fill="none" stroke="#d96b3f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M 2 18 L 2 8 L 7 14 L 12 4 L 17 14 L 22 8 L 22 18 Z"/>
+              </svg>
+              <p class="cfa-macht-label">MACHT</p>
+              <p class="cfa-macht-text">Wiens stem klinkt door &mdash; wie heeft macht in diagnose <em>én</em> prognose?</p>
+            </div>
+          </div>
+
+          <!-- Output: gestructureerd handelen -->
+          <div class="cfa-side">
+            <svg viewBox="0 0 72 88" width="72" height="88" fill="none" stroke="#111" stroke-width="1.3" stroke-linecap="round">
+              <rect x="8"  y="64" width="56" height="16" rx="2" fill="#cdddea" stroke="#111"/>
+              <rect x="14" y="48" width="44" height="16" rx="2" fill="#dde6d4" stroke="#111"/>
+              <rect x="20" y="32" width="32" height="16" rx="2" fill="#f3c9b4" stroke="#111"/>
+              <rect x="26" y="16" width="20" height="16" rx="2" fill="#efd06a" stroke="#111"/>
+            </svg>
+            <p class="cfa-side-label">beleid<br>of actie</p>
+          </div>
+
+        </div>
+
+        <!-- Direction: deconstructie -->
+        <div class="cfa-dir-row">
+          <div class="cfa-dir-line-l"></div>
+          <span class="cfa-dir-lbl">deconstructie</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FIG 4 — De Brug
+       ========================================================= -->
+  <section>
+    <div class="figcard figcard-bridge">
+      <div class="bridge-fig">
+        <svg viewBox="0 0 1000 310" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+          <defs>
+            <linearGradient id="chasm-grad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#ddd5c8"/>
+              <stop offset="100%" stop-color="#c8bfb4"/>
+            </linearGradient>
+            <linearGradient id="cliff-grad-l" x1="1" x2="0" y1="0" y2="0">
+              <stop offset="0%" stop-color="#f0ebde"/>
+              <stop offset="100%" stop-color="#e0d8cc"/>
+            </linearGradient>
+            <linearGradient id="cliff-grad-r" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stop-color="#f0ebde"/>
+              <stop offset="100%" stop-color="#e0d8cc"/>
+            </linearGradient>
+          </defs>
+
+          <!-- ——— Chasm: deep dark abyss ——— -->
+          <rect x="275" y="126" width="450" height="184" fill="url(#chasm-grad)"/>
+
+          <!-- ——— LEFT CLIFF ——— -->
+          <path d="M 0 310 L 0 108 Q 48 88 94 104 Q 142 122 186 102 Q 222 85 252 98 Q 268 106 275 122 L 275 310 Z" fill="url(#cliff-grad-l)"/>
+          <!-- Rocky top-edge highlight -->
+          <path d="M 0 108 Q 48 88 94 104 Q 142 122 186 102 Q 222 85 252 98 Q 268 106 275 122" stroke="#bdb6a8" stroke-width="1.5" fill="none"/>
+          <!-- A few rock texture cracks -->
+          <line x1="220" y1="96"  x2="228" y2="108" stroke="#bdb6a8" stroke-width="0.8"/>
+          <line x1="180" y1="102" x2="188" y2="118" stroke="#bdb6a8" stroke-width="0.8"/>
+
+          <!-- ——— RIGHT CLIFF ——— -->
+          <path d="M 1000 310 L 1000 112 Q 952 92 906 108 Q 858 126 814 106 Q 778 89 748 102 Q 732 110 725 126 L 725 310 Z" fill="url(#cliff-grad-r)"/>
+          <path d="M 1000 112 Q 952 92 906 108 Q 858 126 814 106 Q 778 89 748 102 Q 732 110 725 126" stroke="#bdb6a8" stroke-width="1.5" fill="none"/>
+          <line x1="780" y1="96"  x2="772" y2="112" stroke="#bdb6a8" stroke-width="0.8"/>
+          <line x1="820" y1="106" x2="812" y2="120" stroke="#bdb6a8" stroke-width="0.8"/>
+
+
+          <!-- ——— ROPE BRIDGE ——— -->
+          <!-- ——— CFA BRIDGE: Abstracte theorie → Beleidswereld ——— -->
+          <!-- Front cable -->
+          <path d="M 275 120 Q 350 185 436 198" stroke="#8a7a62" stroke-width="2.5" fill="none"/>
+          <!-- Plank 1 -->
+          <line x1="305" y1="144" x2="305" y2="158" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="296" y="156" width="18" height="5" rx="0.5" fill="#c4b08a" stroke="#8a7a62" stroke-width="0.8" transform="rotate(-5 305 158.5)"/>
+          <!-- Plank 2 -->
+          <line x1="337" y1="164" x2="337" y2="178" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="328" y="176" width="18" height="5" rx="0.5" fill="#b8a47e" stroke="#8a7a62" stroke-width="0.8" transform="rotate(-3 337 178.5)"/>
+          <!-- Plank 3 -->
+          <line x1="369" y1="179" x2="369" y2="193" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="360" y="191" width="18" height="5" rx="0.5" fill="#c4b08a" stroke="#8a7a62" stroke-width="0.8" transform="rotate(-1 369 193.5)"/>
+          <!-- Plank 4 -->
+          <line x1="402" y1="191" x2="402" y2="205" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="393" y="203" width="18" height="5" rx="0.5" fill="#b8a47e" stroke="#8a7a62" stroke-width="0.8" transform="rotate(0 402 205.5)"/>
+          <!-- CFA label -->
+          <text x="310" y="210" font-family="Sora" font-weight="800" font-size="13" fill="#d96b3f" text-anchor="middle">CFA</text>
+
+          <!-- ——— BELEIDSWERELD PLATEAU (CFA) ——— -->
+          <!-- Pillar body rising from abyss floor -->
+          <rect x="452" y="212" width="96" height="98" fill="#eee8e0" stroke="#bdb6a8" stroke-width="1.2"/>
+          <line x1="452" y1="236" x2="548" y2="236" stroke="#c8c0b4" stroke-width="0.8"/>
+          <line x1="452" y1="260" x2="548" y2="260" stroke="#c8c0b4" stroke-width="0.8"/>
+          <line x1="452" y1="284" x2="548" y2="284" stroke="#c8c0b4" stroke-width="0.8"/>
+
+          <!-- Plateau cap -->
+          <rect x="436" y="198" width="128" height="18" rx="1" fill="#d8d0c4" stroke="#bdb6a8" stroke-width="1.2"/>
+          <text x="500" y="211" text-anchor="middle" font-family="Nunito" font-size="9" font-weight="700" fill="#5b5b5b" letter-spacing="0.3">beleidswereld</text>
+          <!-- Main cable A (front) -->
+          <path d="M 275 120 Q 380 140 500 146 Q 620 140 725 120" stroke="#8a7a62" stroke-width="2.5" fill="none"/>
+          <!-- Main cable B (back, parallel) -->
+          <path d="M 275 114 Q 380 134 500 140 Q 620 134 725 114" stroke="#7a6a54" stroke-width="2" fill="none"/>
+
+          <!-- Suspenders and planks (13 planks) -->
+          <!-- x=302 -->
+          <line x1="302" y1="120" x2="302" y2="134" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="294" y="132" width="18" height="5" rx="0.5" fill="#c4b08a" stroke="#8a7a62" stroke-width="0.8"/>
+
+          <!-- x=333 -->
+          <line x1="333" y1="126" x2="333" y2="139" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="325" y="137" width="18" height="5" rx="0.5" fill="#b8a47e" stroke="#8a7a62" stroke-width="0.8" transform="rotate(1.2 333 140)"/>
+
+          <!-- x=364 -->
+          <line x1="364" y1="131" x2="364" y2="143" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="356" y="141" width="18" height="5" rx="0.5" fill="#c4b08a" stroke="#8a7a62" stroke-width="0.8" transform="rotate(-1 364 143)"/>
+
+          <!-- x=395 -->
+          <line x1="395" y1="135" x2="395" y2="147" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="387" y="145" width="18" height="5" rx="0.5" fill="#b8a47e" stroke="#8a7a62" stroke-width="0.8"/>
+
+          <!-- x=426 -->
+          <line x1="426" y1="138" x2="426" y2="150" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="418" y="148" width="18" height="5" rx="0.5" fill="#c4b08a" stroke="#8a7a62" stroke-width="0.8" transform="rotate(0.8 426 150)"/>
+
+          <!-- x=457 -->
+          <line x1="457" y1="140" x2="457" y2="151" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="448" y="149" width="18" height="5" rx="0.5" fill="#b8a47e" stroke="#8a7a62" stroke-width="0.8"/>
+          <!-- gap/missing plank visible here — only short stub (wobbly!) -->
+
+          <!-- x=500 midpoint -->
+          <line x1="500" y1="143" x2="500" y2="155" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="492" y="153" width="18" height="5" rx="0.5" fill="#c4b08a" stroke="#8a7a62" stroke-width="0.8" transform="rotate(-1.5 500 155)"/>
+
+          <!-- x=543 -->
+          <line x1="543" y1="140" x2="543" y2="152" stroke="#8a7a62" stroke-width="1.2"/>
+          <!-- missing plank (wankele brug) — just a thin stub -->
+          <rect x="534" y="150" width="18" height="5" rx="0.5" fill="#b8a47e" stroke="#8a7a62" stroke-width="0.8"/>
+
+          <!-- x=574 -->
+          <line x1="574" y1="138" x2="574" y2="150" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="566" y="148" width="18" height="5" rx="0.5" fill="#c4b08a" stroke="#8a7a62" stroke-width="0.8" transform="rotate(1.8 574 150)"/>
+
+          <!-- x=605 -->
+          <line x1="605" y1="135" x2="605" y2="147" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="597" y="145" width="18" height="5" rx="0.5" fill="#b8a47e" stroke="#8a7a62" stroke-width="0.8"/>
+
+          <!-- x=636 -->
+          <line x1="636" y1="131" x2="636" y2="143" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="628" y="141" width="18" height="5" rx="0.5" fill="#c4b08a" stroke="#8a7a62" stroke-width="0.8" transform="rotate(-0.8 636 143)"/>
+
+          <!-- x=667 -->
+          <line x1="667" y1="126" x2="667" y2="138" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="659" y="136" width="18" height="5" rx="0.5" fill="#b8a47e" stroke="#8a7a62" stroke-width="0.8"/>
+
+          <!-- x=698 -->
+          <line x1="698" y1="121" x2="698" y2="133" stroke="#8a7a62" stroke-width="1.2"/>
+          <rect x="690" y="131" width="18" height="5" rx="0.5" fill="#c4b08a" stroke="#8a7a62" stroke-width="0.8"/>
+
+          <!-- ——— FIGURE ON BRIDGE (balancing, small) ——— -->
+          <g transform="translate(426 102)">
+            <circle cx="0" cy="0" r="5" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+            <line x1="0" y1="5"  x2="0"   y2="24" stroke="#111" stroke-width="1.3"/>
+            <!-- Arms spread wide for balance -->
+            <line x1="0" y1="11" x2="-13" y2="7"  stroke="#111" stroke-width="1.3"/>
+            <line x1="0" y1="11" x2="13"  y2="15" stroke="#111" stroke-width="1.3"/>
+            <!-- Legs -->
+            <line x1="0" y1="24" x2="-5"  y2="36" stroke="#111" stroke-width="1.3"/>
+            <line x1="0" y1="24" x2="5"   y2="36" stroke="#111" stroke-width="1.3"/>
+          </g>
+
+          <!-- ——— LEFT CLIFF CONTENT: Abstracte theorie ——— -->
+          <!-- Shadows drawn first so book bodies always appear on top -->
+          <rect x="35" y="83" width="148" height="24" fill="#9ab8cc"/>
+          <rect x="41" y="60" width="136" height="23" fill="#8aac8a"/>
+          <rect x="47" y="38" width="124" height="22" fill="#c8907a"/>
+          <!-- Book 3 — bottom (deconstructionisme) -->
+          <rect x="32" y="80" width="148" height="24" rx="1" fill="#cdddea" stroke="#111" stroke-width="1.2"/>
+          <rect x="32" y="80" width="11"  height="24" fill="#d96b3f"/>
+          <text x="52" y="96" font-family="Nunito" font-size="8" font-weight="700" fill="#111" letter-spacing="0.5">deconstructionisme</text>
+          <!-- Book 2 — middle (post-structuralisme) -->
+          <rect x="38" y="57" width="136" height="23" rx="1" fill="#dde6d4" stroke="#111" stroke-width="1.2"/>
+          <rect x="38" y="57" width="11"  height="23" fill="#6b8f5e"/>
+          <text x="58" y="73" font-family="Nunito" font-size="8" font-weight="700" fill="#111" letter-spacing="0.5">post-structuralisme</text>
+          <!-- Book 1 — top (constructionisme) -->
+          <rect x="44" y="35" width="124" height="22" rx="1" fill="#f3c9b4" stroke="#111" stroke-width="1.2"/>
+          <rect x="44" y="35" width="11"  height="22" fill="#6f9ec4"/>
+          <text x="64" y="50" font-family="Nunito" font-size="8" font-weight="700" fill="#111" letter-spacing="0.5">constructionisme</text>
+
+          <!-- Main label -->
+          <text x="136" y="20" text-anchor="middle" font-family="Sora" font-weight="800" font-size="19" fill="#111" letter-spacing="-0.5">Abstracte theorie</text>
+          <!-- Underline/rule -->
+          <line x1="32" y1="24" x2="240" y2="24" stroke="#bdb6a8" stroke-width="0.8"/>
+          <!-- Sub-annotation -->
+          <rect x="74" y="104" width="124" height="16" rx="3" fill="#f0ebde" stroke="#bdb6a8" stroke-width="0.8"/><text x="136" y="115" text-anchor="middle" font-family="Nunito" font-size="9.5" font-weight="700" fill="#5b5b5b">zwaar, veel jargon</text>
+
+          <!-- ——— RIGHT CLIFF CONTENT: Ontwerppraktijk ——— -->
+          <!-- Sprint sketchbook -->
+          <rect x="782" y="38" width="114" height="82" rx="1" fill="#faf7f2" stroke="#111" stroke-width="1.3"/>
+          <!-- Spiral binding along left edge -->
+          <circle cx="782" cy="44" r="3" fill="#bdb6a8" stroke="none"/>
+          <circle cx="782" cy="54" r="3" fill="#bdb6a8" stroke="none"/>
+          <circle cx="782" cy="64" r="3" fill="#bdb6a8" stroke="none"/>
+          <circle cx="782" cy="74" r="3" fill="#bdb6a8" stroke="none"/>
+          <circle cx="782" cy="84" r="3" fill="#bdb6a8" stroke="none"/>
+          <circle cx="782" cy="94" r="3" fill="#bdb6a8" stroke="none"/>
+          <circle cx="782" cy="104" r="3" fill="#bdb6a8" stroke="none"/>
+          <!-- Content: sprint tasks -->
+          <text x="792" y="50" font-family="Nunito" font-size="7" font-weight="800" fill="#5b5b5b" letter-spacing="0.8">SPRINT · 2 WEKEN</text>
+          <line x1="792" y1="54" x2="890" y2="54" stroke="#e8e1d3" stroke-width="0.8"/>
+          <!-- Task bars (gantt-like) -->
+          <rect x="792" y="59" width="64" height="7" rx="1" fill="#efd06a"/>
+          <rect x="792" y="70" width="48" height="7" rx="1" fill="#dde6d4"/>
+          <rect x="792" y="81" width="72" height="7" rx="1" fill="#cdddea"/>
+          <rect x="792" y="92" width="55" height="7" rx="1" fill="#f3c9b4"/>
+          <rect x="792" y="103" width="68" height="7" rx="1" fill="#dde6d4"/>
+          <!-- Post-it on corner of sketchbook -->
+          <g transform="rotate(9 882 46)">
+            <rect x="870" y="30" width="36" height="36" fill="#efd06a" stroke="#111" stroke-width="1"/>
+            <line x1="876" y1="40" x2="900" y2="40" stroke="#c4a020" stroke-width="1"/>
+            <line x1="876" y1="47" x2="898" y2="47" stroke="#c4a020" stroke-width="1"/>
+            <line x1="876" y1="54" x2="894" y2="54" stroke="#c4a020" stroke-width="1"/>
+          </g>
+
+          <!-- Main label -->
+          <text x="864" y="20" text-anchor="middle" font-family="Sora" font-weight="800" font-size="19" fill="#111" letter-spacing="-0.5">Ontwerppraktijk</text>
+          <line x1="760" y1="24" x2="968" y2="24" stroke="#bdb6a8" stroke-width="0.8"/>
+          <!-- Sub-annotation -->
+          <rect x="792" y="120" width="144" height="16" rx="3" fill="#f0ebde" stroke="#bdb6a8" stroke-width="0.8"/><text x="864" y="131" text-anchor="middle" font-family="Nunito" font-size="9.5" font-weight="700" fill="#5b5b5b">dagelijkse ontwerpwerk</text>
+
+          <!-- ——— "mijn ontwerp" annotation box ——— -->
+          <rect x="414" y="46" width="172" height="36" rx="3" fill="#fff6dc" stroke="#111" stroke-width="1.3"/>
+          <text x="500" y="62" text-anchor="middle" font-family="Sora" font-weight="800" font-size="11" fill="#111" letter-spacing="-0.2">mijn ontwerp deze sprint</text>
+          <text x="500" y="76" text-anchor="middle" font-family="Nunito" font-size="9" fill="#5b5b5b">een eerste touwtjesbrug</text>
+
+
+          <!-- ——— "bewust nog wankel" annotation ——— -->
+          <path d="M 586 93 Q 616 78 664 71" stroke="#d96b3f" stroke-width="1.4" fill="none" stroke-dasharray="3 2.5"/>
+          <text x="672" y="70" font-family="Nunito" font-size="10" fill="#d96b3f" font-style="italic">bewust nog wankel</text>
+          <!-- Small wavy underline under "wankel" to reinforce -->
+          <path d="M 672 73 Q 686 77 700 73 Q 714 69 728 73 Q 742 77 756 73" stroke="#d96b3f" stroke-width="0.9" fill="none" opacity="0.5"/>
+
+
+        </svg>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

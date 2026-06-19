@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Visualisatie · Video · Poster · Prototype</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    padding: 0;
+  }
+  .figcard { width: 100%; }
+
+  .d1 { --acc: #d96b3f; --acc-soft: #f3c9b4; }
+  .d2 { --acc: #e8c66a; --acc-soft: #f3e2ad; }
+  .d3 { --acc: #6b8f5e; --acc-soft: #c9d8c0; }
+
+  .deck {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .dcard {
+    position: relative;
+    display: flex; flex-direction: column;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 5px 5px 0 0 var(--ink);
+    overflow: hidden;
+  }
+  .dcard::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0; height: 9px;
+    background: var(--acc); z-index: 2;
+  }
+
+  .thumb {
+    height: 172px;
+    margin-top: 9px;
+    border-bottom: 1.5px solid var(--ink);
+    background: var(--paper-3);
+    line-height: 0;
+    overflow: hidden;
+  }
+  .thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .thumb.browser-wrap {
+    background: var(--paper-3);
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 16px;
+  }
+  .browser {
+    width: 100%;
+    background: #fff;
+    border: 1.5px solid var(--ink);
+    border-radius: 10px;
+    box-shadow: 0 8px 22px -12px rgba(17,17,17,0.5);
+    overflow: hidden;
+  }
+  .browser .bbar {
+    height: 22px;
+    background: var(--paper-2);
+    border-bottom: 1.5px solid var(--ink);
+    display: flex; align-items: center; gap: 5px;
+    padding: 0 9px;
+  }
+  .browser .bdot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--ink-4); flex-shrink: 0;
+  }
+  .browser .burl {
+    flex: 1; margin-left: 5px;
+    font-family: var(--font-mono);
+    font-size: 9px; line-height: 1.5; color: var(--ink-4);
+    background: var(--paper); border-radius: 999px;
+    padding: 3px 9px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .browser .bscreen { line-height: 0; height: 112px; overflow: hidden; }
+  .browser .bscreen img {
+    width: 100%; height: 100%; display: block;
+    object-fit: cover; object-position: top;
+  }
+
+  .body {
+    display: flex; flex-direction: column; flex: 1;
+    padding: 18px 20px 22px;
+  }
+  .medium {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 9px;
+  }
+  .medium .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--acc); border: 1.5px solid var(--ink); flex-shrink: 0;
+  }
+  .lens {
+    font-family: var(--font-display);
+    font-weight: 800; letter-spacing: -0.015em; line-height: 1.05;
+    font-size: 26px; margin: 0 0 12px;
+  }
+  .rule { height: 1.5px; background: var(--line-soft); margin: 0 0 12px; }
+  .desc {
+    font-size: 14.5px; line-height: 1.55; color: var(--ink-2);
+    margin: 0; text-wrap: pretty;
+  }
+</style>
+</head>
+<body>
+  <div class="figcard">
+    <div class="deck">
+      <article class="dcard d1">
+        <div class="thumb"><img src="assets/final-viz/deliverable-video.png" alt="Still uit de video: het hoofdprobleem in beeld" style="object-position: center;"></div>
+        <div class="body">
+          <span class="medium"><span class="dot"></span>Desirability</span>
+          <h2 class="lens">Video</h2>
+          <div class="rule"></div>
+          <p class="desc">Een narratief dat het hoofdprobleem, de framing en het concept tot leven brengt. Het maakt invoelbaar wat het platform voor de Wijkuniversiteit kan betekenen.</p>
+        </div>
+      </article>
+
+      <article class="dcard d2">
+        <div class="thumb"><img src="assets/final-viz/deliverable-poster.png" alt="Infographic-poster over de levensvatbaarheid" style="object-position: top left;"></div>
+        <div class="body">
+          <span class="medium"><span class="dot"></span>Viability</span>
+          <h2 class="lens">Poster</h2>
+          <div class="rule"></div>
+          <p class="desc">Een infographic die laat zien dat het platform levensvatbaar is: ontwikkel- en gebruikskosten tegenover een wezenlijke impact, inclusief de SDG's, met de stakeholders centraal.</p>
+        </div>
+      </article>
+
+      <article class="dcard d3">
+        <div class="thumb browser-wrap">
+          <div class="browser">
+            <div class="bbar">
+              <span class="bdot"></span><span class="bdot"></span><span class="bdot"></span>
+              <span class="burl">www.debrillenmaker.com</span>
+            </div>
+            <div class="bscreen"><img src="assets/final-viz/deliverable-prototype.png" alt="Screenshot van het werkende platform"></div>
+          </div>
+        </div>
+        <div class="body">
+          <span class="medium"><span class="dot"></span>Feasibility</span>
+          <h2 class="lens">Prototype</h2>
+          <div class="rule"></div>
+          <p class="desc">Het werkende platform, online te ervaren: hier merk je zelf hoe alle onderdelen samenkomen en dat de belofte uit de video wordt waargemaakt.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</body>
+</html>

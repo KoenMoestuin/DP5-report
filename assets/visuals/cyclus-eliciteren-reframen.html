@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Cyclus · Eliciteren → Reframen</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    padding: 0;
+  }
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  /* ---------- FIG card (matches report style) ---------- */
+  .figcard {
+    position: relative;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 6px 6px 0 0 var(--ink);
+    padding: 36px 32px 32px;
+  }
+
+  .cycle-wrap {
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .cycle-wrap svg { display: block; width: 100%; height: auto; }
+
+  .node-label {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    fill: var(--ink);
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <section>
+      <div class="figcard">
+        <div class="cycle-wrap">
+          <svg viewBox="0 0 880 720" xmlns="http://www.w3.org/2000/svg" aria-label="Cyclus eliciteren-structureren-confronteren-reframen">
+            <defs>
+              <marker id="arrhead" viewBox="0 0 10 10" refX="8" refY="5"
+                      markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 z" fill="#111111"/>
+              </marker>
+            </defs>
+
+            <!-- ============================================
+                 ARCS between nodes (clockwise)
+                 Centers:  T(440,130) R(670,360) B(440,590) L(210,360)
+                 Node radius 110, edge-to-edge curves
+                 ============================================ -->
+            <!-- T -> R -->
+            <path d="M 525.7 195.7 A 230 230 0 0 1 605.7 274.3"
+                  fill="none" stroke="#111111" stroke-width="2" marker-end="url(#arrhead)"/>
+            <!-- R -> B -->
+            <path d="M 605.7 445.7 A 230 230 0 0 1 525.7 524.3"
+                  fill="none" stroke="#111111" stroke-width="2" marker-end="url(#arrhead)"/>
+            <!-- B -> L -->
+            <path d="M 354.3 524.3 A 230 230 0 0 1 274.3 445.7"
+                  fill="none" stroke="#111111" stroke-width="2" marker-end="url(#arrhead)"/>
+            <!-- L -> T -->
+            <path d="M 274.3 274.3 A 230 230 0 0 1 354.3 195.7"
+                  fill="none" stroke="#111111" stroke-width="2" marker-end="url(#arrhead)"/>
+
+            <!-- ============================================
+                 NODE 1 — ELICITEREN  (top, sun)
+                 user is actief bezig met een oefening
+                 ============================================ -->
+            <g transform="translate(440 130)">
+              <circle r="110" fill="#f3e2ad" stroke="#111111" stroke-width="1.8"/>
+
+              <g fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+
+                <!-- worksheet/tablet (in front of user, tilted for perspective) -->
+                <g transform="translate(-50 28) rotate(-14)">
+                  <rect x="0" y="0" width="82" height="38" rx="3" fill="#faf7f2" stroke="#111111" stroke-width="1.6"/>
+                  <!-- prompt header -->
+                  <line x1="6" y1="8" x2="42" y2="8"/>
+                  <!-- a filled-in answer line (already written) -->
+                  <path d="M 6 18 q 6 -3 12 0 t 12 0 t 10 0" stroke="#9c7a14" stroke-width="1.6"/>
+                  <!-- second line, being written right now -->
+                  <path d="M 6 28 q 5 -3 10 0 t 10 0" stroke="#9c7a14" stroke-width="1.6"/>
+                </g>
+                <!-- (desk line removed at user's request) -->
+
+                <!-- aha spark above the head -->
+                <g stroke="#c79e2c" stroke-width="1.8">
+                  <path d="M 18 -68 L 22 -78" />
+                  <path d="M 30 -64 L 38 -68" />
+                  <path d="M 8 -64 L 4 -72" />
+                </g>
+
+                <!-- person bust, three-quarter, leaning toward sheet -->
+                <g transform="translate(-30 -52)">
+                  <!-- head -->
+                  <ellipse cx="22" cy="22" rx="20" ry="22" fill="#faf7f2"/>
+                  <!-- soft hair -->
+                  <path d="M 4 16 Q 10 4 22 3 Q 34 4 40 16"/>
+                  <path d="M 8 12 L 10 8"/>
+                  <path d="M 32 10 L 34 6"/>
+                  <!-- relaxed engaged brows (slightly raised) -->
+                  <path d="M 12 20 Q 16 17 20 20"/>
+                  <path d="M 24 20 Q 28 17 32 20"/>
+                  <!-- eyes (round, focused-down on sheet) -->
+                  <circle cx="16" cy="26" r="1.6" fill="#111" stroke="none"/>
+                  <circle cx="28" cy="26" r="1.6" fill="#111" stroke="none"/>
+                  <!-- small focused smile -->
+                  <path d="M 18 34 Q 22 37 26 34"/>
+                  <!-- shoulders -->
+                  <path d="M -2 56 Q 6 48 22 46 Q 38 48 46 56"/>
+                  <path d="M -2 56 L -4 70"/>
+                  <path d="M 46 56 L 52 64"/>
+                </g>
+
+                <!-- ARM extending from right shoulder, curving in to write on tablet -->
+                <path d="M 16 4 Q 22 14 16 26 L 8 34" stroke="#111" stroke-width="1.8"/>
+                <!-- hand (small loop on tablet) -->
+                <path d="M 4 30 Q 12 30 12 38 Q 10 42 2 40 Z" fill="#faf7f2"/>
+                <!-- pen writing onto sheet -->
+                <line x1="4" y1="38" x2="-8" y2="50" stroke="#9c7a14" stroke-width="2.4"/>
+                <line x1="-6" y1="48" x2="-10" y2="52" stroke="#111" stroke-width="2"/>
+
+              </g>
+
+              <text class="node-label" x="0" y="92" text-anchor="middle">Eliciteren</text>
+            </g>
+
+            <!-- ============================================
+                 NODE 2 — STRUCTUREREN  (right, moss)
+                 losse uitkomsten worden geclusterd
+                 ============================================ -->
+            <g transform="translate(670 360)">
+              <circle r="110" fill="#c9d8c0" stroke="#111111" stroke-width="1.8"/>
+
+              <g stroke="#111111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+
+                <!-- loose scatter at top: small notes drifting in -->
+                <g fill="#faf7f2">
+                  <rect x="-58" y="-72" width="16" height="16" rx="2" transform="rotate(-14 -50 -64)"/>
+                  <rect x="-30" y="-76" width="16" height="16" rx="2" transform="rotate(8 -22 -68)"/>
+                  <rect x="4" y="-72"  width="16" height="16" rx="2" transform="rotate(-6 12 -64)"/>
+                  <rect x="34" y="-78" width="16" height="16" rx="2" transform="rotate(12 42 -70)"/>
+                </g>
+
+                <!-- funnel / sorting lines pointing down to clusters -->
+                <g stroke="#4a6b3f" stroke-width="1.4" fill="none" stroke-dasharray="3 3">
+                  <line x1="-46" y1="-50" x2="-30" y2="-18"/>
+                  <line x1="-20" y1="-58" x2="-26" y2="-22"/>
+                  <line x1="14"  y1="-54" x2="26" y2="-18"/>
+                  <line x1="42"  y1="-58" x2="32" y2="-22"/>
+                </g>
+
+                <!-- CLUSTER A (left): dashed enclosure with 3 grouped notes + label dot -->
+                <g>
+                  <!-- enclosure -->
+                  <ellipse cx="-32" cy="14" rx="42" ry="32"
+                           fill="#faf7f2" stroke="#4a6b3f" stroke-width="1.6" stroke-dasharray="4 3"/>
+
+                  <g fill="#faf7f2">
+                    <rect x="-54" y="-2" width="22" height="22" rx="2" transform="rotate(-8 -43 9)"/>
+                    <rect x="-36" y="6"  width="22" height="22" rx="2" transform="rotate(6 -25 17)"/>
+                    <rect x="-22" y="-4" width="22" height="22" rx="2" transform="rotate(-2 -11 7)"/>
+                  </g>
+                  <!-- tiny content marks on top note -->
+                  <g stroke="#111" stroke-width="1.2" fill="none">
+                    <line x1="-18" y1="2"  x2="-6"  y2="2"/>
+                    <line x1="-18" y1="7"  x2="-10" y2="7"/>
+                  </g>
+                </g>
+
+                <!-- CLUSTER B (right): dashed enclosure with 2 grouped notes -->
+                <g>
+                  <ellipse cx="36" cy="20" rx="34" ry="26"
+                           fill="#faf7f2" stroke="#4a6b3f" stroke-width="1.6" stroke-dasharray="4 3"/>
+                  <g fill="#faf7f2">
+                    <rect x="14" y="6"  width="22" height="22" rx="2" transform="rotate(-6 25 17)"/>
+                    <rect x="32" y="0"  width="22" height="22" rx="2" transform="rotate(10 43 11)"/>
+                  </g>
+                  <g stroke="#111" stroke-width="1.2" fill="none">
+                    <line x1="36" y1="6"  x2="48" y2="6"/>
+                    <line x1="36" y1="11" x2="44" y2="11"/>
+                  </g>
+                </g>
+
+                <!-- link between clusters (shows structure / relation) -->
+                <line x1="6" y1="14" x2="14" y2="20" stroke="#4a6b3f" stroke-width="1.4" fill="none"/>
+
+              </g>
+
+              <text class="node-label" x="0" y="92" text-anchor="middle">Structureren</text>
+            </g>
+
+            <!-- ============================================
+                 NODE 3 — CONFRONTEREN  (bottom, clay)
+                 andere stakeholders + documenten / ideeën komen binnen
+                 ============================================ -->
+            <g transform="translate(440 590)">
+              <circle r="110" fill="#f3c9b4" stroke="#111111" stroke-width="1.8"/>
+
+              <g fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <!-- central person (the user) -->
+                <g transform="translate(-16 -22)">
+                  <ellipse cx="16" cy="16" rx="18" ry="20" fill="#faf7f2"/>
+                  <path d="M 0 10 Q 6 -2 16 -3 Q 26 -2 32 10"/>
+                  <circle cx="12" cy="20" r="1.4" fill="#111" stroke="none"/>
+                  <circle cx="22" cy="20" r="1.4" fill="#111" stroke="none"/>
+                  <path d="M 12 28 Q 16 30 22 28"/>
+                  <path d="M -4 50 Q 4 42 16 40 Q 28 42 36 50"/>
+                  <path d="M -4 50 L -6 68"/>
+                  <path d="M 36 50 L 38 68"/>
+                </g>
+
+                <!-- incoming STAKEHOLDER (top-left, head silhouette) -->
+                <g transform="translate(-80 -56)">
+                  <circle cx="10" cy="10" r="11" fill="#faf7f2"/>
+                  <path d="M 2 6 Q 6 -2 10 -2 Q 14 -2 18 6"/>
+                  <circle cx="7" cy="12" r="1" fill="#111" stroke="none"/>
+                  <circle cx="13" cy="12" r="1" fill="#111" stroke="none"/>
+                  <path d="M -2 26 Q 4 20 10 20 Q 16 20 22 26"/>
+                </g>
+                <line x1="-48" y1="-32" x2="-30" y2="-18" stroke="#9c4f2c" stroke-width="1.8" marker-end="url(#arrhead)"/>
+
+                <!-- incoming DOCUMENT (top-right, sheet with lines) -->
+                <g transform="translate(46 -64)">
+                  <rect x="0" y="0" width="28" height="34" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.6" transform="rotate(8 14 17)"/>
+                  <g stroke="#111" stroke-width="1.2" fill="none" transform="rotate(8 14 17)">
+                    <line x1="4" y1="8"  x2="22" y2="8"/>
+                    <line x1="4" y1="14" x2="20" y2="14"/>
+                    <line x1="4" y1="20" x2="22" y2="20"/>
+                    <line x1="4" y1="26" x2="16" y2="26"/>
+                  </g>
+                </g>
+                <line x1="48" y1="-30" x2="32" y2="-18" stroke="#9c4f2c" stroke-width="1.8" marker-end="url(#arrhead)"/>
+
+                <!-- incoming IDEA (bottom-right, lightbulb-style thought bubble) -->
+                <g transform="translate(50 28)">
+                  <!-- bubble -->
+                  <path d="M 0 12 Q 0 -2 14 -2 Q 28 -2 28 12 Q 28 22 18 24 L 16 30 L 14 24 Q 0 22 0 12 Z"
+                        fill="#faf7f2" stroke="#111" stroke-width="1.6"/>
+                  <!-- lightbulb icon inside -->
+                  <g stroke="#c79e2c" stroke-width="1.6" fill="none">
+                    <path d="M 14 4 Q 9 4 9 9 Q 9 12 12 14 L 12 16 L 16 16 L 16 14 Q 19 12 19 9 Q 19 4 14 4 Z"/>
+                    <line x1="12" y1="18" x2="16" y2="18"/>
+                  </g>
+                </g>
+                <line x1="44" y1="32" x2="26" y2="24" stroke="#9c4f2c" stroke-width="1.8" marker-end="url(#arrhead)"/>
+
+                <!-- incoming STAKEHOLDER (bottom-left, head silhouette) -->
+                <g transform="translate(-76 32)">
+                  <circle cx="10" cy="10" r="11" fill="#faf7f2"/>
+                  <path d="M 2 6 Q 6 -2 10 -2 Q 14 -2 18 6"/>
+                  <circle cx="7" cy="12" r="1" fill="#111" stroke="none"/>
+                  <circle cx="13" cy="12" r="1" fill="#111" stroke="none"/>
+                  <path d="M -2 26 Q 4 20 10 20 Q 16 20 22 26"/>
+                </g>
+                <line x1="-44" y1="38" x2="-28" y2="26" stroke="#9c4f2c" stroke-width="1.8" marker-end="url(#arrhead)"/>
+              </g>
+
+              <text class="node-label" x="0" y="92" text-anchor="middle">Confronteren</text>
+            </g>
+
+            <!-- ============================================
+                 NODE 4 — REFRAMEN  (left, sky)
+                 user zet een andere bril op
+                 ============================================ -->
+            <g transform="translate(210 360)">
+              <circle r="110" fill="#cdddea" stroke="#111111" stroke-width="1.8"/>
+
+              <g fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+
+                <!-- OLD GLASSES (being taken off, top-left, dashed) -->
+                <g stroke="#7a7a7a" stroke-width="2" stroke-dasharray="3 3" fill="none">
+                  <!-- left lens -->
+                  <circle cx="-58" cy="-50" r="11"/>
+                  <!-- right lens -->
+                  <circle cx="-34" cy="-50" r="11"/>
+                  <!-- nose bridge -->
+                  <path d="M -47 -50 q 1.5 -3 4.5 0"/>
+                  <!-- temple arms (going outward) -->
+                  <path d="M -69 -50 q -6 -1 -10 -6"/>
+                  <path d="M -23 -50 q 6 -1 10 -6"/>
+                </g>
+
+                <!-- person face, front view -->
+                <g transform="translate(-30 -30)">
+                  <!-- head -->
+                  <ellipse cx="30" cy="32" rx="26" ry="30" fill="#faf7f2"/>
+                  <!-- hair -->
+                  <path d="M 6 22 Q 14 6 30 4 Q 46 6 54 22"/>
+                  <!-- brows (lifted, perspective shift) -->
+                  <path d="M 14 26 Q 18 22 24 25"/>
+                  <path d="M 36 25 Q 42 22 46 26"/>
+                  <!-- eyes (behind glasses) -->
+                  <circle cx="19" cy="34" r="1.6" fill="#111" stroke="none"/>
+                  <circle cx="41" cy="34" r="1.6" fill="#111" stroke="none"/>
+
+                  <!-- NEW GLASSES (solid, on face) -->
+                  <g stroke="#436b8c" stroke-width="2.2" fill="none">
+                    <!-- left lens -->
+                    <circle cx="19" cy="34" r="10"/>
+                    <!-- right lens -->
+                    <circle cx="41" cy="34" r="10"/>
+                    <!-- nose bridge -->
+                    <path d="M 29 34 q 1.5 -3 2 0"/>
+                    <!-- temple arms hugging head -->
+                    <path d="M 9 34 q -5 0 -8 4"/>
+                    <path d="M 51 34 q 5 0 8 4"/>
+                  </g>
+
+                  <!-- subtle smile -->
+                  <path d="M 22 50 Q 30 54 38 50"/>
+                  <!-- shoulders -->
+                  <path d="M 4 78 Q 14 68 30 66 Q 46 68 56 78"/>
+                  <path d="M 4 78 L 2 92"/>
+                  <path d="M 56 78 L 58 92"/>
+                </g>
+
+                <!-- swap arrow: from bottom of old glasses, down then right toward face (stops at face edge, doesn't cross over head) -->
+                <path d="M -46 -39 Q -46 0 -32 4" stroke="#436b8c" stroke-width="1.8" fill="none" marker-end="url(#arrhead)" data-comment-anchor="cc-2"/>
+
+              </g>
+
+              <text class="node-label" x="0" y="92" text-anchor="middle">Reframen</text>
+            </g>
+
+          </svg>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

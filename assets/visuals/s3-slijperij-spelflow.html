@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>De Slijperij — Spelverloop</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+html, body { margin: 0; padding: 0; background: var(--paper); }
+body { font-family: var(--font-body); color: var(--ink); padding: 64px clamp(24px,5vw,80px) 96px; }
+.page { max-width: 1220px; margin: 0 auto; }
+
+.figcard {
+  position: relative;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  box-shadow: 6px 6px 0 0 var(--ink);
+  padding: 40px 32px 44px;
+}
+
+.snake {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 44px minmax(0,1fr) 44px minmax(0,1fr);
+  grid-template-rows: auto auto 64px auto auto 64px auto auto;
+  column-gap: 0;
+  row-gap: 0;
+}
+
+.cv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+  min-width: 0;
+}
+
+.cl {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--ink);
+  padding: 18px 8px 0;
+  line-height: 1.35;
+  align-self: start;
+}
+.cl::before {
+  content: "";
+  display: block;
+  width: 26px;
+  height: 2.5px;
+  background: var(--clay);
+  margin: 0 auto 9px;
+}
+.cl .d {
+  display: block;
+  font-size: 9.5px;
+  color: var(--ink-3);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+  text-transform: none;
+}
+
+.ah { display: flex; align-items: center; justify-content: center; }
+.ah svg { width: 100%; height: 20px; max-width: 48px; }
+
+.conn { display: flex; align-items: flex-end; justify-content: center; }
+.conn svg { width: 16px; height: 46px; display: block; margin-bottom: -3px; }
+
+/* grid placements */
+.r1c1{grid-column:1;grid-row:1;} .a12{grid-column:2;grid-row:1;}
+.r1c2{grid-column:3;grid-row:1;} .a23{grid-column:4;grid-row:1;}
+.r1c3{grid-column:5;grid-row:1;}
+.l1a{grid-column:1;grid-row:2;} .l1b{grid-column:3;grid-row:2;} .l1c{grid-column:5;grid-row:2;}
+.cn1{grid-column:5;grid-row:3;}
+
+.r2c1{grid-column:5;grid-row:4;} .b12{grid-column:4;grid-row:4;}
+.r2c2{grid-column:3;grid-row:4;} .b23{grid-column:2;grid-row:4;}
+.r2c3{grid-column:1;grid-row:4;}
+.l2a{grid-column:5;grid-row:5;} .l2b{grid-column:3;grid-row:5;} .l2c{grid-column:1;grid-row:5;}
+.cn2{grid-column:1;grid-row:6;}
+
+.r3c1{grid-column:1;grid-row:7;} .c12{grid-column:2;grid-row:7;}
+.r3c2{grid-column:3;grid-row:7;} .c23{grid-column:4;grid-row:7;}
+.r3c3{grid-column:5;grid-row:7;}
+.l3a{grid-column:1;grid-row:8;} .l3b{grid-column:3;grid-row:8;} .l3c{grid-column:5;grid-row:8;}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="figcard">
+  <div class="snake">
+
+    <!-- ============================================================
+         ROW 1 (L→R): Voorbereiding | Fase 0 | Fase 1
+         ============================================================ -->
+
+    <!-- VOORBEREIDING -->
+    <div class="cv r1c1">
+      <svg width="196" height="172" viewBox="0 0 196 172" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Paper stack (bronmateriaal) — rotated layers -->
+        <rect x="56" y="28" width="58" height="76" rx="2" fill="#e8e1d3" stroke="#111" stroke-width="1.3" transform="rotate(-7 85 66)"/>
+        <rect x="60" y="32" width="58" height="76" rx="2" fill="#f3ede2" stroke="#111" stroke-width="1.3" transform="rotate(-3 89 70)"/>
+        <rect x="64" y="36" width="58" height="76" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+        <line x1="72" y1="54" x2="114" y2="54" stroke="#bdb6a8" stroke-width="1.1"/>
+        <line x1="72" y1="62" x2="108" y2="62" stroke="#bdb6a8" stroke-width="1.1"/>
+        <line x1="72" y1="70" x2="114" y2="70" stroke="#bdb6a8" stroke-width="1.1"/>
+        <line x1="72" y1="78" x2="104" y2="78" stroke="#bdb6a8" stroke-width="1.1"/>
+        <line x1="72" y1="86" x2="112" y2="86" stroke="#bdb6a8" stroke-width="1.1"/>
+        <line x1="72" y1="94" x2="100" y2="94" stroke="#bdb6a8" stroke-width="1.1"/>
+        <!-- AI scan overlay (circle + magnifier) -->
+        <circle cx="93" cy="72" r="24" fill="rgba(217,107,63,0.07)" stroke="#d96b3f" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <circle cx="93" cy="72" r="6" fill="none" stroke="#d96b3f" stroke-width="1.5"/>
+        <line x1="97" y1="76" x2="104" y2="83" stroke="#d96b3f" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- Envelope (uitnodiging) top-right -->
+        <rect x="146" y="14" width="46" height="34" rx="2" fill="#cdddea" stroke="#111" stroke-width="1.4"/>
+        <path d="M 146,14 L 169,30 L 192,14" stroke="#111" stroke-width="1.1" fill="none"/>
+        <line x1="156" y1="48" x2="182" y2="48" stroke="#8a8a8a" stroke-width="0.8" stroke-dasharray="2 2"/>
+
+        <!-- Stakeholder stickers (uitnodigingskaarten) -->
+        <rect x="148" y="60" width="18" height="24" rx="2" fill="#dde6d4" stroke="#111" stroke-width="1.2"/>
+        <rect x="170" y="60" width="18" height="24" rx="2" fill="#f3c9b4" stroke="#111" stroke-width="1.2"/>
+        <rect x="159" y="76" width="18" height="24" rx="2" fill="#f3e2ad" stroke="#111" stroke-width="1.2"/>
+        <circle cx="157" cy="67" r="3" fill="#6b8f5e"/>
+        <circle cx="179" cy="67" r="3" fill="#d96b3f"/>
+        <circle cx="168" cy="83" r="3" fill="#e8c66a"/>
+
+        <!-- Laptop/scherm (scherminstellingen) -->
+        <rect x="6" y="112" width="82" height="52" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+        <rect x="8" y="114" width="78" height="42" rx="2" fill="#2a2a2a"/>
+        <rect x="12" y="120" width="26" height="11" rx="2" fill="#d96b3f" opacity="0.85"/>
+        <text x="25" y="128.5" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" fill="#faf7f2">20:00</text>
+        <line x1="44" y1="122" x2="80" y2="122" stroke="#5b5b5b" stroke-width="0.9"/>
+        <line x1="44" y1="128" x2="74" y2="128" stroke="#5b5b5b" stroke-width="0.9"/>
+        <line x1="44" y1="134" x2="78" y2="134" stroke="#5b5b5b" stroke-width="0.9"/>
+        <rect x="2" y="164" width="90" height="6" rx="3" fill="#e8e1d3" stroke="#111" stroke-width="1.1"/>
+
+        <!-- Printer (uitprinten) -->
+        <rect x="108" y="120" width="36" height="16" rx="1" fill="#faf7f2" stroke="#111" stroke-width="1.2"/>
+        <line x1="112" y1="126" x2="140" y2="126" stroke="#bdb6a8" stroke-width="0.9"/>
+        <line x1="112" y1="131" x2="136" y2="131" stroke="#bdb6a8" stroke-width="0.9"/>
+        <rect x="102" y="136" width="62" height="30" rx="3" fill="#e8e1d3" stroke="#111" stroke-width="1.4"/>
+        <rect x="108" y="148" width="50" height="14" rx="1" fill="#faf7f2" stroke="#111" stroke-width="1.1"/>
+        <line x1="113" y1="153" x2="154" y2="153" stroke="#bdb6a8" stroke-width="0.9"/>
+        <line x1="113" y1="158" x2="148" y2="158" stroke="#bdb6a8" stroke-width="0.9"/>
+      </svg>
+    </div>
+
+    <div class="ah a12"><svg viewBox="0 0 60 22" fill="none"><line x1="2" y1="11" x2="48" y2="11" stroke="#111" stroke-width="2"/><path d="M42 4L54 11 42 18" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+
+    <!-- FASE 0: Eigen kaartjes schrijven -->
+    <div class="cv r1c2">
+      <svg width="190" height="166" viewBox="0 0 190 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background blank cards -->
+        <rect x="8" y="46" width="50" height="70" rx="2" fill="#e8e1d3" stroke="#111" stroke-width="1.4" transform="rotate(-9 33 81)"/>
+        <rect x="14" y="40" width="50" height="70" rx="2" fill="#f3ede2" stroke="#111" stroke-width="1.4" transform="rotate(-4 39 75)"/>
+        <!-- blank dashes on back cards -->
+        <line x1="16" y1="74" x2="56" y2="68" stroke="#cdc6b8" stroke-width="1.2" stroke-dasharray="3 2"/>
+        <line x1="16" y1="82" x2="52" y2="76" stroke="#cdc6b8" stroke-width="1.2" stroke-dasharray="3 2"/>
+
+        <!-- Pen -->
+        <g transform="translate(158 36) rotate(32)">
+          <rect x="-3.5" y="-30" width="7" height="32" rx="3.5" fill="#e8c66a" stroke="#111" stroke-width="1.2"/>
+          <path d="M -3.5,-30 L 3.5,-30 L 0,-40 Z" fill="#5b5b5b" stroke="#111" stroke-width="1"/>
+          <rect x="-3.5" y="2" width="7" height="4" fill="#f3c9b4" stroke="#111" stroke-width="0.8"/>
+        </g>
+
+        <!-- Front card (shadow + card) -->
+        <rect x="76" y="30" width="84" height="114" rx="3" fill="#1a1a1a"/>
+        <rect x="72" y="26" width="84" height="114" rx="3" fill="#faf7f2" stroke="#111" stroke-width="2"/>
+        <!-- blank category strip -->
+        <rect x="72" y="26" width="84" height="12" rx="3" fill="#e8e1d3" stroke="#111" stroke-width="1"/>
+        <!-- written lines -->
+        <line x1="80" y1="50" x2="148" y2="50" stroke="#5b5b5b" stroke-width="1.5"/>
+        <line x1="80" y1="60" x2="140" y2="60" stroke="#5b5b5b" stroke-width="1.5"/>
+        <line x1="80" y1="70" x2="148" y2="70" stroke="#5b5b5b" stroke-width="1.5"/>
+        <line x1="80" y1="80" x2="132" y2="80" stroke="#5b5b5b" stroke-width="1.5"/>
+        <!-- partial line with caret -->
+        <line x1="80" y1="90" x2="118" y2="90" stroke="#5b5b5b" stroke-width="1.5"/>
+        <line x1="120" y1="86" x2="120" y2="95" stroke="#d96b3f" stroke-width="1.5"/>
+        <!-- image area bottom -->
+        <rect x="80" y="100" width="68" height="32" rx="1" fill="#e8e1d3" stroke="#bdb6a8" stroke-width="0.8"/>
+
+        <!-- optioneel pill -->
+        <rect x="74" y="144" width="80" height="14" rx="7" fill="#e8e1d3" stroke="#111" stroke-width="1"/>
+        <text x="114" y="154" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="7.5" font-weight="700" fill="#5b5b5b" letter-spacing="0.1em">OPTIONEEL</text>
+      </svg>
+    </div>
+
+    <div class="ah a23"><svg viewBox="0 0 60 22" fill="none"><line x1="2" y1="11" x2="48" y2="11" stroke="#111" stroke-width="2"/><path d="M42 4L54 11 42 18" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+
+    <!-- FASE 1: Wiens waarheid is dit? -->
+    <div class="cv r1c3">
+      <svg width="200" height="172" viewBox="0 0 200 172" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="f1-tl"><circle cx="36" cy="36" r="14"/></clipPath>
+          <clipPath id="f1-tr"><circle cx="164" cy="36" r="14"/></clipPath>
+          <clipPath id="f1-bl"><circle cx="36" cy="124" r="14"/></clipPath>
+          <clipPath id="f1-br"><circle cx="164" cy="124" r="14"/></clipPath>
+        </defs>
+        <!-- Shared table/map -->
+        <rect x="12" y="12" width="176" height="136" rx="5" fill="#f3ede2" stroke="#111" stroke-width="1.5"/>
+
+        <!-- TL stakeholder: moss -->
+        <circle cx="36" cy="36" r="14" fill="#dde6d4" stroke="#111" stroke-width="1.2"/>
+        <g clip-path="url(#f1-tl)">
+          <circle cx="36" cy="31" r="5" fill="#6b8f5e"/>
+          <path d="M22 50L22 38Q22 36 36 36Q50 36 50 38L50 50Z" fill="#6b8f5e"/>
+        </g>
+
+        <!-- TR stakeholder: sky -->
+        <circle cx="164" cy="36" r="14" fill="#cdddea" stroke="#111" stroke-width="1.2"/>
+        <g clip-path="url(#f1-tr)">
+          <circle cx="164" cy="31" r="5" fill="#6f9ec4"/>
+          <path d="M150 50L150 38Q150 36 164 36Q178 36 178 38L178 50Z" fill="#6f9ec4"/>
+        </g>
+
+        <!-- BL stakeholder: clay -->
+        <circle cx="36" cy="124" r="14" fill="#f3c9b4" stroke="#111" stroke-width="1.2"/>
+        <g clip-path="url(#f1-bl)">
+          <circle cx="36" cy="119" r="5" fill="#d96b3f"/>
+          <path d="M22 138L22 126Q22 124 36 124Q50 124 50 126L50 138Z" fill="#d96b3f"/>
+        </g>
+
+        <!-- BR stakeholder: sun -->
+        <circle cx="164" cy="124" r="14" fill="#f3e2ad" stroke="#111" stroke-width="1.2"/>
+        <g clip-path="url(#f1-br)">
+          <circle cx="164" cy="119" r="5" fill="#e8c66a"/>
+          <path d="M150 138L150 126Q150 124 164 124Q178 124 178 126L178 138Z" fill="#e8c66a"/>
+        </g>
+
+        <!-- Central card face-up (being discussed) -->
+        <rect x="84" y="53" width="44" height="60" rx="2" fill="#1a1a1a" transform="rotate(-3 106 83)"/>
+        <rect x="80" y="49" width="44" height="60" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.5" transform="rotate(-3 102 79)"/>
+        <rect x="80" y="49" width="44" height="9" rx="2" fill="#d96b3f" stroke="none" transform="rotate(-3 102 53)"/>
+        <line x1="84" y1="67" x2="120" y2="65" stroke="#bdb6a8" stroke-width="1.1"/>
+        <line x1="84" y1="74" x2="116" y2="72" stroke="#bdb6a8" stroke-width="1.1"/>
+        <line x1="84" y1="81" x2="120" y2="79" stroke="#bdb6a8" stroke-width="1.1"/>
+        <line x1="84" y1="88" x2="112" y2="86" stroke="#bdb6a8" stroke-width="1.1"/>
+
+        <!-- Placement arrows from card to stakeholders -->
+        <line x1="85" y1="66" x2="52" y2="52" stroke="#d96b3f" stroke-width="1" stroke-dasharray="2 2" opacity="0.55"/>
+        <line x1="115" y1="62" x2="150" y2="52" stroke="#d96b3f" stroke-width="1" stroke-dasharray="2 2" opacity="0.35"/>
+
+        <!-- Question bar bottom -->
+        <rect x="20" y="150" width="160" height="18" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <text x="100" y="162" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9" font-weight="700" fill="#111" letter-spacing="0.02em">Wiens waarheid is dit?</text>
+      </svg>
+    </div>
+
+    <!-- ROW 1 LABELS -->
+    <div class="cl l1a">Voorbereiding<span class="d">Vooraf aan de sessie</span></div>
+    <div class="cl l1b">Fase 0 — Eigen kaartjes<span class="d">Optioneel · vooraf aan de sessie</span></div>
+    <div class="cl l1c">Fase 1 — Wiens waarheid?<span class="d">± 20 minuten</span></div>
+
+    <!-- CONNECTOR ↓ at col 5 -->
+    <div class="conn cn1">
+      <svg viewBox="0 0 22 48" fill="none"><line x1="11" y1="2" x2="11" y2="36" stroke="#111" stroke-width="2"/><path d="M4 30L11 44 18 30" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </div>
+
+    <!-- ============================================================
+         ROW 2 (R→L): Fase 2 | Fase 3 | Fase 4
+         ============================================================ -->
+
+    <!-- FASE 2: Drafting (col5, first after connector) -->
+    <div class="cv r2c1">
+      <svg width="196" height="170" viewBox="0 0 196 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Central card pile -->
+        <rect x="73" y="55" width="46" height="62" rx="2" fill="#ccc5ba" stroke="#111" stroke-width="1.2" transform="rotate(-5 96 86)"/>
+        <rect x="77" y="59" width="46" height="62" rx="2" fill="#e0d9ce" stroke="#111" stroke-width="1.2" transform="rotate(-2 100 90)"/>
+        <rect x="80" y="62" width="46" height="62" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+        <rect x="80" y="62" width="46" height="9" rx="2" fill="#6b8f5e"/>
+        <line x1="86" y1="80" x2="120" y2="80" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="86" y1="87" x2="114" y2="87" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="86" y1="94" x2="120" y2="94" stroke="#bdb6a8" stroke-width="1"/>
+
+        <defs>
+          <clipPath id="f2-p1"><circle cx="30" cy="30" r="15"/></clipPath>
+          <clipPath id="f2-p2"><circle cx="30" cy="146" r="15"/></clipPath>
+          <clipPath id="f2-p3"><circle cx="166" cy="88" r="15"/></clipPath>
+        </defs>
+
+        <!-- Cards drawn first so players appear on top -->
+        <!-- Card by player 1 -->
+        <rect x="6" y="58" width="26" height="36" rx="1" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <rect x="6" y="58" width="26" height="6" rx="1" fill="#6b8f5e"/>
+        <!-- Card by player 2 -->
+        <rect x="6" y="108" width="26" height="36" rx="1" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <rect x="6" y="108" width="26" height="6" rx="1" fill="#d96b3f"/>
+        <!-- Card by player 3 -->
+        <rect x="164" y="56" width="26" height="36" rx="1" fill="#faf7f2" stroke="#111" stroke-width="1"/>
+        <rect x="164" y="56" width="26" height="6" rx="1" fill="#6f9ec4"/>
+
+        <!-- Arrows -->
+        <path d="M80 76L36 58" stroke="#d96b3f" stroke-width="1.2" stroke-dasharray="3 2"/>
+        <path d="M46 52L34 57L38 66" stroke="#d96b3f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M80 107L36 120" stroke="#d96b3f" stroke-width="1.2" stroke-dasharray="3 2"/>
+        <path d="M44 124L32 121L34 111" stroke="#d96b3f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M126 80L158 78" stroke="#d96b3f" stroke-width="1.2" stroke-dasharray="3 2"/>
+        <path d="M152 72L162 77L156 84" stroke="#d96b3f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+
+        <!-- Player 1 top-left -->
+        <circle cx="30" cy="30" r="15" fill="#dde6d4" stroke="#111" stroke-width="1.2"/>
+        <g clip-path="url(#f2-p1)">
+          <circle cx="30" cy="24" r="5.5" fill="#6b8f5e"/>
+          <path d="M15 46L15 34Q15 30 30 30Q45 30 45 34L45 46Z" fill="#6b8f5e"/>
+        </g>
+
+        <!-- Player 2 bottom-left -->
+        <circle cx="30" cy="146" r="15" fill="#f3c9b4" stroke="#111" stroke-width="1.2"/>
+        <g clip-path="url(#f2-p2)">
+          <circle cx="30" cy="140" r="5.5" fill="#d96b3f"/>
+          <path d="M15 162L15 150Q15 146 30 146Q45 146 45 150L45 162Z" fill="#d96b3f"/>
+        </g>
+
+        <!-- Player 3 right -->
+        <circle cx="166" cy="88" r="15" fill="#cdddea" stroke="#111" stroke-width="1.2"/>
+        <g clip-path="url(#f2-p3)">
+          <circle cx="166" cy="82" r="5.5" fill="#6f9ec4"/>
+          <path d="M151 104L151 92Q151 88 166 88Q181 88 181 92L181 104Z" fill="#6f9ec4"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="ah b12"><svg viewBox="0 0 60 22" fill="none"><line x1="12" y1="11" x2="58" y2="11" stroke="#111" stroke-width="2"/><path d="M18 4L6 11 18 18" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+
+    <!-- FASE 3: Frame bouwen (col3) -->
+    <div class="cv r2c2">
+      <svg width="190" height="168" viewBox="0 0 190 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- MIJN FRAME label -->
+        <text x="95" y="15" text-anchor="middle" font-family="'Sora',sans-serif" font-size="9" font-weight="800" fill="#8a8a8a" letter-spacing="0.12em">MIJN FRAME</text>
+        <!-- dashed frame border -->
+        <rect x="6" y="20" width="178" height="140" rx="4" fill="none" stroke="#d96b3f" stroke-width="1.5" stroke-dasharray="5 3"/>
+
+        <!-- 6 cards in 2×3 grid -->
+        <!-- top row -->
+        <rect x="14" y="28" width="48" height="62" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.4"/>
+        <rect x="14" y="28" width="48" height="9" rx="2" fill="#d96b3f"/>
+        <line x1="18" y1="45" x2="58" y2="45" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="18" y1="52" x2="52" y2="52" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="18" y1="59" x2="58" y2="59" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="18" y1="66" x2="50" y2="66" stroke="#bdb6a8" stroke-width="1"/>
+        <rect x="18" y="74" width="40" height="12" rx="1" fill="#e8e1d3"/>
+
+        <rect x="70" y="28" width="48" height="62" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.4"/>
+        <rect x="70" y="28" width="48" height="9" rx="2" fill="#e8c66a"/>
+        <line x1="74" y1="45" x2="114" y2="45" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="74" y1="52" x2="108" y2="52" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="74" y1="59" x2="114" y2="59" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="74" y1="66" x2="106" y2="66" stroke="#bdb6a8" stroke-width="1"/>
+        <rect x="74" y="74" width="40" height="12" rx="1" fill="#e8e1d3"/>
+
+        <rect x="126" y="28" width="48" height="62" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.4"/>
+        <rect x="126" y="28" width="48" height="9" rx="2" fill="#6b8f5e"/>
+        <line x1="130" y1="45" x2="170" y2="45" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="130" y1="52" x2="164" y2="52" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="130" y1="59" x2="170" y2="59" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="130" y1="66" x2="158" y2="66" stroke="#bdb6a8" stroke-width="1"/>
+        <rect x="130" y="74" width="40" height="12" rx="1" fill="#e8e1d3"/>
+
+        <!-- inter-row connectors -->
+        <line x1="38" y1="94" x2="94" y2="94" stroke="#111" stroke-width="0.7" stroke-dasharray="2 2" opacity="0.28"/>
+        <line x1="94" y1="94" x2="150" y2="94" stroke="#111" stroke-width="0.7" stroke-dasharray="2 2" opacity="0.28"/>
+
+        <!-- bottom row -->
+        <rect x="14" y="100" width="48" height="52" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.4"/>
+        <rect x="14" y="100" width="48" height="9" rx="2" fill="#6f9ec4"/>
+        <line x1="18" y1="116" x2="58" y2="116" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="18" y1="123" x2="52" y2="123" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="18" y1="130" x2="58" y2="130" stroke="#bdb6a8" stroke-width="1"/>
+
+        <rect x="70" y="100" width="48" height="52" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.4"/>
+        <rect x="70" y="100" width="48" height="9" rx="2" fill="#e8e1d3" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="74" y1="116" x2="114" y2="116" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="74" y1="123" x2="108" y2="123" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="74" y1="130" x2="114" y2="130" stroke="#bdb6a8" stroke-width="1"/>
+
+        <rect x="126" y="100" width="48" height="52" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.4"/>
+        <rect x="126" y="100" width="48" height="9" rx="2" fill="#2a2a2a"/>
+        <line x1="130" y1="116" x2="170" y2="116" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="130" y1="123" x2="164" y2="123" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="130" y1="130" x2="170" y2="130" stroke="#bdb6a8" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <div class="ah b23"><svg viewBox="0 0 60 22" fill="none"><line x1="12" y1="11" x2="58" y2="11" stroke="#111" stroke-width="2"/><path d="M18 4L6 11 18 18" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+
+    <!-- FASE 4: Frames pitchen (col1, last in R→L) -->
+    <div class="cv r2c3">
+      <svg width="196" height="168" viewBox="0 0 196 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="f4-sp"><circle cx="44" cy="44" r="20"/></clipPath>
+        </defs>
+        <!-- Speaker silhouette -->
+        <circle cx="44" cy="44" r="20" fill="#f3ede2" stroke="#111" stroke-width="1.5"/>
+        <g clip-path="url(#f4-sp)">
+          <circle cx="44" cy="38" r="9" fill="#2a2a2a"/>
+          <path d="M24 66L24 52Q24 45 44 45Q64 45 64 52L64 66Z" fill="#2a2a2a"/>
+        </g>
+
+        <!-- Speech bubble -->
+        <rect x="70" y="8" width="118" height="68" rx="8" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+        <path d="M70 36L58 44L70 52Z" fill="#faf7f2" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/>
+        <line x1="70" y1="37" x2="70" y2="51" stroke="#faf7f2" stroke-width="2.5"/>
+        <!-- frame script in bubble -->
+        <text x="129" y="30" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="9.5" font-weight="700" fill="#d96b3f">Het probleem is...</text>
+        <line x1="78" y1="38" x2="180" y2="38" stroke="#e8e1d3" stroke-width="1"/>
+        <text x="129" y="52" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="8" fill="#8a8a8a">Oorzaak · Aanname</text>
+        <text x="129" y="64" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="8" fill="#8a8a8a">Actoren · Oplossing...</text>
+
+        <!-- AI listener: dark screen -->
+        <rect x="8" y="92" width="180" height="72" rx="4" fill="#2a2a2a" stroke="#111" stroke-width="1.5"/>
+        <rect x="10" y="94" width="176" height="68" rx="3" fill="#1a1a1a"/>
+        <text x="22" y="112" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#6f9ec4" opacity="0.9">AI-luisteraar</text>
+        <!-- waveform bars -->
+        <g transform="translate(18 120)">
+          <rect x="0"   y="10" width="5" height="10" rx="1" fill="#d96b3f"/>
+          <rect x="8"   y="4"  width="5" height="16" rx="1" fill="#d96b3f"/>
+          <rect x="16"  y="8"  width="5" height="12" rx="1" fill="#d96b3f"/>
+          <rect x="24"  y="1"  width="5" height="19" rx="1" fill="#d96b3f"/>
+          <rect x="32"  y="6"  width="5" height="14" rx="1" fill="#d96b3f"/>
+          <rect x="40"  y="11" width="5" height="9"  rx="1" fill="#d96b3f"/>
+          <rect x="48"  y="3"  width="5" height="17" rx="1" fill="#d96b3f"/>
+          <rect x="56"  y="8"  width="5" height="12" rx="1" fill="#d96b3f"/>
+          <rect x="64"  y="5"  width="5" height="15" rx="1" fill="#d96b3f"/>
+          <rect x="72"  y="0"  width="5" height="20" rx="1" fill="#d96b3f"/>
+          <rect x="80"  y="7"  width="5" height="13" rx="1" fill="#d96b3f"/>
+          <rect x="88"  y="4"  width="5" height="16" rx="1" fill="#d96b3f"/>
+          <rect x="96"  y="9"  width="5" height="11" rx="1" fill="#d96b3f"/>
+          <rect x="104" y="3"  width="5" height="17" rx="1" fill="#d96b3f"/>
+          <rect x="112" y="7"  width="5" height="13" rx="1" fill="#d96b3f"/>
+          <rect x="120" y="2"  width="5" height="18" rx="1" fill="#d96b3f"/>
+          <rect x="128" y="8"  width="5" height="12" rx="1" fill="#d96b3f"/>
+          <rect x="136" y="5"  width="5" height="15" rx="1" fill="#d96b3f"/>
+          <rect x="144" y="10" width="5" height="10" rx="1" fill="#d96b3f"/>
+          <rect x="152" y="4"  width="5" height="16" rx="1" fill="#d96b3f"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- ROW 2 LABELS -->
+    <div class="cl l2a">Fase 2 — Drafting<span class="d">± 5 minuten</span></div>
+    <div class="cl l2b">Fase 3 — Frame bouwen<span class="d">± 15 minuten</span></div>
+    <div class="cl l2c">Fase 4 — Frames pitchen<span class="d">± 5 min per speler</span></div>
+
+    <!-- CONNECTOR ↓ at col 1 -->
+    <div class="conn cn2">
+      <svg viewBox="0 0 22 48" fill="none"><line x1="11" y1="2" x2="11" y2="36" stroke="#111" stroke-width="2"/><path d="M4 30L11 44 18 30" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </div>
+
+    <!-- ============================================================
+         ROW 3 (L→R): Fase 5 | Fase 6 | Output
+         ============================================================ -->
+
+    <!-- FASE 5: Spanningen zoeken (col1) -->
+    <div class="cv r3c1">
+      <svg width="196" height="168" viewBox="0 0 196 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Left frame cluster -->
+        <rect x="4" y="24" width="46" height="60" rx="2" fill="#e0d9ce" stroke="#111" stroke-width="1.2" transform="rotate(-5 27 54)"/>
+        <rect x="8" y="20" width="46" height="60" rx="2" fill="#f3ede2" stroke="#111" stroke-width="1.3" transform="rotate(-2 31 50)"/>
+        <rect x="12" y="16" width="46" height="60" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+        <rect x="12" y="16" width="46" height="9" rx="2" fill="#d96b3f"/>
+        <line x1="16" y1="32" x2="54" y2="32" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="16" y1="39" x2="50" y2="39" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="16" y1="46" x2="54" y2="46" stroke="#bdb6a8" stroke-width="1"/>
+        <rect x="12" y="82" width="46" height="56" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+        <rect x="12" y="82" width="46" height="9" rx="2" fill="#e8c66a"/>
+        <line x1="16" y1="98" x2="54" y2="98" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="16" y1="105" x2="50" y2="105" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="16" y1="112" x2="54" y2="112" stroke="#bdb6a8" stroke-width="1"/>
+        <text x="35" y="148" text-anchor="middle" font-family="'Sora',sans-serif" font-size="8" font-weight="800" fill="#5b5b5b">Frame A</text>
+
+        <!-- Right frame cluster -->
+        <rect x="146" y="24" width="46" height="60" rx="2" fill="#e0d9ce" stroke="#111" stroke-width="1.2" transform="rotate(5 169 54)"/>
+        <rect x="142" y="20" width="46" height="60" rx="2" fill="#f3ede2" stroke="#111" stroke-width="1.3" transform="rotate(2 165 50)"/>
+        <rect x="138" y="16" width="46" height="60" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+        <rect x="138" y="16" width="46" height="9" rx="2" fill="#6f9ec4"/>
+        <line x1="142" y1="32" x2="180" y2="32" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="142" y1="39" x2="176" y2="39" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="142" y1="46" x2="180" y2="46" stroke="#bdb6a8" stroke-width="1"/>
+        <rect x="138" y="82" width="46" height="56" rx="2" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+        <rect x="138" y="82" width="46" height="9" rx="2" fill="#6b8f5e"/>
+        <line x1="142" y1="98" x2="180" y2="98" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="142" y1="105" x2="176" y2="105" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="142" y1="112" x2="180" y2="112" stroke="#bdb6a8" stroke-width="1"/>
+        <text x="161" y="148" text-anchor="middle" font-family="'Sora',sans-serif" font-size="8" font-weight="800" fill="#5b5b5b">Frame B</text>
+
+        <!-- Tension center -->
+        <line x1="62" y1="72" x2="134" y2="72" stroke="#d96b3f" stroke-width="1.5"/>
+        <path d="M68 67L58 72 68 77" stroke="#d96b3f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <path d="M128 67L138 72 128 77" stroke="#d96b3f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+
+        <!-- Post-it (kernspanning) -->
+        <rect x="56" y="106" width="84" height="44" rx="2" fill="#f3e2ad" stroke="#111" stroke-width="1.5"/>
+        <text x="98" y="122" text-anchor="middle" font-family="'Sora',sans-serif" font-size="8.5" font-weight="800" fill="#111">Kernspanning</text>
+        <line x1="64" y1="131" x2="132" y2="131" stroke="#bdb6a8" stroke-width="1"/>
+        <line x1="64" y1="138" x2="126" y2="138" stroke="#bdb6a8" stroke-width="1"/>
+      </svg>
+    </div>
+
+    <div class="ah c12"><svg viewBox="0 0 60 22" fill="none"><line x1="2" y1="11" x2="48" y2="11" stroke="#111" stroke-width="2"/><path d="M42 4L54 11 42 18" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+
+    <!-- FASE 6: Titeluitreiking (col3) -->
+    <div class="cv r3c2">
+      <svg width="190" height="168" viewBox="0 0 190 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Laptop screen -->
+        <rect x="4" y="4" width="182" height="120" rx="4" fill="#2a2a2a" stroke="#111" stroke-width="1.5"/>
+        <rect x="6" y="6" width="178" height="116" rx="3" fill="#1a1a1a"/>
+        <text x="16" y="24" font-family="'JetBrains Mono',monospace" font-size="8" fill="#6f9ec4" opacity="0.75">AI-analyse</text>
+
+        <!-- Frame summary panels -->
+        <rect x="10" y="30" width="78" height="48" rx="2" fill="#242424" stroke="#d96b3f" stroke-width="0.9"/>
+        <text x="49" y="47" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="7.5" fill="#e8e1d3" font-weight="700">Frame A</text>
+        <line x1="14" y1="53" x2="84" y2="53" stroke="#3a3a3a" stroke-width="0.8"/>
+        <line x1="14" y1="59" x2="80" y2="59" stroke="#3a3a3a" stroke-width="0.8"/>
+        <line x1="14" y1="65" x2="82" y2="65" stroke="#3a3a3a" stroke-width="0.8"/>
+        <line x1="14" y1="71" x2="76" y2="71" stroke="#3a3a3a" stroke-width="0.8"/>
+
+        <rect x="100" y="30" width="78" height="48" rx="2" fill="#242424" stroke="#6f9ec4" stroke-width="0.9"/>
+        <text x="139" y="47" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="7.5" fill="#e8e1d3" font-weight="700">Frame B</text>
+        <line x1="104" y1="53" x2="174" y2="53" stroke="#3a3a3a" stroke-width="0.8"/>
+        <line x1="104" y1="59" x2="170" y2="59" stroke="#3a3a3a" stroke-width="0.8"/>
+        <line x1="104" y1="65" x2="172" y2="65" stroke="#3a3a3a" stroke-width="0.8"/>
+        <line x1="104" y1="71" x2="166" y2="71" stroke="#3a3a3a" stroke-width="0.8"/>
+
+        <!-- Title badges -->
+        <rect x="10" y="86" width="78" height="16" rx="8" fill="#d96b3f"/>
+        <text x="49" y="97" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="7" font-weight="700" fill="#faf7f2">De systeemdenker</text>
+        <rect x="100" y="86" width="78" height="16" rx="8" fill="#6f9ec4"/>
+        <text x="139" y="97" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="7" font-weight="700" fill="#faf7f2">De romanticus</text>
+
+        <!-- Kernspanning bar -->
+        <rect x="10" y="108" width="168" height="12" rx="2" fill="#242424" stroke="#e8c66a" stroke-width="0.8"/>
+        <text x="94" y="117" text-anchor="middle" font-family="'Nunito',sans-serif" font-size="7.5" fill="#e8c66a">Kernspanning: ...</text>
+
+        <!-- Laptop bottom hinge -->
+        <rect x="38" y="124" width="114" height="6" rx="2" fill="#3a3a3a" stroke="#111" stroke-width="0.8"/>
+        <rect x="0" y="130" width="190" height="8" rx="4" fill="#e8e1d3" stroke="#111" stroke-width="1.2"/>
+
+
+      </svg>
+    </div>
+
+    <div class="ah c23"><svg viewBox="0 0 60 22" fill="none"><line x1="2" y1="11" x2="48" y2="11" stroke="#111" stroke-width="2"/><path d="M42 4L54 11 42 18" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+
+    <!-- OUTPUT: Sessie-rapport (col5) -->
+    <div class="cv r3c3">
+      <svg width="196" height="168" viewBox="0 0 196 168" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- shadow -->
+        <rect x="36" y="12" width="130" height="152" rx="3" fill="#2a2a2a"/>
+        <!-- document -->
+        <rect x="32" y="8" width="130" height="152" rx="3" fill="#faf7f2" stroke="#111" stroke-width="1.5"/>
+        <!-- header band -->
+        <rect x="32" y="8" width="130" height="24" rx="3" fill="#111"/>
+        <rect x="32" y="24" width="130" height="8" rx="0" fill="#111"/>
+        <text x="97" y="24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="#faf7f2" opacity="0.8">SESSIE-RAPPORT</text>
+
+        <!-- Section 1: Probleemrepresentaties -->
+        <text x="40" y="50" font-family="'Sora',sans-serif" font-size="7" font-weight="800" fill="#d96b3f" letter-spacing="0.08em">PROBLEEMREPRESENTATIES</text>
+        <rect x="40" y="54" width="52" height="28" rx="1" fill="#f3ede2" stroke="#bdb6a8" stroke-width="0.8"/>
+        <rect x="98" y="54" width="52" height="28" rx="1" fill="#f3ede2" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="44" y1="62" x2="88" y2="62" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="44" y1="68" x2="84" y2="68" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="44" y1="74" x2="88" y2="74" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="102" y1="62" x2="146" y2="62" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="102" y1="68" x2="142" y2="68" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="102" y1="74" x2="146" y2="74" stroke="#bdb6a8" stroke-width="0.8"/>
+
+        <!-- Section 2: Spanningenkaart -->
+        <text x="40" y="98" font-family="'Sora',sans-serif" font-size="7" font-weight="800" fill="#6f9ec4" letter-spacing="0.08em">SPANNINGENKAART</text>
+        <circle cx="56" cy="114" r="11" fill="none" stroke="#d96b3f" stroke-width="1.2"/>
+        <circle cx="97" cy="111" r="11" fill="none" stroke="#e8c66a" stroke-width="1.2"/>
+        <circle cx="138" cy="114" r="11" fill="none" stroke="#6f9ec4" stroke-width="1.2"/>
+        <line x1="67" y1="113" x2="86" y2="112" stroke="#111" stroke-width="0.7" stroke-dasharray="2 1.5" opacity="0.5"/>
+        <line x1="108" y1="112" x2="127" y2="113" stroke="#111" stroke-width="0.7" stroke-dasharray="2 1.5" opacity="0.5"/>
+
+        <!-- Section 3: Stakeholdermatrix -->
+        <text x="40" y="136" font-family="'Sora',sans-serif" font-size="7" font-weight="800" fill="#6b8f5e" letter-spacing="0.08em">STAKEHOLDERMATRIX</text>
+        <rect x="40" y="140" width="50" height="14" rx="1" fill="#f3ede2" stroke="#bdb6a8" stroke-width="0.8"/>
+        <circle cx="50" cy="147" r="3" fill="#d96b3f"/>
+        <circle cx="62" cy="147" r="3" fill="#6f9ec4"/>
+        <circle cx="74" cy="147" r="3" fill="#6b8f5e"/>
+        <circle cx="86" cy="147" r="3" fill="#e8c66a"/>
+        <rect x="96" y="140" width="56" height="14" rx="1" fill="#f3ede2" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="100" y1="145" x2="148" y2="145" stroke="#bdb6a8" stroke-width="0.8"/>
+        <line x1="100" y1="150" x2="144" y2="150" stroke="#bdb6a8" stroke-width="0.8"/>
+      </svg>
+    </div>
+
+    <!-- ROW 3 LABELS -->
+    <div class="cl l3a">Fase 5 — Spanningen<span class="d">± 10 minuten</span></div>
+    <div class="cl l3b">Fase 6 — Titeluitreiking<span class="d">± 5 minuten</span></div>
+    <div class="cl l3c">Output — Sessie-rapport<span class="d">Na de sessie</span></div>
+
+  </div><!-- /.snake -->
+</div><!-- /.figcard -->
+</div><!-- /.page -->
+</body>
+</html>

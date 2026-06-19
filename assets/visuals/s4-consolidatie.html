@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="nl"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visualisatie · Consolidatie → De Brillenmaker</title>
+<style>/* ============================================================
+   Frictiewereld Design System — colors & type
+   Loaded as: <link rel="stylesheet" href="colors_and_type.css">
+   ============================================================ */
+
+/* ---------- Web fonts (Google Fonts) ---------- */
+/* Display: Sora — rounded geometric sans, heavy weights echo the
+   Frictiewereld wordmark (curved F, friendly terminals, weight 800).
+   Body: Nunito — humanist rounded sans matching the warm, social
+   tone of the screens. Mono: JetBrains Mono for any code/labels.
+   NOTE: substitute candidates only — flag to user. */
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("ee5707a9-b29d-4fcc-bd54-eac6b9b7a61b") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("d41c50b2-b402-42e5-8fe0-4c3e063705b0") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("56f037e5-cc4c-49a0-8e8d-a5337484a417") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("c7ce81ff-5a4a-4d69-9080-e8bbb5f32602") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("9334e65a-57a9-4fc0-9114-86ee4322e97d") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("e0397dc5-0718-4232-86f6-773dd639a615") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ee5707a9-b29d-4fcc-bd54-eac6b9b7a61b") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("d41c50b2-b402-42e5-8fe0-4c3e063705b0") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("56f037e5-cc4c-49a0-8e8d-a5337484a417") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("c7ce81ff-5a4a-4d69-9080-e8bbb5f32602") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("9334e65a-57a9-4fc0-9114-86ee4322e97d") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("e0397dc5-0718-4232-86f6-773dd639a615") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fc1b8a4b-f9f6-4de2-bbf6-2513c53bb678") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("29fa1467-0c68-498b-a944-ae735f215b81") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("34ed58b3-22e8-4e03-a44f-a0df7e063412") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("527944b2-4770-47dd-8006-290bd60761d0") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("679787dc-ebf2-4822-a41a-ffee7787d9a3") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fc1b8a4b-f9f6-4de2-bbf6-2513c53bb678") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("29fa1467-0c68-498b-a944-ae735f215b81") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("34ed58b3-22e8-4e03-a44f-a0df7e063412") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("527944b2-4770-47dd-8006-290bd60761d0") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url("679787dc-ebf2-4822-a41a-ffee7787d9a3") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("2cecbcd6-e7b0-43c8-ac32-975efe404136") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("93be1910-2b59-464b-8ceb-d8303e4dab59") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("c7ab0819-2bc3-4c1e-88f4-5435b6b459be") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("0d874dfb-5700-4251-a039-b91f07043b9c") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("ec37a555-f66e-4b6d-9d71-7ebcfba9d707") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("2cecbcd6-e7b0-43c8-ac32-975efe404136") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("93be1910-2b59-464b-8ceb-d8303e4dab59") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("c7ab0819-2bc3-4c1e-88f4-5435b6b459be") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("0d874dfb-5700-4251-a039-b91f07043b9c") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ec37a555-f66e-4b6d-9d71-7ebcfba9d707") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("2cecbcd6-e7b0-43c8-ac32-975efe404136") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("93be1910-2b59-464b-8ceb-d8303e4dab59") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("c7ab0819-2bc3-4c1e-88f4-5435b6b459be") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("0d874dfb-5700-4251-a039-b91f07043b9c") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("ec37a555-f66e-4b6d-9d71-7ebcfba9d707") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("2cecbcd6-e7b0-43c8-ac32-975efe404136") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("93be1910-2b59-464b-8ceb-d8303e4dab59") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("c7ab0819-2bc3-4c1e-88f4-5435b6b459be") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("0d874dfb-5700-4251-a039-b91f07043b9c") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("ec37a555-f66e-4b6d-9d71-7ebcfba9d707") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("3e6103fd-d3ac-4265-baf0-e30bc2c8f625") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("faecf8fe-e0b8-4e63-9800-3d70d0b4b039") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("3e6103fd-d3ac-4265-baf0-e30bc2c8f625") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("faecf8fe-e0b8-4e63-9800-3d70d0b4b039") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("3e6103fd-d3ac-4265-baf0-e30bc2c8f625") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("faecf8fe-e0b8-4e63-9800-3d70d0b4b039") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("3e6103fd-d3ac-4265-baf0-e30bc2c8f625") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Sora';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("faecf8fe-e0b8-4e63-9800-3d70d0b4b039") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+:root {
+  /* ---------- Brand palette ---------------------------------
+     Frictiewereld is high-contrast monochrome at its core
+     (black ink, off-white paper, hand-drawn lines), softened
+     with three "warmth" accents pulled from the social/people
+     side of the brand: clay, moss, sky.
+     ---------------------------------------------------------- */
+
+  /* Ink & paper — the structural backbone */
+  --ink:        #111111;   /* primary text, strokes, fills */
+  --ink-2:      #2a2a2a;   /* secondary ink */
+  --ink-3:      #5b5b5b;   /* tertiary, muted */
+  --ink-4:      #8a8a8a;   /* placeholders */
+  --paper:      #faf7f2;   /* main warm off-white background */
+  --paper-2:    #f3ede2;   /* warmer surface, cards on paper */
+  --paper-3:    #e8e1d3;   /* dividers, subtle bands */
+  --line:       #1a1a1a;   /* hand-drawn stroke color */
+  --line-soft:  rgba(17,17,17,0.18);
+
+  /* Warm accents — social, human, NOT high-tech */
+  --clay:       #d96b3f;   /* friction, action, alerts */
+  --clay-soft:  #f3c9b4;
+  --moss:       #6b8f5e;   /* growth, journey progress */
+  --moss-soft:  #c9d8c0;
+  --sky:        #6f9ec4;   /* perspective, calm, info */
+  --sky-soft:   #cdddea;
+  --sun:        #e8c66a;   /* highlight / "aha" moments */
+  --sun-soft:   #f3e2ad;
+
+  /* Semantic */
+  --fg-1:       var(--ink);
+  --fg-2:       var(--ink-2);
+  --fg-3:       var(--ink-3);
+  --fg-4:       var(--ink-4);
+  --fg-on-dark: var(--paper);
+
+  --bg-1:       var(--paper);
+  --bg-2:       var(--paper-2);
+  --bg-3:       var(--paper-3);
+  --bg-inverse: var(--ink);
+
+  --border:        var(--ink);
+  --border-soft:   var(--line-soft);
+  --border-strong: var(--ink);
+
+  --accent:        var(--clay);
+  --accent-soft:   var(--clay-soft);
+  --success:       var(--moss);
+  --info:          var(--sky);
+  --warn:          var(--sun);
+  --danger:        var(--clay);
+
+  /* ---------- Typography ----------------------------------- */
+  --font-display: 'Sora', 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Nunito', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* Base scale — generous, readable, warm. Body is 17px to
+     give body copy room to breathe. */
+  --fs-xs:   12px;
+  --fs-sm:   14px;
+  --fs-base: 17px;
+  --fs-md:   19px;
+  --fs-lg:   22px;
+  --fs-xl:   28px;
+  --fs-2xl:  36px;
+  --fs-3xl:  48px;
+  --fs-4xl:  64px;
+  --fs-5xl:  88px;
+
+  --lh-tight:  1.08;
+  --lh-snug:   1.22;
+  --lh-normal: 1.45;
+  --lh-loose:  1.65;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-caps:   0.12em;
+
+  /* ---------- Spacing (4-pt base, slightly airy) ----------- */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  48px;
+  --sp-8:  64px;
+  --sp-9:  96px;
+  --sp-10: 128px;
+
+  /* ---------- Radii — Frictiewereld is mostly capsules
+     (pill labels) and circles (orb nodes). Cards are softly
+     rounded. No sharp corners. ----------------------------- */
+  --r-xs:    6px;
+  --r-sm:   10px;
+  --r-md:   14px;
+  --r-lg:   20px;
+  --r-pill: 999px;
+  --r-circle: 50%;
+
+  /* ---------- Borders -------------------------------------- */
+  --bw-hair:   1px;
+  --bw:        1.5px;   /* default hand-drawn weight */
+  --bw-bold:   2.25px;
+  --bw-heavy:  3px;
+
+  /* ---------- Shadows — minimal, used sparingly. The brand
+     is flat-line first; elevation is communicated through
+     stroke weight, not blur. ------------------------------- */
+  --shadow-1: 0 1px 0 rgba(17,17,17,0.06);
+  --shadow-2: 0 6px 20px -10px rgba(17,17,17,0.18);
+  --shadow-3: 0 14px 36px -16px rgba(17,17,17,0.22);
+  /* Inked shadow — for the rare "lifted card" moment */
+  --shadow-ink: 4px 4px 0 0 var(--ink);
+
+  /* ---------- Motion --------------------------------------- */
+  --ease-out:  cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-in:   cubic-bezier(0.7, 0.0, 0.8, 0.2);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 380ms;
+  --dur-4: 640ms;
+}
+
+/* ============================================================
+   Semantic type styles
+   ============================================================ */
+
+html, body {
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.fw-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--lh-tight);
+}
+
+.fw-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-4xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+}
+.fw-h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+}
+.fw-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-2xl);
+  line-height: var(--lh-snug);
+}
+.fw-h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+}
+
+/* "Verhaal." style — short label + period, used to tag nodes */
+.fw-tag {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  letter-spacing: 0;
+}
+
+.fw-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+  text-wrap: pretty;
+}
+.fw-body-sm {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--fg-2);
+}
+
+.fw-quote {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+  color: var(--fg-2);
+}
+
+.fw-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.fw-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: 0;
+}
+
+.fw-orb-letter {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-lg);
+}
+</style>
+
+<style>
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    padding: 56px clamp(20px, 5vw, 72px) 72px;
+  }
+  .page { max-width: 1180px; margin: 0 auto; }
+
+  /* ---------- FIG card ---------- */
+  .figcard {
+    position: relative;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 6px 6px 0 0 var(--ink);
+    padding: 40px 40px 36px;
+  }
+
+  /* sprint accents — matched to the report's sprint colours */
+  .s1 { --acc: #FF3B1F; --acc-soft: #ffd6cd; }
+  .s2 { --acc: #FFC629; --acc-soft: #fff0c2; }
+  .s3 { --acc: #1E3CFF; --acc-soft: #d6dcff; }
+  .s4 { --acc: #00B86A; --acc-soft: #c3eed8; }
+
+  /* deelproduct chip */
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    border-radius: 999px;
+    padding: 6px 12px 6px 8px;
+    font-size: 12px; font-weight: 700; line-height: 1.1;
+    color: var(--ink);
+    box-shadow: 2px 2px 0 0 var(--ink);
+  }
+  .chip .ico {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--acc-soft);
+    border: 1.25px solid var(--ink);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .chip .ico svg { width: 13px; height: 13px; display: block; }
+  .chip.star {
+    background: var(--acc); border-color: var(--ink); color: var(--paper);
+  }
+  .chip.star .ico { background: var(--paper); }
+  .chip .badge {
+    margin-left: 2px; font-size: 9px; font-weight: 800;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .chip.star .badge { color: rgba(250,247,242,0.82); }
+  /* dropped product */
+  .chip.dropped {
+    border-style: dashed; border-color: var(--ink-4);
+    box-shadow: none; color: var(--ink-4);
+    background: transparent;
+  }
+  .chip.dropped .ico { background: var(--paper-2); border-color: var(--ink-4); opacity: 0.7; }
+  .chip.dropped .ico svg { stroke: var(--ink-4); }
+  .chip.dropped .label { text-decoration: line-through; text-decoration-color: var(--ink-4); }
+
+  /* ============================================================
+     Confluentie
+     ============================================================ */
+  .confl {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) 138px minmax(0, 0.96fr);
+    align-items: stretch;
+    gap: 0;
+  }
+  .confl-lanes {
+    display: flex; flex-direction: column; gap: 16px;
+    justify-content: center;
+  }
+  .lane {
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    border-radius: 14px;
+    padding: 14px 16px 15px 20px;
+    position: relative;
+  }
+  .lane::before {
+    content: ""; position: absolute; left: 0; top: 14px; bottom: 14px;
+    width: 5px; border-radius: 0 4px 4px 0; background: var(--acc);
+  }
+
+  /* hero-style lane header (echoes the report sprint hero) */
+  .lane-hero { display: flex; align-items: center; gap: 14px; margin-bottom: 13px; }
+  .lane-num {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 40px; line-height: 0.8; letter-spacing: -0.04em;
+    color: var(--ink); flex-shrink: 0;
+  }
+  .lane-num .slash { color: var(--acc); }
+  .lane-titles { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .lane-eyebrow {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .lane-title {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 15px; letter-spacing: -0.01em; line-height: 1.12;
+    color: var(--ink); text-wrap: pretty;
+  }
+  .lane-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .confl-merge { position: relative; }
+  .confl-merge svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+
+  .confl-out { display: flex; align-items: center; justify-content: flex-start; }
+
+  /* platform (destination) */
+  .platform {
+    border: 1.5px solid var(--ink);
+    background: var(--paper-2);
+    box-shadow: 5px 5px 0 0 var(--ink);
+    border-radius: 16px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .platform-top {
+    background: #00B86A;
+    border-bottom: 1.5px solid var(--ink);
+    padding: 15px 18px;
+    display: flex; align-items: center; gap: 13px;
+  }
+  .platform-top .bril-badge {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--paper); border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .platform-top .bril-badge svg { width: 27px; height: 27px; }
+  .platform-top .pt-text { min-width: 0; }
+  .platform-top .pt-kicker {
+    font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 800; color: rgba(17,17,17,0.62);
+  }
+  .platform-top .pt-name {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(16px, 1.7vw, 20px);
+    letter-spacing: 0; line-height: 1.06; color: var(--ink);
+  }
+  .platform-body { padding: 15px 18px 17px; }
+  .platform-body .pb-label {
+    font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 800; color: var(--ink-3); margin-bottom: 11px;
+  }
+  .gebieden { display: flex; flex-direction: column; gap: 8px; }
+  .gebied {
+    display: flex; align-items: center; gap: 11px;
+    font-size: 13px; font-weight: 700; color: var(--ink);
+    border: 1.25px solid var(--ink); background: var(--paper);
+    border-radius: 999px; padding: 7px 14px;
+  }
+  .gmark {
+    width: 15px; height: 15px; border-radius: 5px;
+    border: 1.5px solid var(--ink); flex-shrink: 0;
+  }
+  .gmark.g1 { background: #FF3B1F; }
+  .gmark.g2 { background: #FFC629; }
+  .gmark.g3 { background: #1E3CFF; }
+  .gmark.g4 { background: #00B86A; }
+  .gmark.split { background: linear-gradient(105deg, #FF3B1F 0 48%, #1E3CFF 52% 100%); }
+
+  /* legend */
+  .legend {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px;
+    margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line-soft);
+    font-size: 12px; color: var(--ink-3);
+  }
+  .legend .li { display: inline-flex; align-items: center; gap: 8px; }
+  .legend .key-dot {
+    width: 13px; height: 13px; border-radius: 4px;
+    border: 1.5px solid var(--ink); background: var(--acc); flex-shrink: 0;
+  }
+  .legend .sw-dash {
+    width: 16px; height: 16px; border-radius: 5px;
+    border: 1.5px dashed var(--ink-4); background: transparent; flex-shrink: 0;
+  }
+  .legend .sep { width: 1px; height: 16px; background: var(--line-soft); }
+  .legend .note { font-style: italic; }
+
+  @media (max-width: 880px) {
+    .confl { grid-template-columns: 1fr; }
+    .confl-merge { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="figcard">
+      <div class="confl">
+
+        <!-- lanes -->
+        <div class="confl-lanes">
+          <div class="lane s1">
+            <div class="lane-hero">
+              <span class="lane-num">01<span class="slash">/</span></span>
+              <span class="lane-titles">
+                <span class="lane-eyebrow">Sprint 1</span>
+                <span class="lane-title">Mentale modellen zichtbaar maken</span>
+              </span>
+            </div>
+            <div class="lane-chips">
+              <span class="chip s1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><line x1="8" y1="8" x2="16" y2="8"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="8" y1="16" x2="13" y2="16"></line></svg></span><span class="label">Elicitatie-oefeningen</span></span>
+              <span class="chip s1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="6" ry="9"></ellipse><line x1="12" y1="3" x2="12" y2="21"></line></svg></span><span class="label">Persoonlijke spiegel</span></span>
+              <span class="chip dropped s1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8 L12 5 L20 8 L12 11 Z"></path><path d="M4 13 L12 16 L20 13"></path></svg></span><span class="label">Brede kennislagen</span><span class="badge">losgelaten</span></span>
+            </div>
+          </div>
+
+          <div class="lane s2">
+            <div class="lane-hero">
+              <span class="lane-num">02<span class="slash">/</span></span>
+              <span class="lane-titles">
+                <span class="lane-eyebrow">Sprint 2</span>
+                <span class="lane-title">Aansluiten op het werkproces</span>
+              </span>
+            </div>
+            <div class="lane-chips">
+              <span class="chip s2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10Z"></path><circle cx="12" cy="11" r="2"></circle></svg></span><span class="label">Project-onboarding</span></span>
+              <span class="chip s2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1"></rect><rect x="13" y="4" width="7" height="7" rx="1"></rect><rect x="4" y="13" width="7" height="7" rx="1"></rect><rect x="13" y="13" width="7" height="7" rx="1"></rect></svg></span><span class="label">Foto-elicitatie</span></span>
+            </div>
+          </div>
+
+          <div class="lane s3">
+            <div class="lane-hero">
+              <span class="lane-num">03<span class="slash">/</span></span>
+              <span class="lane-titles">
+                <span class="lane-eyebrow">Sprint 3</span>
+                <span class="lane-title">Samen problemen ontwerpen</span>
+              </span>
+            </div>
+            <div class="lane-chips">
+              <span class="chip star s3"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="7" height="9" rx="1"></rect><rect x="13" y="6" width="7" height="12" rx="1"></rect></svg></span><span class="label">CFA-bouwstenen</span><span class="badge">→ kern</span></span>
+              <span class="chip s3"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="9" height="13" rx="1.5" transform="rotate(-10 7.5 13.5)"></rect><rect x="11" y="6" width="9" height="13" rx="1.5" transform="rotate(8 15.5 12.5)"></rect></svg></span><span class="label">De Slijperij</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- merge connectors (drawn by JS to match lane heights) -->
+        <div class="confl-merge">
+          <svg id="mergeSvg" aria-hidden="true"></svg>
+        </div>
+
+        <!-- destination platform -->
+        <div class="confl-out">
+          <div class="platform">
+            <div class="platform-top">
+              <div class="bril-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="14" r="4"></circle><circle cx="17" cy="14" r="4"></circle><line x1="11" y1="14" x2="13" y2="14"></line><path d="M3 11 q 1 -3 4 -1"></path><path d="M21 11 q -1 -3 -4 -1"></path></svg>
+              </div>
+              <div class="pt-text">
+                <div class="pt-kicker">Sprint 4 · één coherent platform</div>
+                <div class="pt-name">De Brillenmaker</div>
+              </div>
+            </div>
+            <div class="platform-body">
+              <div class="pb-label">Vijf gebieden</div>
+              <div class="gebieden">
+                <span class="gebied"><span class="gmark g2"></span>Projecten</span>
+                <span class="gebied"><span class="gmark g4"></span>Brillen</span>
+                <span class="gebied"><span class="gmark g3"></span>Bouwstenen</span>
+                <span class="gebied"><span class="gmark split"></span>Slijperij</span>
+                <span class="gebied"><span class="gmark g2"></span>Werkplaats</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function drawConnector() {
+      var svg = document.getElementById('mergeSvg');
+      if (!svg) return;
+      var cont = svg.parentElement;
+      var cb = cont.getBoundingClientRect();
+      var w = cb.width, h = cb.height;
+      if (w < 2 || h < 2) return;
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      var lanes = Array.prototype.slice.call(document.querySelectorAll('.confl-lanes .lane'));
+      // converge on the centre of the middle lane (Sprint 2) so its line runs straight
+      var midLane = lanes[Math.floor(lanes.length / 2)];
+      var mr = midLane.getBoundingClientRect();
+      var cx = w * 0.58;
+      var cy = Math.max(10, Math.min(h - 10, mr.top + mr.height / 2 - cb.top));
+      var s = '';
+      lanes.forEach(function (l) {
+        var r = l.getBoundingClientRect();
+        var y = r.top + r.height / 2 - cb.top;
+        s += '<path d="M0 ' + y + ' C ' + (cx * 0.62) + ' ' + y + ', ' + (cx * 0.5) + ' ' + cy + ', ' + cx + ' ' + cy + '" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/>';
+      });
+      s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (w - 2) + '" y2="' + cy + '" stroke="#111" stroke-width="2"/>';
+      s += '<circle cx="' + cx + '" cy="' + cy + '" r="5.5" fill="#00B86A" stroke="#111" stroke-width="1.5"/>';
+      s += '<path d="M' + (w - 11) + ' ' + (cy - 7) + ' L ' + w + ' ' + cy + ' L ' + (w - 11) + ' ' + (cy + 7) + '" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+      svg.innerHTML = s;
+    }
+    window.addEventListener('load', drawConnector);
+    window.addEventListener('resize', drawConnector);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawConnector);
+    setTimeout(drawConnector, 300);
+  </script>
+
+
+</body></html>

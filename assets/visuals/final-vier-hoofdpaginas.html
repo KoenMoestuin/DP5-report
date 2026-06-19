@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Visualisatie · De vier hoofdpagina's</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+  body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    padding: 0;
+  }
+  .figcard { width: 100%; }
+
+  .p1 { --acc: #6f9ec4; --acc-soft: #cdddea; }
+  .p2 { --acc: #d96b3f; --acc-soft: #f3c9b4; }
+  .p3 { --acc: #6b8f5e; --acc-soft: #c9d8c0; }
+  .p4 { --acc: #e8c66a; --acc-soft: #f3e2ad; }
+
+  .overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 5px 5px 0 0 var(--ink);
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .ov {
+    position: relative;
+    display: flex; align-items: center; gap: 12px;
+    padding: 18px 16px 16px;
+  }
+  .ov + .ov { border-left: 1.5px solid var(--line-soft); }
+  .ov::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0; height: 6px;
+    background: var(--acc);
+  }
+  .ov-med {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--acc-soft);
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ov-med svg { display: block; }
+  .ov-med svg [fill="none"] { stroke: var(--ink); }
+  .ov-txt { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .ov-num {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.1em;
+    color: var(--acc);
+    font-weight: 500;
+  }
+  .ov-name {
+    font-family: var(--font-display);
+    font-weight: 700; font-size: 15px; letter-spacing: -0.01em;
+    color: var(--ink); line-height: 1.15;
+  }
+
+  .rows { display: flex; flex-direction: column; gap: 34px; }
+  .row {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 26px;
+    align-items: center;
+  }
+  .row .pagecard { order: 1; }
+  .row .shot     { order: 2; }
+  .row.flip { grid-template-columns: 1fr 300px; }
+  .row.flip .shot     { order: 1; }
+  .row.flip .pagecard { order: 2; }
+
+  .pagecard {
+    position: relative;
+    display: flex; flex-direction: column;
+    height: 305px;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 5px 5px 0 0 var(--ink);
+    padding: 22px 24px 22px;
+    overflow: hidden;
+  }
+  .pagecard::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: 0; height: 9px;
+    background: var(--acc);
+    border-bottom: 1.5px solid var(--ink);
+  }
+  .card-top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin: 6px 0 14px;
+  }
+  .medallion {
+    width: 58px; height: 58px; border-radius: 50%;
+    background: var(--acc-soft);
+    border: 1.5px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .medallion svg { display: block; }
+  .medallion svg [fill="none"] { stroke: var(--ink); }
+  .pagecard .num {
+    font-family: var(--font-display);
+    font-weight: 800; font-size: 32px; line-height: 1;
+    color: var(--acc); letter-spacing: -0.02em;
+  }
+  .pagecard h2 {
+    font-family: var(--font-display);
+    font-weight: 800; letter-spacing: -0.015em; line-height: 1.1;
+    font-size: 21px; margin: 0 0 5px;
+  }
+  .pagecard .area-tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 11px;
+  }
+  .pagecard .area-tag .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--acc); border: 1.5px solid var(--ink); flex-shrink: 0;
+  }
+  .pagecard .rule { height: 1.5px; background: var(--line-soft); margin: 0 0 11px; }
+  .pagecard .desc {
+    font-size: 14.5px; line-height: 1.55; color: var(--ink-2);
+    margin: 0; text-wrap: pretty;
+  }
+
+  .shot {
+    border: 1.5px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 5px 5px 0 0 var(--ink);
+    overflow: hidden;
+    background: #111;
+    line-height: 0;
+  }
+  .shot img { display: block; width: 100%; height: auto; }
+</style>
+</head>
+<body>
+  <div class="figcard">
+    <div class="overview">
+      <div class="ov p1">
+        <div class="ov-med">
+          <svg viewBox="0 0 40 20" width="30" height="15" aria-hidden="true">
+            <circle cx="10" cy="10" r="8.5" fill="none" stroke-width="2.2"/>
+            <circle cx="30" cy="10" r="8.5" fill="none" stroke-width="2.2"/>
+            <path d="M18.5 9.5 Q20 8 21.5 9.5" fill="none" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M2 9 Q0 8 0 10" fill="none" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M38 9 Q40 8 40 10" fill="none" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="ov-txt"><span class="ov-num">01</span><span class="ov-name">De brillen</span></div>
+      </div>
+      <div class="ov p2">
+        <div class="ov-med">
+          <svg viewBox="0 0 18 18" width="22" height="22" aria-hidden="true">
+            <rect x="1" y="1" width="7" height="7" rx="1.5" fill="none" stroke-width="1.8"/>
+            <rect x="10" y="1" width="7" height="7" rx="1.5" fill="none" stroke-width="1.8"/>
+            <rect x="1" y="10" width="7" height="7" rx="1.5" fill="none" stroke-width="1.8"/>
+            <rect x="10" y="10" width="7" height="7" rx="1.5" fill="none" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <div class="ov-txt"><span class="ov-num">02</span><span class="ov-name">De bouwstenen</span></div>
+      </div>
+      <div class="ov p3">
+        <div class="ov-med">
+          <svg viewBox="0 0 20 18" width="24" height="22" aria-hidden="true">
+            <path d="M 1 8.5 L 3.5 6 L 17 6 L 17 9.5 L 14 9.5 L 14 13 L 5 13 L 5 9.5 L 3.5 9.5 Z" fill="none" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M 3.5 13 L 3 15.5 L 16 15.5 L 15.5 13" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="ov-txt"><span class="ov-num">03</span><span class="ov-name">De slijperij</span></div>
+      </div>
+      <div class="ov p4">
+        <div class="ov-med">
+          <svg viewBox="0 0 18 18" width="22" height="22" aria-hidden="true">
+            <path d="M 9 2 L 11.6 4.5 L 15.1 5.5 L 14.2 9 L 15.1 12.5 L 11.6 13.5 L 9 16 L 6.4 13.5 L 2.9 12.5 L 3.8 9 L 2.9 5.5 L 6.4 4.5 Z" fill="none" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="9" cy="9" r="2.6" fill="none" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <div class="ov-txt"><span class="ov-num">04</span><span class="ov-name">De werkplaats</span></div>
+      </div>
+    </div>
+
+    <div class="rows">
+      <div class="row p1">
+        <article class="pagecard">
+          <div class="card-top">
+            <div class="medallion">
+              <svg viewBox="0 0 40 20" width="42" height="21" aria-hidden="true">
+                <circle cx="10" cy="10" r="8.5" fill="none" stroke-width="2.2"/>
+                <circle cx="30" cy="10" r="8.5" fill="none" stroke-width="2.2"/>
+                <path d="M18.5 9.5 Q20 8 21.5 9.5" fill="none" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M2 9 Q0 8 0 10" fill="none" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M38 9 Q40 8 40 10" fill="none" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="num">01</span>
+          </div>
+          <h2>De brillen</h2>
+          <span class="area-tag"><span class="dot"></span>Perspectief</span>
+          <div class="rule"></div>
+          <p class="desc">Hier zie je elke bril die in je project is ontstaan. Van je eigen blik tot die van stakeholders. Ontwerp en schaaf je eigen frame bij wanneer je perspectief verandert.</p>
+        </article>
+        <div class="shot"><img src="assets/final-viz/brillen.png" alt="Screenshot van de pagina De brillen"></div>
+      </div>
+
+      <div class="row flip p2">
+        <article class="pagecard">
+          <div class="card-top">
+            <div class="medallion">
+              <svg viewBox="0 0 18 18" width="34" height="34" aria-hidden="true">
+                <rect x="1" y="1" width="7" height="7" rx="1.5" fill="none" stroke-width="1.8"/>
+                <rect x="10" y="1" width="7" height="7" rx="1.5" fill="none" stroke-width="1.8"/>
+                <rect x="1" y="10" width="7" height="7" rx="1.5" fill="none" stroke-width="1.8"/>
+                <rect x="10" y="10" width="7" height="7" rx="1.5" fill="none" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <span class="num">02</span>
+          </div>
+          <h2>De bouwstenen</h2>
+          <span class="area-tag"><span class="dot"></span>Kaartjes</span>
+          <div class="rule"></div>
+          <p class="desc">Hier beheer je de kaartjes waaruit brillen worden opgebouwd. Voeg zelf nieuwe toe of laat ze genereren vanuit documenten die je uploadt.</p>
+        </article>
+        <div class="shot"><img src="assets/final-viz/bouwstenen.png" alt="Screenshot van de pagina De bouwstenen"></div>
+      </div>
+
+      <div class="row p3">
+        <article class="pagecard">
+          <div class="card-top">
+            <div class="medallion">
+              <svg viewBox="0 0 20 18" width="38" height="34" aria-hidden="true">
+                <path d="M 1 8.5 L 3.5 6 L 17 6 L 17 9.5 L 14 9.5 L 14 13 L 5 13 L 5 9.5 L 3.5 9.5 Z" fill="none" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M 3.5 13 L 3 15.5 L 16 15.5 L 15.5 13" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="num">03</span>
+          </div>
+          <h2>De slijperij</h2>
+          <span class="area-tag"><span class="dot"></span>Oefenen</span>
+          <div class="rule"></div>
+          <p class="desc">Hier scherp je je blik met interactieve oefeningen en nodig je stakeholders uit voor een gezamenlijke sessie om perspectieven op het project op te halen.</p>
+        </article>
+        <div class="shot"><img src="assets/final-viz/slijperij.png" alt="Screenshot van de pagina De slijperij"></div>
+      </div>
+
+      <div class="row flip p4">
+        <article class="pagecard">
+          <div class="card-top">
+            <div class="medallion">
+              <svg viewBox="0 0 18 18" width="34" height="34" aria-hidden="true">
+                <path d="M 9 2 L 11.6 4.5 L 15.1 5.5 L 14.2 9 L 15.1 12.5 L 11.6 13.5 L 9 16 L 6.4 13.5 L 2.9 12.5 L 3.8 9 L 2.9 5.5 L 6.4 4.5 Z" fill="none" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="9" cy="9" r="2.6" fill="none" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <span class="num">04</span>
+          </div>
+          <h2>De werkplaats</h2>
+          <span class="area-tag"><span class="dot"></span>Beheer</span>
+          <div class="rule"></div>
+          <p class="desc">Projectdocumenten en instellingen.</p>
+        </article>
+        <div class="shot"><img src="assets/final-viz/werkplaats.png" alt="Screenshot van de pagina De werkplaats"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
